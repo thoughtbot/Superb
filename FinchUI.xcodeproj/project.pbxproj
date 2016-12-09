@@ -14,6 +14,7 @@
 		4A9061961DF9BB4A0004D532 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */; };
 		4A9061A11DF9BB4A0004D532 /* FinchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */; };
 		4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */; };
+		4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinchUITests.swift; sourceTree = "<group>"; };
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubOAuth.storyboard; sourceTree = "<group>"; };
+		4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */,
+				4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
+				4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

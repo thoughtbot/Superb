@@ -28,7 +28,7 @@
         <!--GitHubOAuth-->
         <scene sceneID="gL3-Mu-l0N">
             <objects>
-                <viewController id="xFl-Le-nbD" sceneMemberID="viewController">
+                <viewController id="xFl-Le-nbD" customClass="GitHubOAuthViewController" customModule="FinchUI" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SB2-Nt-fL8"/>
                         <viewControllerLayoutGuide type="bottom" id="rIp-uq-wVr"/>
@@ -36,7 +36,20 @@
                     <view key="view" contentMode="scaleToFill" id="KAY-ty-yio">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdA-u1-oi0">
+                                <rect key="frame" x="154" y="318" width="66" height="30"/>
+                                <state key="normal" title="Authorize"/>
+                                <connections>
+                                    <action selector="authorize:" destination="xFl-Le-nbD" eventType="touchUpInside" id="bkj-kT-pAc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kdA-u1-oi0" firstAttribute="centerX" secondItem="KAY-ty-yio" secondAttribute="centerX" id="1hm-Av-kc6"/>
+                            <constraint firstItem="kdA-u1-oi0" firstAttribute="centerY" secondItem="KAY-ty-yio" secondAttribute="centerY" id="lWv-A3-xqB"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GitHubOAuth" id="RsL-iB-4eB">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="VHw-jF-3vs">
