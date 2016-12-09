@@ -9,14 +9,16 @@ final class GitHubOAuthProvider: FinchProvider {
   static let identifier = "com.thoughtbot.finch.github.oauth"
 
   let clientId: String
+  let clientSecret: String
 
   private var currentAuthorization: (
     safariViewController: SFSafariViewController,
     completionHandler: (String?) -> Void
   )?
 
-  init(clientId: String) {
+  init(clientId: String, clientSecret: String) {
     self.clientId = clientId
+    self.clientSecret = clientSecret
   }
 
   func authorize(over viewController: UIViewController, completionHandler: @escaping (String?) -> Void) {
@@ -42,7 +44,7 @@ final class GitHubOAuthProvider: FinchProvider {
 
     var params: [URLQueryItem] = []
     params.append(URLQueryItem(name: "code", value: code))
-    params.append(URLQueryItem(name: "client_secret", value: "b9d69d245ca6f952b50c77a543dca4f4c612ff73"))
+    params.append(URLQueryItem(name: "client_secret", value: clientSecret))
     params.append(URLQueryItem(name: "client_id", value: clientId))
 
     var requestComponents = URLComponents()
