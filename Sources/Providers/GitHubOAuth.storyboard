@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,18 +38,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdA-u1-oi0">
-                                <rect key="frame" x="154" y="318" width="66" height="30"/>
-                                <state key="normal" title="Authorize"/>
-                                <connections>
-                                    <action selector="getUser:" destination="xFl-Le-nbD" eventType="touchUpInside" id="lSh-ke-zF1"/>
-                                </connections>
-                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAH-m2-X7Z">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-c6-ccU">
+                                        <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="6rs-c6-ccU" firstAttribute="top" secondItem="yAH-m2-X7Z" secondAttribute="topMargin" id="1AL-OU-yMg"/>
+                                    <constraint firstItem="6rs-c6-ccU" firstAttribute="leading" secondItem="yAH-m2-X7Z" secondAttribute="leadingMargin" id="NjX-HF-ycX"/>
+                                    <constraint firstItem="6rs-c6-ccU" firstAttribute="trailing" secondItem="yAH-m2-X7Z" secondAttribute="trailingMargin" id="ON9-F8-hdH"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Nba-0G-PIq">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kdA-u1-oi0" firstAttribute="centerX" secondItem="KAY-ty-yio" secondAttribute="centerX" id="1hm-Av-kc6"/>
-                            <constraint firstItem="kdA-u1-oi0" firstAttribute="centerY" secondItem="KAY-ty-yio" secondAttribute="centerY" id="lWv-A3-xqB"/>
+                            <constraint firstItem="rIp-uq-wVr" firstAttribute="top" secondItem="yAH-m2-X7Z" secondAttribute="bottom" id="Ddr-Fo-f47"/>
+                            <constraint firstItem="Nba-0G-PIq" firstAttribute="centerX" secondItem="KAY-ty-yio" secondAttribute="centerX" id="XXf-CB-KnU"/>
+                            <constraint firstItem="yAH-m2-X7Z" firstAttribute="top" secondItem="SB2-Nt-fL8" secondAttribute="bottom" id="bSk-VW-nzc"/>
+                            <constraint firstItem="yAH-m2-X7Z" firstAttribute="leading" secondItem="KAY-ty-yio" secondAttribute="leading" id="drO-Ni-Vbs"/>
+                            <constraint firstItem="Nba-0G-PIq" firstAttribute="centerY" secondItem="KAY-ty-yio" secondAttribute="centerY" id="eU9-hA-Low"/>
+                            <constraint firstAttribute="trailing" secondItem="yAH-m2-X7Z" secondAttribute="trailing" id="qYM-9B-NNh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GitHubOAuth" id="RsL-iB-4eB">
@@ -58,11 +76,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Nba-0G-PIq" id="LOq-ih-kJY"/>
+                        <outlet property="userContainer" destination="yAH-m2-X7Z" id="LmF-2s-6jc"/>
+                        <outlet property="userNameLabel" destination="6rs-c6-ccU" id="WHq-Dw-QwC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K94-z4-iZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="bnj-NU-dyT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="743" y="196"/>
+            <point key="canvasLocation" x="741.60000000000002" y="195.6521739130435"/>
         </scene>
     </scenes>
 </document>
