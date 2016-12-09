@@ -54,7 +54,7 @@
                     <navigationItem key="navigationItem" title="GitHubOAuth" id="RsL-iB-4eB">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="VHw-jF-3vs">
                             <connections>
-                                <segue destination="bnj-NU-dyT" kind="unwind" unwindAction="unwindToProviders:" id="SzG-Rd-FU5"/>
+                                <segue destination="bnj-NU-dyT" kind="unwind" identifier="unwindToProviders" unwindAction="unwindToProviders:" id="Kom-5g-cpr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
