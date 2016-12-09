@@ -13,7 +13,7 @@ final class GitHubOAuthProvider: FinchProvider {
 
   private var currentAuthorization: (
     safariViewController: SFSafariViewController,
-    completionHandler: (String?) -> Void
+    completionHandler: (Result<String>) -> Void
   )?
 
   init(clientId: String, clientSecret: String, redirectURI: URL) {
@@ -22,7 +22,7 @@ final class GitHubOAuthProvider: FinchProvider {
     self.redirectURI = redirectURI
   }
 
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (String?) -> Void) {
+  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String>) -> Void) {
     precondition(currentAuthorization == nil)
 
     var authorizeURLComponents = URLComponents(url: authorizeURL, resolvingAgainstBaseURL: false)!
@@ -72,17 +72,18 @@ final class GitHubOAuthProvider: FinchProvider {
 
     defer { currentAuthorization = nil }
 
-    var tokenResult: String?
+    var result: Result<String>!
 
     defer {
       DispatchQueue.main.async { [authorization] in
         authorization.safariViewController.dismiss(animated: true) {
-          authorization.completionHandler(tokenResult)
+          authorization.completionHandler(result)
         }
       }
     }
 
     guard error == nil else {
+      result = .failure(error!)
       return
     }
 
@@ -92,9 +93,10 @@ final class GitHubOAuthProvider: FinchProvider {
     components.query = response
 
     guard let token = components.queryItems?.first(where: { $0.name == "access_token" })?.value else {
+      result = .failure(FinchError.authorizationResponseInvalid)
       return
     }
 
-    tokenResult = token
+    result = .success(token)
   }
 }

@@ -17,6 +17,8 @@
 		4A9061A11DF9BB4A0004D532 /* FinchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */; };
 		4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */; };
 		4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */; };
+		4A9F693F1DF9F238001BB7B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F693E1DF9F238001BB7B2 /* Result.swift */; };
+		4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubOAuth.storyboard; sourceTree = "<group>"; };
 		4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthViewController.swift; sourceTree = "<group>"; };
+		4A9F693E1DF9F238001BB7B2 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 			children = (
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
+				4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */,
 				4A3776831DF9C8D8005480A1 /* FinchProvider.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
 				4A90618F1DF9BB4A0004D532 /* Main.storyboard */,
@@ -121,6 +126,7 @@
 				4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */,
 				4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */,
 				4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */,
+				4A9F693E1DF9F238001BB7B2 /* Result.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -231,10 +237,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9F693F1DF9F238001BB7B2 /* Result.swift in Sources */,
 				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
 				4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
 				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
+				4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */,
 				4A3776841DF9C8D8005480A1 /* FinchProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
