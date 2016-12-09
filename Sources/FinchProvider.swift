@@ -18,6 +18,16 @@ enum Finch {
       return instance
     }
   }
+
+  static func handleAuthenticationRedirect(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+    for (_, provider) in providers {
+      if provider.handleCallback(url, options: options) {
+        return true
+      }
+    }
+
+    return false
+  }
 }
 
 protocol FinchProvider {
@@ -25,4 +35,11 @@ protocol FinchProvider {
 
   func authorizationHeader(forToken token: String) -> String
   func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String>) -> Void)
+  func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool
+}
+
+extension FinchProvider {
+  func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+    return false
+  }
 }
