@@ -4,13 +4,15 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
-  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-    guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-      let query = components.queryItems,
-      let codeParam = query.first(where: { $0.name == "code" }),
-      let code = codeParam.value
-      else { return false }
-    print("received code", code)
+  static var gitHubProvider: GitHubOAuthProvider {
+    return Finch.register(GitHubOAuthProvider())
+  }
+
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
     return true
+  }
+
+  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+    return AppDelegate.gitHubProvider.handleCallback(url, options: options)
   }
 }
