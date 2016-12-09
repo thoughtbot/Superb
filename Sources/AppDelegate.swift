@@ -4,7 +4,7 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
-  static var gitHubProvider: GitHubOAuthProvider {
+  static var gitHubOAuthProvider: GitHubOAuthProvider {
     return Finch.register(
       GitHubOAuthProvider(
         clientId: "3127cd33caef9514cbc5",
@@ -14,10 +14,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     )
   }
 
-  static let gitHubRequestAuthorizer: RequestAuthorizer = {
+  static let gitHubOAuthRequestAuthorizer: RequestAuthorizer = {
     return RequestAuthorizer(
       applicationDelegate: UIApplication.shared.delegate!,
-      authorizationProvider: gitHubProvider
+      authorizationProvider: gitHubOAuthProvider
+    )
+  }()
+
+  static var gitHubBasicAuthProvider: GitHubBasicAuthProvider {
+    return Finch.register(
+      GitHubBasicAuthProvider()
+    )
+  }
+
+  static let gitHubBasicAuthRequestAuthorizer: RequestAuthorizer = {
+    return RequestAuthorizer(
+      applicationDelegate: UIApplication.shared.delegate!,
+      authorizationProvider: gitHubBasicAuthProvider
     )
   }()
 
@@ -26,6 +39,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-    return AppDelegate.gitHubProvider.handleCallback(url, options: options)
+    return AppDelegate.gitHubOAuthProvider.handleCallback(url, options: options)
   }
 }

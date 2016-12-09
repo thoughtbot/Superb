@@ -48,15 +48,18 @@ final class RequestAuthorizer {
         return
       }
 
-      self.authorizationProvider.authorize(over: topViewController) { result in
-        switch result {
-        case let .success(token):
-          self.token = token
-          self.performAuthorized(request, reauthorize: false, completionHandler: completionHandler)
+      DispatchQueue.main.async {
+        self.authorizationProvider.authorize(over: topViewController) { result in
+          switch result {
+          case let .success(token):
+            self.token = token
+            self.performAuthorized(request, reauthorize: false, completionHandler: completionHandler)
 
-        case let .failure(error):
-          completionHandler(.failure(error))
+          case let .failure(error):
+            completionHandler(.failure(error))
+          }
         }
+
       }
     }
 

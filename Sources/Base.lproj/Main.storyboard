@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CxG-fD-mpb">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CxG-fD-mpb">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,18 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYg-rf-uQ4">
-                                <rect key="frame" x="140" y="318" width="95" height="30"/>
-                                <state key="normal" title="GitHub OAuth"/>
-                                <connections>
-                                    <segue destination="9Cw-uZ-Ecd" kind="presentation" modalPresentationStyle="formSheet" id="pL7-kM-GMC"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rgD-VT-PWY">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYg-rf-uQ4">
+                                        <state key="normal" title="GitHub OAuth"/>
+                                        <connections>
+                                            <segue destination="9Cw-uZ-Ecd" kind="presentation" modalPresentationStyle="formSheet" id="pL7-kM-GMC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYo-Av-G7W">
+                                        <state key="normal" title="GitHub Basic Auth"/>
+                                        <connections>
+                                            <segue destination="Ydv-Oq-uhF" kind="presentation" id="HDD-be-NeW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="BYg-rf-uQ4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Fdg-PN-AUW"/>
-                            <constraint firstItem="BYg-rf-uQ4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kzM-yJ-fye"/>
+                            <constraint firstItem="rgD-VT-PWY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Mjc-md-mpb"/>
+                            <constraint firstItem="rgD-VT-PWY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="axA-DI-EsK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Choose A Provider" id="V5h-OL-cS4"/>
@@ -47,7 +53,15 @@
                 <viewControllerPlaceholder storyboardName="GitHubOAuth" id="9Cw-uZ-Ecd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ip-Zv-n2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1890" y="-545"/>
+            <point key="canvasLocation" x="1888" y="-600"/>
+        </scene>
+        <!--GitHubBasicAuth-->
+        <scene sceneID="aOq-UM-SFg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GitHubBasicAuth" id="Ydv-Oq-uhF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oBc-mc-EMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1889" y="-491"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9kU-iz-TzF">

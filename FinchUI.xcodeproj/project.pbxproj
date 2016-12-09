@@ -20,6 +20,9 @@
 		4A9F693F1DF9F238001BB7B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F693E1DF9F238001BB7B2 /* Result.swift */; };
 		4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */; };
 		4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
+		7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */; };
+		7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */; };
+		70DD2AF91DFB08CA00DD9695 /* GitHubBasicAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		4A9F693E1DF9F238001BB7B2 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchError.swift; sourceTree = "<group>"; };
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
+		7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthProvider.swift; sourceTree = "<group>"; };
+		7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthViewController.swift; sourceTree = "<group>"; };
+		70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubBasicAuth.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,9 +133,12 @@
 			isa = PBXGroup;
 			children = (
 				4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */,
+				70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */,
 				4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */,
 				4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */,
 				4A9F693E1DF9F238001BB7B2 /* Result.swift */,
+				7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */,
+				7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -220,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9061961DF9BB4A0004D532 /* LaunchScreen.storyboard in Resources */,
+				70DD2AF91DFB08CA00DD9695 /* GitHubBasicAuth.storyboard in Resources */,
 				4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */,
 				4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */,
 				4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */,
@@ -244,7 +254,9 @@
 				4A9F693F1DF9F238001BB7B2 /* Result.swift in Sources */,
 				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
 				4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */,
+				7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
+				7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */,
 				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
 				4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */,
 				4A3776841DF9C8D8005480A1 /* FinchProvider.swift in Sources */,
@@ -386,6 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
 				INFOPLIST_FILE = Sources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,6 +412,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
 				INFOPLIST_FILE = Sources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
