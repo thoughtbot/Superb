@@ -7,14 +7,16 @@ let createAccessTokenURL = URL(string: "https://github.com/login/oauth/access_to
 final class GitHubOAuthProvider: FinchProvider {
   static let identifier = "com.thoughtbot.finch.github.oauth"
 
-  private var completionHandler: ((String?) -> Void)?
-  private var safariViewController: SFSafariViewController?
+  private var currentAuthorization: (
+    safariViewController: SFSafariViewController,
+    completionHandler: (String?) -> Void
+  )?
 
   func authorize(over viewController: UIViewController, completionHandler: @escaping (String?) -> Void) {
-    self.completionHandler = completionHandler
+    precondition(currentAuthorization == nil)
 
     let safariViewController = SFSafariViewController(url: authorizeURL)
-    self.safariViewController = safariViewController
+    currentAuthorization = (safariViewController, completionHandler)
     viewController.present(safariViewController, animated: true)
   }
 
@@ -41,20 +43,16 @@ final class GitHubOAuthProvider: FinchProvider {
     request.httpMethod = "POST"
 
     let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-      guard let `self` = self, let complete = self.completionHandler else { return }
+      guard let `self` = self, let authorization = self.currentAuthorization else { return }
 
-      defer { self.completionHandler = nil }
+      defer { self.currentAuthorization = nil }
 
       var tokenResult: String?
 
       defer {
-        DispatchQueue.main.async { [safariViewController = self.safariViewController] in
-          if let safariViewController = safariViewController {
-            safariViewController.dismiss(animated: true) {
-              complete(tokenResult)
-            }
-          } else {
-            complete(tokenResult)
+        DispatchQueue.main.async { [authorization] in
+          authorization.safariViewController.dismiss(animated: true) {
+            authorization.completionHandler(tokenResult)
           }
         }
       }
