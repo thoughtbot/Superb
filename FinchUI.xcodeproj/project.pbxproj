@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */; };
-		4A90618E1DF9BB4A0004D532 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ViewController.swift */; };
+		4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */; };
 		4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A90618F1DF9BB4A0004D532 /* Main.storyboard */; };
 		4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061921DF9BB4A0004D532 /* Assets.xcassets */; };
 		4A9061961DF9BB4A0004D532 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */; };
 		4A9061A11DF9BB4A0004D532 /* FinchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */; };
+		4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +29,7 @@
 /* Begin PBXFileReference section */
 		4A9061881DF9BB4A0004D532 /* FinchUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinchUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4A90618D1DF9BB4A0004D532 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
 		4A9061901DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A9061921DF9BB4A0004D532 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A9061951DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +37,7 @@
 		4A90619C1DF9BB4A0004D532 /* FinchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinchUITests.swift; sourceTree = "<group>"; };
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubOAuth.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +79,9 @@
 		4A90618A1DF9BB4A0004D532 /* FinchUI */ = {
 			isa = PBXGroup;
 			children = (
+				4A9061AC1DF9BD6E0004D532 /* Providers */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
-				4A90618D1DF9BB4A0004D532 /* ViewController.swift */,
+				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
 				4A90618F1DF9BB4A0004D532 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
 				4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */,
@@ -103,6 +106,14 @@
 				4A90619F1DF9BB4A0004D532 /* FinchUITests */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		4A9061AC1DF9BD6E0004D532 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9061961DF9BB4A0004D532 /* LaunchScreen.storyboard in Resources */,
+				4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */,
 				4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */,
 				4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */,
 			);
@@ -210,7 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A90618E1DF9BB4A0004D532 /* ViewController.swift in Sources */,
+				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
