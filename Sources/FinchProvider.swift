@@ -1,3 +1,5 @@
+import UIKit
+
 enum Finch {
   private static var providers: [String: FinchProvider] = [:]
 
@@ -20,4 +22,7 @@ enum Finch {
 
 protocol FinchProvider {
   static var identifier: String { get }
+
+  func authorizationHeader(forToken token: String) -> String
+  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String>) -> Void)
 }

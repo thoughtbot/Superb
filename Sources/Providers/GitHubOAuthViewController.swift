@@ -1,6 +1,21 @@
 import UIKit
 
 final class GitHubOAuthViewController: UIViewController {
+  @IBAction func getUser(_ sender: Any?) {
+    let userRequest = URLRequest(url: URL(string: "https://api.github.com/user")!)
+
+    AppDelegate.gitHubRequestAuthorizer.performAuthorized(userRequest) { result in
+      switch result {
+      case let .success(data?, response?):
+        print(data, response)
+      case let .success(data, response):
+        print(data, response)
+      case let .failure(error):
+        print(error)
+      }
+    }
+  }
+
   @IBAction func authorize(_ sender: Any?) {
     AppDelegate.gitHubProvider.authorize(over: self) { [weak self] result in
       guard let `self` = self else { return }

@@ -41,7 +41,7 @@
                                 <rect key="frame" x="154" y="318" width="66" height="30"/>
                                 <state key="normal" title="Authorize"/>
                                 <connections>
-                                    <action selector="authorize:" destination="xFl-Le-nbD" eventType="touchUpInside" id="bkj-kT-pAc"/>
+                                    <action selector="getUser:" destination="xFl-Le-nbD" eventType="touchUpInside" id="lSh-ke-zF1"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -19,6 +19,7 @@
 		4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */; };
 		4A9F693F1DF9F238001BB7B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F693E1DF9F238001BB7B2 /* Result.swift */; };
 		4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */; };
+		4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthViewController.swift; sourceTree = "<group>"; };
 		4A9F693E1DF9F238001BB7B2 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchError.swift; sourceTree = "<group>"; };
+		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */,
 				4A3776831DF9C8D8005480A1 /* FinchProvider.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
+				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
 				4A90618F1DF9BB4A0004D532 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
 				4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */,
@@ -237,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */,
 				4A9F693F1DF9F238001BB7B2 /* Result.swift in Sources */,
 				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
 				4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */,

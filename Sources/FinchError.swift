@@ -2,6 +2,7 @@ import Foundation
 
 enum FinchError: Error {
   case authorizationResponseInvalid
+  case userInteractionRequired
 }
 
 extension FinchError: LocalizedError {
@@ -9,6 +10,8 @@ extension FinchError: LocalizedError {
     switch self {
     case .authorizationResponseInvalid:
       return "😢"
+    case .userInteractionRequired:
+      return "📱🔨"
     }
   }
 }

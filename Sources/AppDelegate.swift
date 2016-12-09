@@ -14,6 +14,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     )
   }
 
+  static let gitHubRequestAuthorizer: RequestAuthorizer = {
+    return RequestAuthorizer(
+      applicationDelegate: UIApplication.shared.delegate!,
+      authorizationProvider: gitHubProvider
+    )
+  }()
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
     return true
   }

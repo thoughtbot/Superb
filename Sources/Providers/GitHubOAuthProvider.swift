@@ -22,6 +22,10 @@ final class GitHubOAuthProvider: FinchProvider {
     self.redirectURI = redirectURI
   }
 
+  func authorizationHeader(forToken token: String) -> String {
+    return "token \(token)"
+  }
+
   func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String>) -> Void) {
     precondition(currentAuthorization == nil)
 
