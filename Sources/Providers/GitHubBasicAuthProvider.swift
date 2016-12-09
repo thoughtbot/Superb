@@ -60,9 +60,7 @@ final class GitHubBasicAuthProvider : FinchProvider {
       var result: Result<String>!
 
       defer {
-        DispatchQueue.main.async {
-          completionHandler(result)
-        }
+        completionHandler(result)
       }
 
       guard error == nil else {

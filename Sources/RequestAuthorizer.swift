@@ -31,20 +31,23 @@ final class RequestAuthorizer {
         result = .success(data, response)
       }
 
+      func complete(failingWith newError: Error? = nil) {
+        let finalResult = newError.map(Result.failure) ?? result
+        DispatchQueue.main.async {
+          completionHandler(finalResult)
+        }
+      }
+
       guard let httpResponse = response as? HTTPURLResponse,
-        httpResponse.statusCode == 401
+        httpResponse.statusCode == 401,
+        shouldReauthorize
         else {
-          completionHandler(result)
+          complete()
           return
         }
 
-      guard shouldReauthorize else {
-        completionHandler(result)
-        return
-      }
-
       guard let topViewController = self.topViewController else {
-        completionHandler(.failure(FinchError.userInteractionRequired))
+        complete(failingWith: FinchError.userInteractionRequired)
         return
       }
 
@@ -56,7 +59,7 @@ final class RequestAuthorizer {
             self.performAuthorized(request, reauthorize: false, completionHandler: completionHandler)
 
           case let .failure(error):
-            completionHandler(.failure(error))
+            complete(failingWith: error)
           }
         }
 
