@@ -41,7 +41,8 @@ final class GitHubOAuthProvider: FinchProvider {
   }
 
   func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-    guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+    guard let authorization = self.currentAuthorization,
+      let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
       let query = components.queryItems,
       let codeParam = query.first(where: { $0.name == "code" }),
       let code = codeParam.value
@@ -62,28 +63,25 @@ final class GitHubOAuthProvider: FinchProvider {
     request.httpBody = requestBody
     request.httpMethod = "POST"
 
-    let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-      self?.handleAuthorizationResponse(data, response, error)
+    let task = URLSession.shared.dataTask(with: request) { [weak self, completionHandler = authorization.completionHandler] data, response, error in
+      self?.handleAuthorizationResponse(data, response, error, completionHandler: completionHandler)
     }
 
     task.resume()
 
+    authorization.safariViewController.dismiss(animated: true)
+    currentAuthorization = nil
+
     return true
   }
 
-  private func handleAuthorizationResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
-    guard let authorization = self.currentAuthorization else { return }
-
+  private func handleAuthorizationResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?, completionHandler: @escaping (Result<String>) -> Void) {
     defer { currentAuthorization = nil }
 
     var result: Result<String>!
 
     defer {
-      DispatchQueue.main.async { [authorization] in
-        authorization.safariViewController.dismiss(animated: true) {
-          authorization.completionHandler(result)
-        }
-      }
+      completionHandler(result)
     }
 
     guard error == nil else {
