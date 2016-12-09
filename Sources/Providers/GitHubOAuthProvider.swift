@@ -43,38 +43,42 @@ final class GitHubOAuthProvider: FinchProvider {
     request.httpMethod = "POST"
 
     let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-      guard let `self` = self, let authorization = self.currentAuthorization else { return }
-
-      defer { self.currentAuthorization = nil }
-
-      var tokenResult: String?
-
-      defer {
-        DispatchQueue.main.async { [authorization] in
-          authorization.safariViewController.dismiss(animated: true) {
-            authorization.completionHandler(tokenResult)
-          }
-        }
-      }
-
-      guard error == nil else {
-        return
-      }
-
-      let response = data.flatMap { String(data: $0, encoding: .utf8) }
-
-      var components = URLComponents()
-      components.query = response
-
-      guard let token = components.queryItems?.first(where: { $0.name == "access_token" })?.value else {
-        return
-      }
-
-      tokenResult = token
+      self?.handleAuthorizationResponse(data, response, error)
     }
 
     task.resume()
 
     return true
+  }
+
+  private func handleAuthorizationResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+    guard let authorization = self.currentAuthorization else { return }
+
+    defer { currentAuthorization = nil }
+
+    var tokenResult: String?
+
+    defer {
+      DispatchQueue.main.async { [authorization] in
+        authorization.safariViewController.dismiss(animated: true) {
+          authorization.completionHandler(tokenResult)
+        }
+      }
+    }
+
+    guard error == nil else {
+      return
+    }
+
+    let response = data.flatMap { String(data: $0, encoding: .utf8) }
+
+    var components = URLComponents()
+    components.query = response
+
+    guard let token = components.queryItems?.first(where: { $0.name == "access_token" })?.value else {
+      return
+    }
+
+    tokenResult = token
   }
 }
