@@ -5,7 +5,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   static var gitHubProvider: GitHubOAuthProvider {
-    return Finch.register(GitHubOAuthProvider())
+    return Finch.register(GitHubOAuthProvider(clientId: "3127cd33caef9514cbc5"))
   }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {

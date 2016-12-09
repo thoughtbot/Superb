@@ -1,21 +1,34 @@
 import SafariServices
 import UIKit
 
-let authorizeURL = URL(string: "https://github.com/login/oauth/authorize?client_id=3127cd33caef9514cbc5&redirect_uri=finchui%3A%2F%2Foauth%2Fgithub%2Fcode")!
+let authorizeURL = URL(string: "https://github.com/login/oauth/authorize")!
 let createAccessTokenURL = URL(string: "https://github.com/login/oauth/access_token")!
+let redirectURI = "finchui://oauth/github/code"
 
 final class GitHubOAuthProvider: FinchProvider {
   static let identifier = "com.thoughtbot.finch.github.oauth"
+
+  let clientId: String
 
   private var currentAuthorization: (
     safariViewController: SFSafariViewController,
     completionHandler: (String?) -> Void
   )?
 
+  init(clientId: String) {
+    self.clientId = clientId
+  }
+
   func authorize(over viewController: UIViewController, completionHandler: @escaping (String?) -> Void) {
     precondition(currentAuthorization == nil)
 
-    let safariViewController = SFSafariViewController(url: authorizeURL)
+    var authorizeURLComponents = URLComponents(url: authorizeURL, resolvingAgainstBaseURL: false)!
+    authorizeURLComponents.queryItems = [
+      URLQueryItem(name: "client_id", value: clientId),
+      URLQueryItem(name: "redirect_uri", value: redirectURI),
+    ]
+
+    let safariViewController = SFSafariViewController(url: authorizeURLComponents.url!)
     currentAuthorization = (safariViewController, completionHandler)
     viewController.present(safariViewController, animated: true)
   }
@@ -30,7 +43,7 @@ final class GitHubOAuthProvider: FinchProvider {
     var params: [URLQueryItem] = []
     params.append(URLQueryItem(name: "code", value: code))
     params.append(URLQueryItem(name: "client_secret", value: "b9d69d245ca6f952b50c77a543dca4f4c612ff73"))
-    params.append(URLQueryItem(name: "client_id", value: "3127cd33caef9514cbc5"))
+    params.append(URLQueryItem(name: "client_id", value: clientId))
 
     var requestComponents = URLComponents()
     requestComponents.queryItems = params
