@@ -32,7 +32,7 @@ final class RequestAuthorizer<Token> {
         result = .success(data, response)
       }
 
-      func complete(failingWith newError: FinchError? = nil) {
+      func complete(overridingResultWith newError: FinchError?) {
         let finalResult = newError.map(Result.failure) ?? result
         DispatchQueue.main.async {
           completionHandler(finalResult)
@@ -43,12 +43,12 @@ final class RequestAuthorizer<Token> {
         httpResponse.statusCode == 401,
         shouldReauthorize
         else {
-          complete()
+          complete(overridingResultWith: nil)
           return
         }
 
       guard let topViewController = self.topViewController else {
-        complete(failingWith: .userInteractionRequired)
+        complete(overridingResultWith: .userInteractionRequired)
         return
       }
 
@@ -60,7 +60,7 @@ final class RequestAuthorizer<Token> {
             self.performAuthorized(request, reauthorize: false, completionHandler: completionHandler)
 
           case let .failure(error):
-            complete(failingWith: error)
+            complete(overridingResultWith: error)
           }
         }
 
