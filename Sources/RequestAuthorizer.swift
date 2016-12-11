@@ -1,15 +1,15 @@
 import Result
 import UIKit
 
-final class RequestAuthorizer {
+final class RequestAuthorizer<Token> {
   let applicationDelegate: UIApplicationDelegate
-  let authorizationProvider: FinchProvider
+  let authorizationProvider: AnyFinchProvider<Token>
 
-  private var token: String?
+  private var token: Token?
 
-  init(applicationDelegate: UIApplicationDelegate, authorizationProvider: FinchProvider) {
+  init<Provider: FinchProvider>(applicationDelegate: UIApplicationDelegate, authorizationProvider: Provider) where Provider.Token == Token {
     self.applicationDelegate = applicationDelegate
-    self.authorizationProvider = authorizationProvider
+    self.authorizationProvider = AnyFinchProvider(authorizationProvider)
   }
 
   func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {

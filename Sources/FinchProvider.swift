@@ -2,7 +2,7 @@ import Result
 import UIKit
 
 enum Finch {
-  private static var providers: [String: FinchProvider] = [:]
+  private static var providers: [String: Any] = [:]
 
   static func register<Provider: FinchProvider>(_ makeProvider: @autoclosure () -> Provider) -> Provider {
     return register { makeProvider() }
@@ -22,7 +22,8 @@ enum Finch {
 
   static func handleAuthenticationRedirect(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
     for (_, provider) in providers {
-      if provider.handleCallback(url, options: options) {
+      let handler = provider as! _CallbackHandler
+      if handler.handleCallback(url, options: options) {
         return true
       }
     }
@@ -31,12 +32,19 @@ enum Finch {
   }
 }
 
-protocol FinchProvider {
-  static var identifier: String { get }
-
-  func authorizationHeader(forToken token: String) -> String
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void)
+protocol _CallbackHandler {
   func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool
+}
+
+protocol _FinchProvider: _CallbackHandler {
+  associatedtype Token
+
+  func authorizationHeader(forToken token: Token) -> String
+  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<Token, FinchError>) -> Void)
+}
+
+protocol FinchProvider: _FinchProvider {
+  static var identifier: String { get }
 }
 
 extension FinchProvider {
