@@ -12,8 +12,10 @@ final class RequestAuthorizer<Token> {
     self.authorizationProvider = AnyFinchProvider(authorizationProvider)
   }
 
-  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
-    performAuthorized(request, reauthorize: true, completionHandler: completionHandler)
+  func performAuthorized(_ request: URLRequest, qos: DispatchQoS.QoSClass = .default, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+    DispatchQueue.global(qos: qos).async {
+      self.performAuthorized(request, reauthorize: true, completionHandler: completionHandler)
+    }
   }
 
   private func performAuthorized(_ request: URLRequest, reauthorize shouldReauthorize: Bool = true, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
