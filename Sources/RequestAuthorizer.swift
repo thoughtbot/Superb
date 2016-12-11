@@ -14,11 +14,11 @@ final class RequestAuthorizer<Token> {
 
   func performAuthorized(_ request: URLRequest, qos: DispatchQoS.QoSClass = .default, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
     DispatchQueue.global(qos: qos).async {
-      self.performAuthorized(request, reauthorize: true, completionHandler: completionHandler)
+      self.performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
     }
   }
 
-  private func performAuthorized(_ request: URLRequest, reauthorize shouldReauthorize: Bool = true, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+  private func performAuthorized(_ request: URLRequest, reauthenticate: Bool = true, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
     var authorizedRequest = request
 
     if let authorization = token.map(authorizationProvider.authorizationHeader(forToken:)) {
@@ -43,7 +43,7 @@ final class RequestAuthorizer<Token> {
 
       guard let httpResponse = response as? HTTPURLResponse,
         httpResponse.statusCode == 401,
-        shouldReauthorize
+        reauthenticate
         else {
           complete(overridingResultWith: nil)
           return
@@ -59,7 +59,7 @@ final class RequestAuthorizer<Token> {
           switch result {
           case let .success(token):
             self.token = token
-            self.performAuthorized(request, reauthorize: false, completionHandler: completionHandler)
+            self.performAuthorized(request, reauthenticate: false, completionHandler: completionHandler)
 
           case let .failure(error):
             complete(overridingResultWith: error)
