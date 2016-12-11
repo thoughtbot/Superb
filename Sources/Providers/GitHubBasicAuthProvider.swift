@@ -1,3 +1,4 @@
+import Result
 import UIKit
 
 let createPersonalAccessTokenURL = URL(string: "https://api.github.com/authorizations")!
@@ -12,7 +13,7 @@ final class GitHubBasicAuthProvider : FinchProvider {
     return "token \(token)"
   }
 
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String>) -> Void) {
+  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
     let alert = UIAlertController(title: "Sign in to GitHub", message: nil, preferredStyle: .alert)
 
     alert.addTextField { textField in
@@ -45,7 +46,7 @@ final class GitHubBasicAuthProvider : FinchProvider {
     password = sender.text ?? ""
   }
 
-  private func createAccessToken(login: String, password: String, completionHandler: @escaping (Result<String>) -> Void) {
+  private func createAccessToken(login: String, password: String, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
 
     let requestBody = try? JSONSerialization.data(withJSONObject: [
       "note": makePersonalAccessTokenNote()
@@ -57,14 +58,14 @@ final class GitHubBasicAuthProvider : FinchProvider {
     request.setValue(createAuthorizationHeader(login: login, password: password), forHTTPHeaderField: "Authorization")
 
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
-      var result: Result<String>!
+      var result: Result<String, FinchError>!
 
       defer {
         completionHandler(result)
       }
 
       guard error == nil else {
-        result = .failure(error!)
+        result = .failure(.requestFailed(error!))
         return
       }
 
@@ -73,7 +74,7 @@ final class GitHubBasicAuthProvider : FinchProvider {
         let response = object as? [String: Any],
         let token = response["token"] as? String
         else {
-          result = .failure(FinchError.authorizationResponseInvalid)
+          result = .failure(.authorizationResponseInvalid)
           return
         }
 

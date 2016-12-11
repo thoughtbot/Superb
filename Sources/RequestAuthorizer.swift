@@ -1,3 +1,4 @@
+import Result
 import UIKit
 
 final class RequestAuthorizer {
@@ -11,11 +12,11 @@ final class RequestAuthorizer {
     self.authorizationProvider = authorizationProvider
   }
 
-  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?)>) -> Void) {
+  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
     performAuthorized(request, reauthorize: true, completionHandler: completionHandler)
   }
 
-  private func performAuthorized(_ request: URLRequest, reauthorize shouldReauthorize: Bool = true, completionHandler: @escaping (Result<(Data?, URLResponse?)>) -> Void) {
+  private func performAuthorized(_ request: URLRequest, reauthorize shouldReauthorize: Bool = true, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
     var authorizedRequest = request
 
     if let authorization = token.map(authorizationProvider.authorizationHeader(forToken:)) {
@@ -23,15 +24,15 @@ final class RequestAuthorizer {
     }
 
     let task = URLSession.shared.dataTask(with: authorizedRequest) { data, response, error in
-      let result: Result<(Data?, URLResponse?)>
+      let result: Result<(Data?, URLResponse?), FinchError>
 
       if let error = error {
-        result = .failure(error)
+        result = .failure(.requestFailed(error))
       } else {
         result = .success(data, response)
       }
 
-      func complete(failingWith newError: Error? = nil) {
+      func complete(failingWith newError: FinchError? = nil) {
         let finalResult = newError.map(Result.failure) ?? result
         DispatchQueue.main.async {
           completionHandler(finalResult)
@@ -47,7 +48,7 @@ final class RequestAuthorizer {
         }
 
       guard let topViewController = self.topViewController else {
-        complete(failingWith: FinchError.userInteractionRequired)
+        complete(failingWith: .userInteractionRequired)
         return
       }
 

@@ -1,3 +1,4 @@
+import Result
 import UIKit
 
 enum Finch {
@@ -34,7 +35,7 @@ protocol FinchProvider {
   static var identifier: String { get }
 
   func authorizationHeader(forToken token: String) -> String
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String>) -> Void)
+  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void)
   func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool
 }
 

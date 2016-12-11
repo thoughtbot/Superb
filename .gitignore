@@ -6,6 +6,10 @@
 build/
 DerivedData/
 
+## Carthage
+Cartfile.resolved
+Carthage/
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
