@@ -26,7 +26,7 @@ final class GitHubOAuthViewController: UIViewController {
 
     AppDelegate.gitHubOAuthRequestAuthorizer.performAuthorized(userRequest) { result in
       switch result {
-      case let .success(data?, response?):
+      case let .success(data?, _):
         if let object = try? JSONSerialization.jsonObject(with: data) {
           DispatchQueue.main.async {
             self.showUser(object)
