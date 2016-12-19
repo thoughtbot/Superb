@@ -14,6 +14,7 @@ final class GitHubOAuthProvider: FinchProvider {
 
   private var currentAuthorization: (
     safariViewController: SFSafariViewController,
+    delegate: SafariViewControllerDelegate,
     completionHandler: (Result<String, FinchError>) -> Void
   )?
 
@@ -37,8 +38,16 @@ final class GitHubOAuthProvider: FinchProvider {
     ]
 
     let safariViewController = SFSafariViewController(url: authorizeURLComponents.url!)
-    currentAuthorization = (safariViewController, completionHandler)
+    let delegate = SafariViewControllerDelegate { [weak self] in self?.failIfUnauthorized() }
+    safariViewController.delegate = delegate
+    currentAuthorization = (safariViewController, delegate, completionHandler)
     viewController.present(safariViewController, animated: true)
+  }
+
+  private func failIfUnauthorized() {
+    guard let completionHandler = currentAuthorization?.completionHandler else { return }
+    currentAuthorization = nil
+    completionHandler(.failure(.unauthorized))
   }
 
   func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
@@ -70,8 +79,8 @@ final class GitHubOAuthProvider: FinchProvider {
 
     task.resume()
 
-    authorization.safariViewController.dismiss(animated: true)
     currentAuthorization = nil
+    authorization.safariViewController.dismiss(animated: true)
 
     return true
   }
@@ -101,5 +110,19 @@ final class GitHubOAuthProvider: FinchProvider {
     }
 
     result = .success(token)
+  }
+}
+
+private extension GitHubOAuthProvider {
+  final class SafariViewControllerDelegate: NSObject, SFSafariViewControllerDelegate {
+    private let completionHandler: () -> Void
+
+    init(completionHandler: @escaping () -> Void) {
+      self.completionHandler = completionHandler
+    }
+
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+      completionHandler()
+    }
   }
 }

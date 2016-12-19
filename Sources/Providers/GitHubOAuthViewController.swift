@@ -25,27 +25,26 @@ final class GitHubOAuthViewController: UIViewController {
     defer { self.userRequest = nil }
 
     AppDelegate.gitHubOAuthRequestAuthorizer.performAuthorized(userRequest) { result in
+      let maybeUser: Any?
+
       switch result {
       case let .success(data?, _):
-        if let object = try? JSONSerialization.jsonObject(with: data) {
-          DispatchQueue.main.async {
-            self.showUser(object)
-          }
-        }
-      case let .success(data, response):
-        print(response ?? "<no response>")
-        if let description = data.flatMap({ String(data: $0, encoding: .utf8) }) {
-          print(description)
-        } else {
-          print(data ?? "<no data>")
-        }
+        maybeUser = try? JSONSerialization.jsonObject(with: data)
+
+      case let .success(_, response):
+        print("response:", response ?? "<no response>")
+        maybeUser = nil
+
       case let .failure(error):
-        print(error)
+        print("error:", error)
+        maybeUser = nil
       }
+
+      self.showUser(maybeUser)
     }
   }
 
-  private func showUser(_ object: Any) {
+  private func showUser(_ object: Any?) {
     userContainer.alpha = 0
     userContainer.isHidden = false
 
