@@ -22,6 +22,10 @@
 		4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
 		4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA980BE1DFB55A0000604FB /* Result.framework */; };
 		4AA980C41DFB5FD6000604FB /* AnyFinchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */; };
+		4AAA9F8C1E1C82950064F4C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; };
+		4AAA9F8D1E1C82950064F4C9 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; };
+		4AAA9F8F1E1C82B00064F4C9 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4AAA9F901E1C82B00064F4C9 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AF7D78D1E1C0CA8003847BD /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7D78C1E1C0CA8003847BD /* Channel.swift */; };
 		7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */; };
 		7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */; };
@@ -37,6 +41,21 @@
 			remoteInfo = FinchUI;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4AAA9F8E1E1C82A60064F4C9 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4AAA9F8F1E1C82B00064F4C9 /* Nimble.framework in Copy Frameworks */,
+				4AAA9F901E1C82B00064F4C9 /* Quick.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
@@ -58,6 +77,8 @@
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyFinchProvider.swift; sourceTree = "<group>"; };
+		4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		4AAA9F8B1E1C82950064F4C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		4AF7D78C1E1C0CA8003847BD /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthProvider.swift; sourceTree = "<group>"; };
 		7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AAA9F8C1E1C82950064F4C9 /* Nimble.framework in Frameworks */,
+				4AAA9F8D1E1C82950064F4C9 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +179,8 @@
 		4AA980BD1DFB55A0000604FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */,
+				4AAA9F8B1E1C82950064F4C9 /* Quick.framework */,
 				4AA980BE1DFB55A0000604FB /* Result.framework */,
 			);
 			name = Frameworks;
@@ -189,6 +214,7 @@
 				4A9061981DF9BB4A0004D532 /* Sources */,
 				4A9061991DF9BB4A0004D532 /* Frameworks */,
 				4A90619A1DF9BB4A0004D532 /* Resources */,
+				4AAA9F8E1E1C82A60064F4C9 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -418,6 +444,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
