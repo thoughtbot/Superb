@@ -14,7 +14,6 @@
 		4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A90618F1DF9BB4A0004D532 /* Main.storyboard */; };
 		4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061921DF9BB4A0004D532 /* Assets.xcassets */; };
 		4A9061961DF9BB4A0004D532 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */; };
-		4A9061A11DF9BB4A0004D532 /* FinchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */; };
 		4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */; };
 		4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */; };
 		4A90A5001E09F31F0077BC68 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90A4FF1E09F31F0077BC68 /* Atomic.swift */; };
@@ -22,6 +21,7 @@
 		4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
 		4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA980BE1DFB55A0000604FB /* Result.framework */; };
 		4AA980C41DFB5FD6000604FB /* AnyFinchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */; };
+		4AAA9F891E1C818C0064F4C9 /* ChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */; };
 		4AAA9F8C1E1C82950064F4C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; };
 		4AAA9F8D1E1C82950064F4C9 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; };
 		4AAA9F8F1E1C82B00064F4C9 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -68,7 +68,6 @@
 		4A9061951DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A9061971DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A90619C1DF9BB4A0004D532 /* FinchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinchUITests.swift; sourceTree = "<group>"; };
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubOAuth.storyboard; sourceTree = "<group>"; };
 		4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +76,7 @@
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyFinchProvider.swift; sourceTree = "<group>"; };
+		4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
 		4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4AAA9F8B1E1C82950064F4C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		4AF7D78C1E1C0CA8003847BD /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 		4A90619F1DF9BB4A0004D532 /* FinchUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4A9061A01DF9BB4A0004D532 /* FinchUITests.swift */,
+				4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */,
 				4A9061A21DF9BB4A0004D532 /* Info.plist */,
 			);
 			path = FinchUITests;
@@ -333,7 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9061A11DF9BB4A0004D532 /* FinchUITests.swift in Sources */,
+				4AAA9F891E1C818C0064F4C9 /* ChannelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
