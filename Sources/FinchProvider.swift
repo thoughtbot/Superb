@@ -39,7 +39,7 @@ protocol _CallbackHandler {
 protocol _FinchProvider: _CallbackHandler {
   associatedtype Token
 
-  func authorizationHeader(forToken token: Token) -> String
+  func authorizationHeader(for token: Token) -> String
   func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<Token, FinchError>) -> Void)
 }
 

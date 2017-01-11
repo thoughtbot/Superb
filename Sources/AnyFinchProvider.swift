@@ -9,12 +9,12 @@ internal final class AnyFinchProvider<Token>: _FinchProvider {
 
   init<Base: FinchProvider>(_ provider: Base) where Base.Token == Token {
     identifier = Base.identifier
-    _authorizationHeader = { provider.authorizationHeader(forToken: $0) }
+    _authorizationHeader = { provider.authorizationHeader(for: $0) }
     _authorize = { provider.authorize(over: $0, completionHandler: $1) }
     _handleCallback = { provider.handleCallback($0, options: $1) }
   }
 
-  func authorizationHeader(forToken token: Token) -> String {
+  func authorizationHeader(for token: Token) -> String {
     return _authorizationHeader(token)
   }
 

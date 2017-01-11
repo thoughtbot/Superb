@@ -9,7 +9,7 @@ final class GitHubBasicAuthProvider : FinchProvider {
   private var login = ""
   private var password = ""
 
-  func authorizationHeader(forToken token: String) -> String {
+  func authorizationHeader(for token: String) -> String {
     return "token \(token)"
   }
 

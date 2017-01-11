@@ -23,7 +23,7 @@ final class GitHubOAuthProvider: FinchProvider {
     self.redirectURI = redirectURI
   }
 
-  func authorizationHeader(forToken token: String) -> String {
+  func authorizationHeader(for token: String) -> String {
     return "token \(token)"
   }
 
