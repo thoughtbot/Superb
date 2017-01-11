@@ -52,5 +52,32 @@ final class ChannelSpec: QuickSpec {
 
       expect(received) == [1]
     }
+
+    it("handles concurrent subscription and broadcasting safely") {
+      let subscriptions = 10000
+      let subscriptionInterval = 0.0001
+
+      let group = DispatchGroup()
+      (0..<subscriptions).forEach { _ in group.enter() }
+      DispatchQueue.concurrentPerform(iterations: subscriptions) { _ in
+        Thread.sleep(forTimeInterval: subscriptionInterval)
+        channel.subscribe { _ in
+          group.leave()
+        }
+      }
+
+      let broadcasts = subscriptions / 10
+      let broadcastInterval = subscriptionInterval * 10
+
+      DispatchQueue.concurrentPerform(iterations: broadcasts) { i in
+        Thread.sleep(forTimeInterval: broadcastInterval)
+        channel.broadcast(i)
+      }
+
+      guard case .success = group.wait(timeout: .now() + .seconds(1)) else {
+        fail("expected all subscriptions to complete")
+        return
+      }
+    }
   }
 }
