@@ -16,7 +16,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
   static let gitHubOAuthRequestAuthorizer: RequestAuthorizer = {
     return RequestAuthorizer(
-      applicationDelegate: UIApplication.shared.delegate!,
       authorizationProvider: gitHubOAuthProvider
     )
   }()
@@ -29,7 +28,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
   static let gitHubBasicAuthRequestAuthorizer: RequestAuthorizer = {
     return RequestAuthorizer(
-      applicationDelegate: UIApplication.shared.delegate!,
       authorizationProvider: gitHubBasicAuthProvider
     )
   }()

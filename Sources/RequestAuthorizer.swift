@@ -2,13 +2,15 @@ import Result
 import UIKit
 
 final class RequestAuthorizer<Token> {
-  let applicationDelegate: UIApplicationDelegate
+  let applicationDelegate: () -> UIApplicationDelegate?
   let authorizationProvider: AnyFinchProvider<Token>
 
   private let authenticationComplete: Channel<Result<Token, FinchError>>
   private let authenticationState: Atomic<AuthenticationState<Token>>
 
-  init<Provider: FinchProvider>(applicationDelegate: UIApplicationDelegate, authorizationProvider: Provider) where Provider.Token == Token {
+  init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = UIApplication.shared.delegate)
+    where Provider.Token == Token
+  {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
     self.authenticationState = Atomic(.unauthenticated)
@@ -197,7 +199,7 @@ final class RequestAuthorizer<Token> {
   }
 
   private var topViewController: UIViewController? {
-    guard let rootViewController = applicationDelegate.window??.rootViewController
+    guard let rootViewController = applicationDelegate()?.window??.rootViewController
       else { return nil }
 
     return rootViewController.topPresentedViewController
