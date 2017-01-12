@@ -36,5 +36,31 @@ final class RequestAuthorizerSpec: QuickSpec {
 
       requests.verify()
     }
+
+    it("calls the request authorizer and retries on a 401 response") {
+      let testProvider = TestAuthorizationProvider()
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, token: "stale-token")
+      let request = URLRequest(url: testURL(path: "/example"))
+
+      requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "stale-token")) { _ in
+        return OHHTTPStubsResponse(data: Data(), statusCode: 401, headers: nil)
+      }
+
+      requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "new-token"))
+
+      var response: HTTPURLResponse?
+      var error: FinchError?
+
+      authorizer.performAuthorized(request) { result in
+        response = result.value?.1 as? HTTPURLResponse
+        error = result.error
+      }
+
+      testProvider.complete(with: "new-token")
+
+      requests.verify()
+      expect(response?.statusCode).toEventually(equal(200))
+      expect(error).to(beNil())
+    }
   }
 }

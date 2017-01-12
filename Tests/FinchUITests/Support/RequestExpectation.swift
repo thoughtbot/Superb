@@ -31,7 +31,7 @@ final class RequestExpectation: NSObject {
     tearDown()
   }
 
-  func expect(where predicate: @escaping (OHHTTPStubsTestBlock), return response: OHHTTPStubsResponse = OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil), file: StaticString = #file, line: UInt = #line) {
+  func expect(where predicate: @escaping OHHTTPStubsTestBlock, file: StaticString = #file, line: UInt = #line, response: @escaping OHHTTPStubsResponseBlock = { _ in OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil) }) {
     var expectation: OHHTTPStubsDescriptor!
     expectation = stub(condition: predicate) { [unowned self] request in
       self.willChangeValue(forKey: #keyPath(responseCount))
@@ -39,7 +39,7 @@ final class RequestExpectation: NSObject {
         self.responses.recordComplete(expectation, request)
       }
       self.didChangeValue(forKey: #keyPath(responseCount))
-      return response
+      return response(request)
     }
     stubs.add(expectation, file, line)
   }
