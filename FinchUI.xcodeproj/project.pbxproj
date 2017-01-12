@@ -22,6 +22,7 @@
 		4A97A7D81E26D62700FC51EC /* OHHTTPStubs.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A97A7DB1E26EA8B00FC51EC /* RequestExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */; };
 		4A97A7DD1E280F9500FC51EC /* TestAuthorizationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */; };
+		4A97A7DF1E281EA200FC51EC /* ConditionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */; };
 		4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */; };
 		4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
 		4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA980BE1DFB55A0000604FB /* Result.framework */; };
@@ -82,6 +83,7 @@
 		4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestExpectation.swift; sourceTree = "<group>"; };
 		4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAuthorizationProvider.swift; sourceTree = "<group>"; };
+		4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionLock.swift; sourceTree = "<group>"; };
 		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchError.swift; sourceTree = "<group>"; };
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		4A97A7D91E26EA7100FC51EC /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */,
 				4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */,
 				4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */,
 			);
@@ -356,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A97A7DF1E281EA200FC51EC /* ConditionLock.swift in Sources */,
 				4A97A7DB1E26EA8B00FC51EC /* RequestExpectation.swift in Sources */,
 				4AAA9F891E1C818C0064F4C9 /* ChannelSpec.swift in Sources */,
 				4A97A7DD1E280F9500FC51EC /* TestAuthorizationProvider.swift in Sources */,

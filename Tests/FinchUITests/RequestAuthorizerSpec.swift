@@ -22,5 +22,19 @@ final class RequestAuthorizerSpec: QuickSpec {
       authorizer.performAuthorized(request) { _ in }
       requests.verify()
     }
+
+    it("calls the request authorizer when unathenticated") {
+      let testProvider = TestAuthorizationProvider()
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider)
+      let request = URLRequest(url: testURL(path: "/example"))
+
+      requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "dynamic-token"))
+
+      authorizer.performAuthorized(request) { _ in }
+
+      testProvider.complete(with: "dynamic-token")
+
+      requests.verify()
+    }
   }
 }
