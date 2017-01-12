@@ -21,6 +21,14 @@ final class TestAuthorizationProvider: FinchProvider {
   }
 
   func complete(with token: String) {
+    complete(with: .success(token))
+  }
+
+  func complete(with error: FinchError) {
+    complete(with: .failure(error))
+  }
+
+  private func complete(with result: Result<String, FinchError>) {
     queue.async { [authenticationLock] in
       authenticationLock.lock(when: .authenticating)
       guard let completionHandler = self.completionHandler else {
@@ -28,7 +36,7 @@ final class TestAuthorizationProvider: FinchProvider {
       }
       self.completionHandler = nil
       authenticationLock.unlock(with: .ready)
-      completionHandler(.success(token))
+      completionHandler(result)
     }
   }
 }

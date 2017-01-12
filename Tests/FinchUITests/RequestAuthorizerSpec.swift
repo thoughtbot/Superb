@@ -97,5 +97,49 @@ final class RequestAuthorizerSpec: QuickSpec {
       expect(statusCodes.count).toEventually(equal(limit))
       expect(Set(statusCodes)).to(equal(Set([200])))
     }
+
+    it("notifies multiple pending requests of authentication failure") {
+      let testProvider = TestAuthorizationProvider()
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider)
+
+      var errors: [FinchError] = []
+      let queue = DispatchQueue(label: "response queue")
+      let group = DispatchGroup()
+
+      let limit = 100
+      (0..<limit).forEach { _ in group.enter() }
+
+      DispatchQueue.concurrentPerform(iterations: limit) { i in
+        let example = "/example\(i + 1)"
+
+        authorizer.performAuthorized(testRequest(path: example)) { result in
+          if let error = result.error {
+            queue.sync { errors.append(error) }
+          }
+        }
+
+        group.leave()
+      }
+
+      group.wait()
+
+      testProvider.complete(with: .unauthorized)
+
+      var allUnauthorized: Bool {
+        for error in errors {
+          switch error {
+          case .unauthorized:
+            continue
+          default:
+            return false
+          }
+        }
+        return true
+      }
+
+      requests.verify()
+      expect(errors.count).toEventually(equal(limit))
+      expect(allUnauthorized).to(beTrue())
+    }
   }
 }
