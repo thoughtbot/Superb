@@ -8,12 +8,12 @@ final class RequestAuthorizer<Token> {
   private let authenticationComplete: Channel<Result<Token, FinchError>>
   private let authenticationState: Atomic<AuthenticationState<Token>>
 
-  init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = UIApplication.shared.delegate)
+  init<Provider: FinchProvider>(authorizationProvider: Provider, token: Token? = nil, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = UIApplication.shared.delegate)
     where Provider.Token == Token
   {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
-    self.authenticationState = Atomic(.unauthenticated)
+    self.authenticationState = Atomic(token.map(AuthenticationState.authenticated) ?? .unauthenticated)
     self.authorizationProvider = AnyFinchProvider(authorizationProvider)
   }
 
@@ -202,7 +202,7 @@ final class RequestAuthorizer<Token> {
     guard let rootViewController = applicationDelegate()?.window??.rootViewController
       else { return nil }
 
-    return rootViewController.topPresentedViewController
+    return rootViewController.topPresentedViewController ?? rootViewController
   }
 }
 
