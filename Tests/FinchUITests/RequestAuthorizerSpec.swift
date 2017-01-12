@@ -5,8 +5,9 @@ import Nimble
 
 final class RequestAuthorizerSpec: QuickSpec {
   override func spec() {
-    func testURL(path: String) -> URL {
-      return URL(string: "http://example.com")!.appendingPathComponent(path)
+    func testRequest(path: String) -> URLRequest {
+      let url = URL(string: "http://example.com")!.appendingPathComponent(path)
+      return URLRequest(url: url)
     }
 
     var requests: RequestExpectation!
@@ -16,7 +17,7 @@ final class RequestAuthorizerSpec: QuickSpec {
     it("authorizes a request with the current token") {
       let testProvider = TestAuthorizationProvider()
       let authorizer = RequestAuthorizer(authorizationProvider: testProvider, token: "test-token")
-      let request = URLRequest(url: testURL(path: "/example"))
+      let request = testRequest(path: "/example")
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "test-token"))
       authorizer.performAuthorized(request) { _ in }
@@ -26,7 +27,7 @@ final class RequestAuthorizerSpec: QuickSpec {
     it("calls the request authorizer when unathenticated") {
       let testProvider = TestAuthorizationProvider()
       let authorizer = RequestAuthorizer(authorizationProvider: testProvider)
-      let request = URLRequest(url: testURL(path: "/example"))
+      let request = testRequest(path: "/example")
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "dynamic-token"))
 
@@ -40,7 +41,7 @@ final class RequestAuthorizerSpec: QuickSpec {
     it("calls the request authorizer and retries on a 401 response") {
       let testProvider = TestAuthorizationProvider()
       let authorizer = RequestAuthorizer(authorizationProvider: testProvider, token: "stale-token")
-      let request = URLRequest(url: testURL(path: "/example"))
+      let request = testRequest(path: "/example")
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "stale-token")) { _ in
         return OHHTTPStubsResponse(data: Data(), statusCode: 401, headers: nil)
@@ -61,6 +62,40 @@ final class RequestAuthorizerSpec: QuickSpec {
       requests.verify()
       expect(response?.statusCode).toEventually(equal(200))
       expect(error).to(beNil())
+    }
+
+    it("authorizes multiple pending requests") {
+      let testProvider = TestAuthorizationProvider()
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider)
+
+      var statusCodes: [Int] = []
+      let queue = DispatchQueue(label: "response queue")
+      let group = DispatchGroup()
+
+      let limit = 100
+      (0..<limit).forEach { _ in group.enter() }
+
+      DispatchQueue.concurrentPerform(iterations: limit) { i in
+        let example = "/example\(i + 1)"
+
+        requests.expect(where: isPath(example) && hasHeaderNamed("Authorization", value: "shared-token"))
+
+        authorizer.performAuthorized(testRequest(path: example)) { result in
+          if let httpResponse = result.value?.1 as? HTTPURLResponse {
+            queue.sync { statusCodes.append(httpResponse.statusCode) }
+          }
+        }
+
+        group.leave()
+      }
+
+      group.wait()
+
+      testProvider.complete(with: "shared-token")
+
+      requests.verify()
+      expect(statusCodes.count).toEventually(equal(limit))
+      expect(Set(statusCodes)).to(equal(Set([200])))
     }
   }
 }

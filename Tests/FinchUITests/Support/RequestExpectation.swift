@@ -8,8 +8,9 @@ extension XCTestCase {
 }
 
 final class RequestExpectation: NSObject {
-  private let queue = DispatchQueue(label: "response queue")
+  private let responsesQueue = DispatchQueue(label: "responses queue")
   private var responses = Responses()
+  private let stubsQueue = DispatchQueue(label: "stubs queue")
   private var stubs = Stubs()
   private let test: XCTestCase
   private var unexpectedStub: OHHTTPStubsDescriptor?
@@ -19,7 +20,7 @@ final class RequestExpectation: NSObject {
     super.init()
     self.unexpectedStub = stub(condition: { _ in true }) { [unowned self] request in
       self.willChangeValue(forKey: #keyPath(responseCount))
-      self.queue.sync {
+      self.responsesQueue.sync {
         self.responses.recordUnexpected(request)
       }
       self.didChangeValue(forKey: #keyPath(responseCount))
@@ -35,20 +36,20 @@ final class RequestExpectation: NSObject {
     var expectation: OHHTTPStubsDescriptor!
     expectation = stub(condition: predicate) { [unowned self] request in
       self.willChangeValue(forKey: #keyPath(responseCount))
-      self.queue.sync {
+      self.responsesQueue.sync {
         self.responses.recordComplete(expectation, request)
       }
       self.didChangeValue(forKey: #keyPath(responseCount))
       return response(request)
     }
-    stubs.add(expectation, file, line)
+    stubsQueue.sync { stubs.add(expectation, file, line) }
   }
 
   func verify(timeout: TimeInterval = 1, file: StaticString = #file, line: UInt = #line) {
     test.keyValueObservingExpectation(for: self, keyPath: #keyPath(responseCount), expectedValue: stubs.count)
 
     test.waitForExpectations(timeout: timeout) { error in
-      var missing = self.stubs
+      var missing = self.stubsQueue.sync { self.stubs }
       for (stub, _) in self.expectedResponses.values {
         missing.remove(stub)
       }
@@ -65,7 +66,7 @@ final class RequestExpectation: NSObject {
     }
   }
 
-  func tearDown() {
+  private func tearDown() {
     if let stub = unexpectedStub {
       OHHTTPStubs.removeStub(stub)
     }
@@ -79,19 +80,19 @@ final class RequestExpectation: NSObject {
   }
 
   @objc private var responseCount: Int {
-    return queue.sync {
+    return responsesQueue.sync {
       return responses.responseCount
     }
   }
 
   private var expectedResponses: [ObjectIdentifier: (OHHTTPStubsDescriptor, URLRequest)] {
-    return queue.sync {
+    return responsesQueue.sync {
       responses.expected
     }
   }
 
   private var unexpectedRequests: [URLRequest] {
-    return queue.sync {
+    return responsesQueue.sync {
       responses.unexpected
     }
   }
