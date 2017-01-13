@@ -35,21 +35,28 @@ final class ChannelSpec: QuickSpec {
     }
 
     it("doesn't notify the same subscriber twice") {
-      let queue = DispatchQueue(label: "receive queue")
+      // Use high-priority queue to ensure subscribers execute promptly.
+      let queue = DispatchQueue(label: "receive queue", qos: .userInteractive)
 
       var received: [Int] = []
+
+      let possibleExecutions = DispatchGroup()
+      possibleExecutions.enter()
+      possibleExecutions.enter()
 
       channel.subscribe { message in
         queue.async {
           received.append(message)
+          possibleExecutions.leave()
         }
       }
 
       channel.broadcast(1)
       channel.broadcast(2)
 
-      Thread.sleep(forTimeInterval: 0.1)
+      let secondExecutionResult = possibleExecutions.wait(timeout: .now() + .milliseconds(100))
 
+      expect(secondExecutionResult == .timedOut) == true
       expect(received) == [1]
     }
 
