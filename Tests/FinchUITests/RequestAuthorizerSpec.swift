@@ -5,6 +5,10 @@ import Nimble
 
 final class RequestAuthorizerSpec: QuickSpec {
   override func spec() {
+    func emptyResponse(withStatus statusCode: Int32) -> OHHTTPStubsResponseBlock {
+      return { _ in OHHTTPStubsResponse(data: Data(), statusCode: statusCode, headers: nil) }
+    }
+
     func testRequest(path: String) -> URLRequest {
       let url = URL(string: "http://example.com")!.appendingPathComponent(path)
       return URLRequest(url: url)
@@ -43,9 +47,10 @@ final class RequestAuthorizerSpec: QuickSpec {
       let authorizer = RequestAuthorizer(authorizationProvider: testProvider, token: "stale-token")
       let request = testRequest(path: "/example")
 
-      requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "stale-token")) { _ in
-        return OHHTTPStubsResponse(data: Data(), statusCode: 401, headers: nil)
-      }
+      requests.expect(
+        where: isPath("/example") && hasHeaderNamed("Authorization", value: "stale-token"),
+        andReturn: emptyResponse(withStatus: 401)
+      )
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "new-token"))
 
