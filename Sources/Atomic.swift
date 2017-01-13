@@ -17,6 +17,13 @@ final class Atomic<Value> {
     }
   }
 
+  func swap(_ newValue: Value) -> Value {
+    return modify { value in
+      defer { value = newValue }
+      return value
+    }
+  }
+
   func modify<Result>(body: (inout Value) throws -> Result) rethrows -> Result {
     lock.lock()
     defer { lock.unlock() }
