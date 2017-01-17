@@ -45,6 +45,7 @@ protocol _FinchProvider: _CallbackHandler {
 
 protocol FinchProvider: _FinchProvider {
   static var identifier: String { get }
+  static var keychainServiceName: String { get }
 }
 
 extension FinchProvider {

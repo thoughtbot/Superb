@@ -5,6 +5,7 @@ let createPersonalAccessTokenURL = URL(string: "https://api.github.com/authoriza
 
 final class GitHubBasicAuthProvider : FinchProvider {
   static let identifier = "com.thoughtbot.finch.github.basic"
+  static let keychainServiceName = "GitHub Personal Access Token"
 
   private var login = ""
   private var password = ""

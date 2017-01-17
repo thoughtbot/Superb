@@ -31,7 +31,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("calls the request authorizer when unathenticated") {
       let testProvider = TestAuthorizationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider)
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: SimpleTokenStorage())
       let request = testRequest(path: "/example")
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "dynamic-token"))
@@ -73,7 +73,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("authorizes multiple pending requests") {
       let testProvider = TestAuthorizationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider)
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
       var statusCodes: [Int] = []
       let queue = DispatchQueue(label: "response queue")
@@ -107,7 +107,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("notifies multiple pending requests of authentication failure") {
       let testProvider = TestAuthorizationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider)
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
       var errors: [FinchError] = []
       let queue = DispatchQueue(label: "response queue")

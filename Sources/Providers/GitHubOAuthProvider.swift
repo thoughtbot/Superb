@@ -7,6 +7,7 @@ let createAccessTokenURL = URL(string: "https://github.com/login/oauth/access_to
 
 final class GitHubOAuthProvider: FinchProvider {
   static let identifier = "com.thoughtbot.finch.github.oauth"
+  static let keychainServiceName = "GitHub OAuth"
 
   let clientId: String
   let clientSecret: String

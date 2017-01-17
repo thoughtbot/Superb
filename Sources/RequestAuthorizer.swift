@@ -17,12 +17,6 @@ final class RequestAuthorizer<Token> {
     self.authorizationProvider = AnyFinchProvider(authorizationProvider)
   }
 
-  convenience init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
-    where Provider.Token == Token
-  {
-    self.init(authorizationProvider: authorizationProvider, tokenStorage: SimpleTokenStorage(), applicationDelegate: applicationDelegate)
-  }
-
   /// Performs `request` based on the current authentication state.
   ///
   /// - If authenticated, authorizes the request using the cached token
@@ -233,6 +227,15 @@ final class RequestAuthorizer<Token> {
       else { return nil }
 
     return rootViewController.topPresentedViewController ?? rootViewController
+  }
+}
+
+extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
+  convenience init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+    where Provider.Token == Token
+  {
+    let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName)
+    self.init(authorizationProvider: authorizationProvider, tokenStorage: keychainTokenStorage, applicationDelegate: applicationDelegate)
   }
 }
 

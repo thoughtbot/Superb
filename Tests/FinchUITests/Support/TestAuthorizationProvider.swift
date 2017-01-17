@@ -4,6 +4,7 @@ import UIKit
 
 final class TestAuthorizationProvider: FinchProvider {
   static let identifier = "test-provider"
+  static let keychainServiceName = "Test Finch Provider"
 
   private var completionHandler: ((Result<String, FinchError>) -> Void)?
 
