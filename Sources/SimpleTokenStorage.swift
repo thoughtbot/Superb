@@ -1,11 +1,19 @@
 struct SimpleTokenStorage<Token>: TokenStorage {
-  private var token: Token?
+  private let token: Atomic<Token?>
 
   init(token: Token? = nil) {
-    self.token = token
+    self.token = Atomic(token)
   }
 
   func fetchToken() -> Token? {
-    return token
+    return token.value
+  }
+
+  func saveToken(_ newToken: Token) {
+    token.value = newToken
+  }
+
+  func deleteToken() {
+    token.value = nil
   }
 }

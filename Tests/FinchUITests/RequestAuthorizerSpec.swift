@@ -148,5 +148,23 @@ final class RequestAuthorizerSpec: QuickSpec {
       expect(errors.count).toEventually(equal(limit))
       expect(allUnauthorized).to(beTrue())
     }
+
+    describe("token storage") {
+      it("updates the stored token after authenticating") {
+        let testProvider = TestAuthorizationProvider()
+        let testTokenStorage = SimpleTokenStorage<String>()
+        let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
+        let request = testRequest(path: "/example")
+
+        requests.expect(where: isPath("/example"))
+
+        authorizer.performAuthorized(request) { _ in }
+        testProvider.complete(with: "new-token")
+
+        expect(testTokenStorage.fetchToken()).toEventually(equal("new-token"))
+
+        requests.verify()
+      }
+    }
   }
 }

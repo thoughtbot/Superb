@@ -6,15 +6,14 @@ final class RequestAuthorizer<Token> {
   let authorizationProvider: AnyFinchProvider<Token>
 
   private let authenticationComplete: Channel<Result<Token, FinchError>>
-  private let authenticationState: Atomic<AuthenticationState<Token>>
+  private let authenticationState: AuthenticationState<Token>
 
   init<Provider: FinchProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
     where Provider.Token == Token, Storage.Token == Token
   {
-    let token = try! tokenStorage.fetchToken()
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
-    self.authenticationState = Atomic(token.map(AuthenticationState.authenticated) ?? .unauthenticated)
+    self.authenticationState = AuthenticationState(tokenStorage: tokenStorage)
     self.authorizationProvider = AnyFinchProvider(authorizationProvider)
   }
 
@@ -121,7 +120,7 @@ final class RequestAuthorizer<Token> {
           return
         }
 
-      self.authenticationState.value = .unauthenticated
+      self.authenticationState.clearToken()
 
       self.performAuthorized(request, reauthenticate: false, completionHandler: completionHandler)
     }
@@ -215,12 +214,6 @@ final class RequestAuthorizer<Token> {
 
 private var defaultApplicationDelegate: UIApplicationDelegate? {
   return UIApplication.shared.delegate
-}
-
-private enum AuthenticationState<Token> {
-  case unauthenticated
-  case authenticating
-  case authenticated(Token)
 }
 
 private extension Sequence {
