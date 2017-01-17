@@ -63,6 +63,11 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
     addLabelIfNecessary(to: item)
 
     let status = SecItemDelete(item)
+
+    guard status != errSecItemNotFound else {
+      return
+    }
+
     guard status == noErr else {
       throw FinchError.keychainAccessFailure(status)
     }

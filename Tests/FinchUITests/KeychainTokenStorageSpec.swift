@@ -70,5 +70,12 @@ final class KeychainTokenStorageSpec: QuickSpec {
       expect { try storage.deleteToken() }.toNot(throwError())
       expect { fetchTestToken() }.to(beNil())
     }
+
+    it("deletes the token twice without throwing an error") {
+      let storage = KeychainTokenStorage<String>(service: service)
+      saveTestToken("thr0waway")
+      expect { try storage.deleteToken() }.toNot(throwError())
+      expect { try storage.deleteToken() }.toNot(throwError())
+    }
   }
 }
