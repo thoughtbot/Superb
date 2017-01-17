@@ -53,6 +53,11 @@ final class KeychainTokenStorageSpec: QuickSpec {
       expect { try storage.fetchToken(for: service) } == "s3cret"
     }
 
+    it("returns nil if the fetched token doesn't exist in the keychain") {
+      let storage = KeychainTokenStorage<String>()
+      expect { try storage.fetchToken(for: service) }.to(beNil())
+    }
+
     it("saves the token to the keychain") {
       let storage = KeychainTokenStorage<String>()
       expect { try storage.saveToken("passw0rd", for: service) }.toNot(throwError())

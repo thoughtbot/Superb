@@ -6,7 +6,7 @@ enum KeychainTokenStorageError: Error {
 }
 
 struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable> {
-  func fetchToken(for service: String) throws -> Token {
+  func fetchToken(for service: String) throws -> Token? {
     let query: NSDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
@@ -15,6 +15,11 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable> {
 
     var result: CFTypeRef?
     let status = SecItemCopyMatching(query, &result)
+
+    guard status != errSecItemNotFound else {
+      return nil
+    }
+
     guard status == noErr else {
       throw KeychainTokenStorageError.keychain(status)
     }
