@@ -69,7 +69,7 @@ final class RequestAuthorizer<Token> {
   ///       response from performing `request`, or the error returned
   ///       from authentication.
   private func performAuthorized(_ request: URLRequest, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
-    authenticationState.modify { state in
+    modifyAuthenticationState(handlingErrorsWith: completionHandler) { state in
       switch state {
       case .authenticated(let token):
         self.perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
@@ -132,8 +132,8 @@ final class RequestAuthorizer<Token> {
   /// successfully authorized.
   ///
   /// - note: In order to ensure pending requests see a consistent view
-  ///   of the authentication state, this method **must** be called while
-  ///   holding the `authenticationState` lock, after checking that the
+  ///   of the authentication state, this method **must** be called in the
+  ///   `modify` block of `modifyAuthenticationState()`, after checking that the
   ///   state is `.authenticating`.
   ///
   /// - parameters:
@@ -158,9 +158,9 @@ final class RequestAuthorizer<Token> {
   /// Invokes the auth provider to authenticate, updating `authenticationState`
   /// before performing `request` with the new token.
   ///
-  /// - note: This method must be called while holding the `authenticationState`
-  ///   lock, after checking that its value is `.unauthenticated` and updating
-  ///   it to `.authenticating`.
+  /// - note: This method must be called in the `modify` block of
+  ///   `modifyAuthenticationState()`, after checking that its value
+  ///   is `.unauthenticated` and updating it to `.authenticating`.
   ///
   /// - note: When authentication completes, the result is broadcast to
   ///   pending requests via the `authenticationComplete` channel. This
@@ -185,7 +185,7 @@ final class RequestAuthorizer<Token> {
       }
 
       self.authorizationProvider.authorize(over: topViewController) { result in
-        self.authenticationState.modify { state in
+        self.modifyAuthenticationState(handlingErrorsWith: completionHandler) { state in
           defer { self.authenticationComplete.broadcast(result) }
 
           switch result {
@@ -201,6 +201,23 @@ final class RequestAuthorizer<Token> {
           }
         }
       }
+    }
+  }
+
+  private func modifyAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, modify: (inout AuthenticationStateResult<Token>) -> Void) {
+    let error: FinchError
+
+    do {
+      try authenticationState.modify(body: modify)
+      return
+    } catch let finchError as FinchError {
+      error = finchError
+    } catch {
+      fatalError("Unexpected error: \(error.localizedDescription)")
+    }
+
+    DispatchQueue.main.async {
+      completionHandler(.failure(error))
     }
   }
 

@@ -1,10 +1,5 @@
 import Foundation
 
-enum KeychainTokenStorageError: Error {
-  case decodeFailure(Data)
-  case keychain(OSStatus)
-}
-
 struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: TokenStorage {
   let service: String
 
@@ -23,12 +18,12 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
     }
 
     guard status == noErr else {
-      throw KeychainTokenStorageError.keychain(status)
+      throw FinchError.keychainAccessFailure(status)
     }
 
     let data = result as! Data
     guard let token = Token(decoding: data) else {
-      throw KeychainTokenStorageError.decodeFailure(data)
+      throw FinchError.keychainDecodeFailure(data)
     }
 
     return token
@@ -43,7 +38,7 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
 
     let status = SecItemAdd(item, nil)
     guard status == noErr else {
-      throw KeychainTokenStorageError.keychain(status)
+      throw FinchError.keychainAccessFailure(status)
     }
   }
 
@@ -55,7 +50,7 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
 
     let status = SecItemDelete(item)
     guard status == noErr else {
-      throw KeychainTokenStorageError.keychain(status)
+      throw FinchError.keychainAccessFailure(status)
     }
   }
 }

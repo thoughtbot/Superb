@@ -9,7 +9,7 @@ final class AuthenticationState<Token> {
     storage = AnyTokenStorage(tokenStorage)
   }
 
-  func modify<Result>(body: (inout AuthenticationStateResult<Token>) throws -> Result) rethrows -> Result {
+  func modify<Result>(body: (inout AuthenticationStateResult<Token>) throws -> Result) throws -> Result {
     return try queue.sync {
       var state = try currentState()
       let result = try body(&state)
