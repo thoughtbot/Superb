@@ -8,13 +8,20 @@ final class RequestAuthorizer<Token> {
   private let authenticationComplete: Channel<Result<Token, FinchError>>
   private let authenticationState: Atomic<AuthenticationState<Token>>
 
-  init<Provider: FinchProvider>(authorizationProvider: Provider, token: Token? = nil, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
-    where Provider.Token == Token
+  init<Provider: FinchProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+    where Provider.Token == Token, Storage.Token == Token
   {
+    let token = try! tokenStorage.fetchToken()
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
     self.authenticationState = Atomic(token.map(AuthenticationState.authenticated) ?? .unauthenticated)
     self.authorizationProvider = AnyFinchProvider(authorizationProvider)
+  }
+
+  convenience init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+    where Provider.Token == Token
+  {
+    self.init(authorizationProvider: authorizationProvider, tokenStorage: SimpleTokenStorage(), applicationDelegate: applicationDelegate)
   }
 
   /// Performs `request` based on the current authentication state.

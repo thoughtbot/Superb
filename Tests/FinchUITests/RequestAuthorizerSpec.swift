@@ -20,7 +20,8 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("authorizes a request with the current token") {
       let testProvider = TestAuthorizationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, token: "test-token")
+      let testTokenStorage = SimpleTokenStorage(token: "test-token")
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
       let request = testRequest(path: "/example")
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "test-token"))
@@ -44,7 +45,8 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("calls the request authorizer and retries on a 401 response") {
       let testProvider = TestAuthorizationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, token: "stale-token")
+      let testTokenStorage = SimpleTokenStorage(token: "stale-token")
+      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
       let request = testRequest(path: "/example")
 
       requests.expect(

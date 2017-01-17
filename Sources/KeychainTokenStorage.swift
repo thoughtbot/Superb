@@ -5,8 +5,10 @@ enum KeychainTokenStorageError: Error {
   case keychain(OSStatus)
 }
 
-struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable> {
-  func fetchToken(for service: String) throws -> Token? {
+struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: TokenStorage {
+  let service: String
+
+  func fetchToken() throws -> Token? {
     let query: NSDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
@@ -32,7 +34,7 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable> {
     return token
   }
 
-  func saveToken(_ token: Token, for service: String) throws {
+  func saveToken(_ token: Token) throws {
     let item: NSDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
@@ -45,7 +47,7 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable> {
     }
   }
 
-  func deleteToken(for service: String) throws {
+  func deleteToken() throws {
     let item: NSDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,

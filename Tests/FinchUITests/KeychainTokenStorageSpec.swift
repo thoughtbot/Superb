@@ -48,26 +48,26 @@ final class KeychainTokenStorageSpec: QuickSpec {
     }
 
     it("fetches the token from the keychain") {
-      let storage = KeychainTokenStorage<String>()
+      let storage = KeychainTokenStorage<String>(service: service)
       saveTestToken("s3cret")
-      expect { try storage.fetchToken(for: service) } == "s3cret"
+      expect { try storage.fetchToken() } == "s3cret"
     }
 
     it("returns nil if the fetched token doesn't exist in the keychain") {
-      let storage = KeychainTokenStorage<String>()
-      expect { try storage.fetchToken(for: service) }.to(beNil())
+      let storage = KeychainTokenStorage<String>(service: service)
+      expect { try storage.fetchToken() }.to(beNil())
     }
 
     it("saves the token to the keychain") {
-      let storage = KeychainTokenStorage<String>()
-      expect { try storage.saveToken("passw0rd", for: service) }.toNot(throwError())
+      let storage = KeychainTokenStorage<String>(service: service)
+      expect { try storage.saveToken("passw0rd") }.toNot(throwError())
       expect { fetchTestToken() } == "passw0rd"
     }
 
     it("deletes the token from the keychain") {
-      let storage = KeychainTokenStorage<String>()
+      let storage = KeychainTokenStorage<String>(service: service)
       saveTestToken("1nsecure")
-      expect { try storage.deleteToken(for: service) }.toNot(throwError())
+      expect { try storage.deleteToken() }.toNot(throwError())
       expect { fetchTestToken() }.to(beNil())
     }
   }

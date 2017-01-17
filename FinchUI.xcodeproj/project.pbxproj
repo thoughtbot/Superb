@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */; };
 		4A3776841DF9C8D8005480A1 /* FinchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776831DF9C8D8005480A1 /* FinchProvider.swift */; };
+		4A8BDBA81E2DCB0500F29E62 /* SimpleTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */; };
 		4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */; };
 		4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */; };
 		4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A90618F1DF9BB4A0004D532 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */; };
 		4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
 		4A9FE90E1E2AF0BD0029C645 /* KeychainTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */; };
+		4A9FE9101E2AF0C80029C645 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */; };
 		4A9FE9111E2AF0DA0029C645 /* KeychainTokenStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */; };
 		4A9FE9131E2AFCCE0029C645 /* KeychainEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */; };
 		4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA980BE1DFB55A0000604FB /* Result.framework */; };
@@ -70,6 +72,7 @@
 /* Begin PBXFileReference section */
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
 		4A3776831DF9C8D8005480A1 /* FinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchProvider.swift; sourceTree = "<group>"; };
+		4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTokenStorage.swift; sourceTree = "<group>"; };
 		4A9061881DF9BB4A0004D532 /* FinchUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinchUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
 		4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTokenStorageSpec.swift; sourceTree = "<group>"; };
 		4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTokenStorage.swift; sourceTree = "<group>"; };
+		4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainEncoding.swift; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyFinchProvider.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
 				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
+				4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */,
+				4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */,
 				4A90618F1DF9BB4A0004D532 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
 				4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */,
@@ -352,10 +358,12 @@
 				4A9F69431DFA046B001BB7B2 /* RequestAuthorizer.swift in Sources */,
 				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
 				4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */,
+				4A8BDBA81E2DCB0500F29E62 /* SimpleTokenStorage.swift in Sources */,
 				7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */,
 				4A9FE9131E2AFCCE0029C645 /* KeychainEncoding.swift in Sources */,
 				4A90A5001E09F31F0077BC68 /* Atomic.swift in Sources */,
 				4AF7D78D1E1C0CA8003847BD /* Channel.swift in Sources */,
+				4A9FE9101E2AF0C80029C645 /* TokenStorage.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
 				7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */,
 				4AA980C41DFB5FD6000604FB /* AnyFinchProvider.swift in Sources */,
