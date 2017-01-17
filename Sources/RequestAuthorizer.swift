@@ -234,7 +234,7 @@ extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
   convenience init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
     where Provider.Token == Token
   {
-    let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName)
+    let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)
     self.init(authorizationProvider: authorizationProvider, tokenStorage: keychainTokenStorage, applicationDelegate: applicationDelegate)
   }
 }

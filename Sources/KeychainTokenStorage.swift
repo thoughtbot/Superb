@@ -2,13 +2,23 @@ import Foundation
 
 struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: TokenStorage {
   let service: String
+  let label: String?
+  private let labelData: Data?
+
+  init(service: String, label: String? = nil) {
+    self.service = service
+    self.label = label
+    self.labelData = label.flatMap { $0.data(using: .utf8) }
+  }
 
   func fetchToken() throws -> Token? {
-    let query: NSDictionary = [
+    let query: NSMutableDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
       kSecReturnData: true,
     ]
+
+    addLabelIfNecessary(to: query)
 
     var result: CFTypeRef?
     let status = SecItemCopyMatching(query, &result)
@@ -30,11 +40,13 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
   }
 
   func saveToken(_ token: Token) throws {
-    let item: NSDictionary = [
+    let item: NSMutableDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
       kSecValueData: token.encoded(),
     ]
+
+    addLabelIfNecessary(to: item)
 
     let status = SecItemAdd(item, nil)
     guard status == noErr else {
@@ -43,14 +55,22 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
   }
 
   func deleteToken() throws {
-    let item: NSDictionary = [
+    let item: NSMutableDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
     ]
 
+    addLabelIfNecessary(to: item)
+
     let status = SecItemDelete(item)
     guard status == noErr else {
       throw FinchError.keychainAccessFailure(status)
+    }
+  }
+
+  private func addLabelIfNecessary(to item: NSMutableDictionary) {
+    if let label = labelData {
+      item[kSecAttrGeneric] = label
     }
   }
 }
