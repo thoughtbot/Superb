@@ -120,9 +120,10 @@ final class RequestAuthorizer<Token> {
           return
         }
 
-      self.authenticationState.clearToken()
-
-      self.performAuthorized(request, reauthenticate: false, completionHandler: completionHandler)
+      self.handlingAuthenticationErrors(with: completionHandler) {
+        try self.authenticationState.clearToken()
+        self.performAuthorized(request, reauthenticate: false, completionHandler: completionHandler)
+      }
     }
 
     task.resume()
@@ -205,10 +206,16 @@ final class RequestAuthorizer<Token> {
   }
 
   private func modifyAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, modify: (inout AuthenticationStateResult<Token>) -> Void) {
+    handlingAuthenticationErrors(with: completionHandler) {
+      try authenticationState.modify(body: modify)
+    }
+  }
+
+  private func handlingAuthenticationErrors(with completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: () throws -> Void) {
     let error: FinchError
 
     do {
-      try authenticationState.modify(body: modify)
+      try body()
       return
     } catch let finchError as FinchError {
       error = finchError

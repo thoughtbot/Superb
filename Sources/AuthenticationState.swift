@@ -18,7 +18,8 @@ final class AuthenticationState<Token> {
     }
   }
 
-  func clearToken() {
+  func clearToken() throws {
+    try queue.sync { try storage.deleteToken() }
   }
 
   private func currentState() throws -> AuthenticationStateResult<Token> {
