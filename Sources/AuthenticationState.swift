@@ -9,12 +9,31 @@ final class AuthenticationState<Token> {
     storage = AnyTokenStorage(tokenStorage)
   }
 
-  func modify<Result>(body: (inout AuthenticationStateResult<Token>) throws -> Result) throws -> Result {
-    return try queue.sync {
-      var state = try currentState()
-      let result = try body(&state)
-      try update(from: state)
-      return result
+  func fetch(_ body: (_ state: CurrentAuthenticationState<Token>, _ startedAuthenticating: inout Bool) -> Void) throws {
+    try queue.sync {
+      let state = try currentState()
+      var startedAuthenticating = false
+
+      body(state, &startedAuthenticating)
+
+      if startedAuthenticating {
+        isAuthenticating = true
+      }
+    }
+  }
+
+  func update(_ body: () -> NewAuthenticationState<Token>) throws {
+    try queue.sync {
+      defer { isAuthenticating = false }
+
+      let result = body()
+
+      switch result {
+      case let .authenticated(token):
+        try storage.saveToken(token)
+      case .unauthenticated:
+        try storage.deleteToken()
+      }
     }
   }
 
@@ -22,33 +41,25 @@ final class AuthenticationState<Token> {
     try queue.sync { try storage.deleteToken() }
   }
 
-  private func currentState() throws -> AuthenticationStateResult<Token> {
+  private func currentState() throws -> CurrentAuthenticationState<Token> {
     guard !isAuthenticating else { return .authenticating }
     let token = try storage.fetchToken()
-    return AuthenticationStateResult(token: token)
-  }
-
-  private func update(from state: AuthenticationStateResult<Token>) throws {
-    switch state {
-    case let .authenticated(token):
-      try storage.saveToken(token)
-    case .unauthenticated:
-      try storage.deleteToken()
-    case .authenticating:
-      break
-    }
-
-    isAuthenticating = state.isAuthenticating
+    return CurrentAuthenticationState(token: token)
   }
 }
 
-enum AuthenticationStateResult<Token> {
+enum CurrentAuthenticationState<Token> {
   case unauthenticated
   case authenticating
   case authenticated(Token)
 }
 
-private extension AuthenticationStateResult {
+enum NewAuthenticationState<Token> {
+  case unauthenticated
+  case authenticated(Token)
+}
+
+private extension CurrentAuthenticationState {
   init(token: Token?) {
     if let token = token {
       self = .authenticated(token)

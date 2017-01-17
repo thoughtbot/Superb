@@ -63,13 +63,13 @@ final class RequestAuthorizer<Token> {
   ///       response from performing `request`, or the error returned
   ///       from authentication.
   private func performAuthorized(_ request: URLRequest, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
-    modifyAuthenticationState(handlingErrorsWith: completionHandler) { state in
+    fetchAuthenticationState(handlingErrorsWith: completionHandler) { state, startedAuthenticating in
       switch state {
       case .authenticated(let token):
         self.perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
 
       case .unauthenticated:
-        state = .authenticating
+        startedAuthenticating = true
         self.authenticate(thenPerform: request, completionHandler: completionHandler)
 
       case .authenticating:
@@ -128,7 +128,7 @@ final class RequestAuthorizer<Token> {
   ///
   /// - note: In order to ensure pending requests see a consistent view
   ///   of the authentication state, this method **must** be called in the
-  ///   `modify` block of `modifyAuthenticationState()`, after checking that the
+  ///   `body` block of `fetchAuthenticationState()`, after checking that the
   ///   state is `.authenticating`.
   ///
   /// - parameters:
@@ -153,9 +153,9 @@ final class RequestAuthorizer<Token> {
   /// Invokes the auth provider to authenticate, updating `authenticationState`
   /// before performing `request` with the new token.
   ///
-  /// - note: This method must be called in the `modify` block of
-  ///   `modifyAuthenticationState()`, after checking that its value
-  ///   is `.unauthenticated` and updating it to `.authenticating`.
+  /// - note: This method must be called in the `body` block of
+  ///   `fetchAuthenticationState()`, after checking that the state
+  ///   is `.unauthenticated` and setting `startedAuthenticating` to `true`.
   ///
   /// - note: When authentication completes, the result is broadcast to
   ///   pending requests via the `authenticationComplete` channel. This
@@ -180,8 +180,10 @@ final class RequestAuthorizer<Token> {
       }
 
       self.authorizationProvider.authorize(over: topViewController) { result in
-        self.modifyAuthenticationState(handlingErrorsWith: completionHandler) { state in
+        self.updateAuthenticationState(handlingErrorsWith: completionHandler) {
           defer { self.authenticationComplete.broadcast(result) }
+
+          let state: NewAuthenticationState<Token>
 
           switch result {
           case let .success(token):
@@ -194,14 +196,22 @@ final class RequestAuthorizer<Token> {
               completionHandler(.failure(error))
             }
           }
+
+          return state
         }
       }
     }
   }
 
-  private func modifyAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, modify: (inout AuthenticationStateResult<Token>) -> Void) {
+  private func fetchAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
     handlingAuthenticationErrors(with: completionHandler) {
-      try authenticationState.modify(body: modify)
+      try authenticationState.fetch(body)
+    }
+  }
+
+  private func updateAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: () -> NewAuthenticationState<Token>) {
+    handlingAuthenticationErrors(with: completionHandler) {
+      try authenticationState.update(body)
     }
   }
 
