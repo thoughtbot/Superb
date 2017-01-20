@@ -6,14 +6,14 @@ final class RequestAuthorizer<Token> {
   let authorizationProvider: AnyFinchProvider<Token>
 
   private let authenticationComplete: Channel<Result<Token, FinchError>>
-  private let authenticationState: AuthenticationState<Token>
+  private let authenticationState: Actor<AuthenticationState<Token>>
 
   init<Provider: FinchProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
     where Provider.Token == Token, Storage.Token == Token
   {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
-    self.authenticationState = AuthenticationState(tokenStorage: tokenStorage)
+    self.authenticationState = AuthenticationState.makeActor(tokenStorage: tokenStorage)
     self.authorizationProvider = AnyFinchProvider(authorizationProvider)
   }
 
@@ -115,7 +115,7 @@ final class RequestAuthorizer<Token> {
         }
 
       self.handlingAuthenticationErrors(with: completionHandler) {
-        try self.authenticationState.clearToken()
+        try self.authenticationState.sync { try $0.clearToken() }
         self.performAuthorized(request, reauthenticate: false, completionHandler: completionHandler)
       }
     }
@@ -205,13 +205,13 @@ final class RequestAuthorizer<Token> {
 
   private func fetchAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
     handlingAuthenticationErrors(with: completionHandler) {
-      try authenticationState.fetch(body)
+      try authenticationState.sync { try $0.fetch(body) }
     }
   }
 
   private func updateAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: () -> NewAuthenticationState<Token>) {
     handlingAuthenticationErrors(with: completionHandler) {
-      try authenticationState.update(body)
+      try authenticationState.sync { try $0.update(body) }
     }
   }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */; };
 		4A3776841DF9C8D8005480A1 /* FinchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776831DF9C8D8005480A1 /* FinchProvider.swift */; };
+		4A80B72F1E3260B600CD49B7 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A80B72E1E3260B600CD49B7 /* Actor.swift */; };
 		4A8BDBA81E2DCB0500F29E62 /* SimpleTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */; };
 		4A8BDBAA1E2DD0E600F29E62 /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */; };
 		4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */; };
@@ -73,6 +74,7 @@
 /* Begin PBXFileReference section */
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
 		4A3776831DF9C8D8005480A1 /* FinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchProvider.swift; sourceTree = "<group>"; };
+		4A80B72E1E3260B600CD49B7 /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTokenStorage.swift; sourceTree = "<group>"; };
 		4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		4A9061881DF9BB4A0004D532 /* FinchUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinchUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
+				4A80B72E1E3260B600CD49B7 /* Actor.swift */,
 				4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
 				4A90A4FF1E09F31F0077BC68 /* Atomic.swift */,
@@ -373,6 +376,7 @@
 				4AA980C41DFB5FD6000604FB /* AnyFinchProvider.swift in Sources */,
 				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
 				4A9F69411DF9F3D5001BB7B2 /* FinchError.swift in Sources */,
+				4A80B72F1E3260B600CD49B7 /* Actor.swift in Sources */,
 				4A3776841DF9C8D8005480A1 /* FinchProvider.swift in Sources */,
 				4A9FE90E1E2AF0BD0029C645 /* KeychainTokenStorage.swift in Sources */,
 			);

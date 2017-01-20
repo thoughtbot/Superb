@@ -1,44 +1,43 @@
 import Foundation
 
-final class AuthenticationState<Token> {
+struct AuthenticationState<Token> {
   private var isAuthenticating = false
-  private let queue = DispatchQueue(label: "com.thoughtbot.finch.AuthenticationState")
   private let storage: AnyTokenStorage<Token>
 
-  init<Storage: TokenStorage>(tokenStorage: Storage) where Storage.Token == Token {
+  static func makeActor<Storage: TokenStorage>(tokenStorage: Storage) -> Actor<AuthenticationState> where Storage.Token == Token {
+    return Actor(AuthenticationState(tokenStorage: tokenStorage))
+  }
+
+  private init<Storage: TokenStorage>(tokenStorage: Storage) where Storage.Token == Token {
     storage = AnyTokenStorage(tokenStorage)
   }
 
-  func fetch(_ body: (_ state: CurrentAuthenticationState<Token>, _ startedAuthenticating: inout Bool) -> Void) throws {
-    try queue.sync {
-      let state = try currentState()
-      var startedAuthenticating = false
+  mutating func fetch(_ body: (_ state: CurrentAuthenticationState<Token>, _ startedAuthenticating: inout Bool) -> Void) throws {
+    let state = try currentState()
+    var startedAuthenticating = false
 
-      body(state, &startedAuthenticating)
+    body(state, &startedAuthenticating)
 
-      if startedAuthenticating {
-        isAuthenticating = true
-      }
+    if startedAuthenticating {
+      isAuthenticating = true
     }
   }
 
-  func update(_ body: () -> NewAuthenticationState<Token>) throws {
-    try queue.sync {
-      defer { isAuthenticating = false }
+  mutating func update(_ body: () -> NewAuthenticationState<Token>) throws {
+    defer { isAuthenticating = false }
 
-      let result = body()
+    let result = body()
 
-      switch result {
-      case let .authenticated(token):
-        try storage.saveToken(token)
-      case .unauthenticated:
-        try storage.deleteToken()
-      }
+    switch result {
+    case let .authenticated(token):
+      try storage.saveToken(token)
+    case .unauthenticated:
+      try storage.deleteToken()
     }
   }
 
-  func clearToken() throws {
-    try queue.sync { try storage.deleteToken() }
+  mutating func clearToken() throws {
+    try storage.deleteToken()
   }
 
   private func currentState() throws -> CurrentAuthenticationState<Token> {
