@@ -79,7 +79,7 @@ final class RequestAuthorizerSpec: QuickSpec {
       let queue = DispatchQueue(label: "response queue")
       let group = DispatchGroup()
 
-      let limit = 100
+      let limit = 50
       (0..<limit).forEach { _ in group.enter() }
 
       DispatchQueue.concurrentPerform(iterations: limit) { i in
@@ -113,7 +113,7 @@ final class RequestAuthorizerSpec: QuickSpec {
       let queue = DispatchQueue(label: "response queue")
       let group = DispatchGroup()
 
-      let limit = 100
+      let limit = 50
       (0..<limit).forEach { _ in group.enter() }
 
       DispatchQueue.concurrentPerform(iterations: limit) { i in
