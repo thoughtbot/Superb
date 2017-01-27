@@ -1,4 +1,4 @@
-@testable import FinchUI
+@testable import Finch
 import Result
 import UIKit
 

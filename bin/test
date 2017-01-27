@@ -5,6 +5,6 @@ set -o pipefail
 
 env NSUnbufferedIO=YES \
   xcodebuild test \
-    -scheme FinchUI \
+    -scheme Finch \
     -destination 'platform=iOS Simulator,name=iPhone 7' \
     | xcpretty -c

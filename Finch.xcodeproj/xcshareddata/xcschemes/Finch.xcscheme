@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-               BuildableName = "FinchUI.app"
-               BlueprintName = "FinchUI"
-               ReferencedContainer = "container:FinchUI.xcodeproj">
+               BuildableName = "Finch.app"
+               BlueprintName = "Finch"
+               ReferencedContainer = "container:Finch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A90619B1DF9BB4A0004D532"
-               BuildableName = "FinchUITests.xctest"
-               BlueprintName = "FinchUITests"
-               ReferencedContainer = "container:FinchUI.xcodeproj">
+               BuildableName = "FinchTests.xctest"
+               BlueprintName = "FinchTests"
+               ReferencedContainer = "container:Finch.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-            BuildableName = "FinchUI.app"
-            BlueprintName = "FinchUI"
-            ReferencedContainer = "container:FinchUI.xcodeproj">
+            BuildableName = "Finch.app"
+            BlueprintName = "Finch"
+            ReferencedContainer = "container:Finch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -61,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-            BuildableName = "FinchUI.app"
-            BlueprintName = "FinchUI"
-            ReferencedContainer = "container:FinchUI.xcodeproj">
+            BuildableName = "Finch.app"
+            BlueprintName = "Finch"
+            ReferencedContainer = "container:Finch.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -80,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-            BuildableName = "FinchUI.app"
-            BlueprintName = "FinchUI"
-            ReferencedContainer = "container:FinchUI.xcodeproj">
+            BuildableName = "Finch.app"
+            BlueprintName = "Finch"
+            ReferencedContainer = "container:Finch.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

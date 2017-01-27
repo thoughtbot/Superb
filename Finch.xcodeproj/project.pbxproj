@@ -51,7 +51,7 @@
 			containerPortal = 4A9061801DF9BB4A0004D532 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4A9061871DF9BB4A0004D532;
-			remoteInfo = FinchUI;
+			remoteInfo = Finch;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -77,14 +77,14 @@
 		4A80B72E1E3260B600CD49B7 /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTokenStorage.swift; sourceTree = "<group>"; };
 		4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
-		4A9061881DF9BB4A0004D532 /* FinchUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinchUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A9061881DF9BB4A0004D532 /* Finch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
 		4A9061901DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A9061921DF9BB4A0004D532 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A9061951DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A9061971DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A90619C1DF9BB4A0004D532 /* FinchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A90619C1DF9BB4A0004D532 /* FinchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubOAuth.storyboard; sourceTree = "<group>"; };
 		4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthViewController.swift; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		4A90617F1DF9BB4A0004D532 = {
 			isa = PBXGroup;
 			children = (
-				4A90618A1DF9BB4A0004D532 /* FinchUI */,
+				4A90618A1DF9BB4A0004D532 /* Finch */,
 				4A9061AB1DF9BB9F0004D532 /* Tests */,
 				4A9061891DF9BB4A0004D532 /* Products */,
 				4AA980BD1DFB55A0000604FB /* Frameworks */,
@@ -146,13 +146,13 @@
 		4A9061891DF9BB4A0004D532 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4A9061881DF9BB4A0004D532 /* FinchUI.app */,
-				4A90619C1DF9BB4A0004D532 /* FinchUITests.xctest */,
+				4A9061881DF9BB4A0004D532 /* Finch.app */,
+				4A90619C1DF9BB4A0004D532 /* FinchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4A90618A1DF9BB4A0004D532 /* FinchUI */ = {
+		4A90618A1DF9BB4A0004D532 /* Finch */ = {
 			isa = PBXGroup;
 			children = (
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
@@ -175,11 +175,11 @@
 				4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */,
 				4A9061971DF9BB4A0004D532 /* Info.plist */,
 			);
-			name = FinchUI;
+			name = Finch;
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		4A90619F1DF9BB4A0004D532 /* FinchUITests */ = {
+		4A90619F1DF9BB4A0004D532 /* FinchTests */ = {
 			isa = PBXGroup;
 			children = (
 				4A97A7D91E26EA7100FC51EC /* Support */,
@@ -188,13 +188,13 @@
 				4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */,
 				4A9061A21DF9BB4A0004D532 /* Info.plist */,
 			);
-			path = FinchUITests;
+			path = FinchTests;
 			sourceTree = "<group>";
 		};
 		4A9061AB1DF9BB9F0004D532 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4A90619F1DF9BB4A0004D532 /* FinchUITests */,
+				4A90619F1DF9BB4A0004D532 /* FinchTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -236,9 +236,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4A9061871DF9BB4A0004D532 /* FinchUI */ = {
+		4A9061871DF9BB4A0004D532 /* Finch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchUI" */;
+			buildConfigurationList = 4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "Finch" */;
 			buildPhases = (
 				4A9061841DF9BB4A0004D532 /* Sources */,
 				4A9061851DF9BB4A0004D532 /* Frameworks */,
@@ -249,14 +249,14 @@
 			);
 			dependencies = (
 			);
-			name = FinchUI;
-			productName = FinchUI;
-			productReference = 4A9061881DF9BB4A0004D532 /* FinchUI.app */;
+			name = Finch;
+			productName = Finch;
+			productReference = 4A9061881DF9BB4A0004D532 /* Finch.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4A90619B1DF9BB4A0004D532 /* FinchUITests */ = {
+		4A90619B1DF9BB4A0004D532 /* FinchTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchUITests" */;
+			buildConfigurationList = 4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchTests" */;
 			buildPhases = (
 				4A9061981DF9BB4A0004D532 /* Sources */,
 				4A9061991DF9BB4A0004D532 /* Frameworks */,
@@ -268,9 +268,9 @@
 			dependencies = (
 				4A90619E1DF9BB4A0004D532 /* PBXTargetDependency */,
 			);
-			name = FinchUITests;
-			productName = FinchUITests;
-			productReference = 4A90619C1DF9BB4A0004D532 /* FinchUITests.xctest */;
+			name = FinchTests;
+			productName = FinchTests;
+			productReference = 4A90619C1DF9BB4A0004D532 /* FinchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -296,7 +296,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "FinchUI" */;
+			buildConfigurationList = 4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "Finch" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -309,8 +309,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4A9061871DF9BB4A0004D532 /* FinchUI */,
-				4A90619B1DF9BB4A0004D532 /* FinchUITests */,
+				4A9061871DF9BB4A0004D532 /* Finch */,
+				4A90619B1DF9BB4A0004D532 /* FinchTests */,
 			);
 		};
 /* End PBXProject section */
@@ -400,7 +400,7 @@
 /* Begin PBXTargetDependency section */
 		4A90619E1DF9BB4A0004D532 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4A9061871DF9BB4A0004D532 /* FinchUI */;
+			target = 4A9061871DF9BB4A0004D532 /* Finch */;
 			targetProxy = 4A90619D1DF9BB4A0004D532 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -527,7 +527,7 @@
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.Finch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -540,7 +540,7 @@
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.Finch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -552,12 +552,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
-				INFOPLIST_FILE = Tests/FinchUITests/Info.plist;
+				INFOPLIST_FILE = "Tests/$(TARGET_NAME)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinchUI.app/FinchUI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Finch.app/Finch";
 			};
 			name = Debug;
 		};
@@ -567,19 +567,19 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
-				INFOPLIST_FILE = Tests/FinchUITests/Info.plist;
+				INFOPLIST_FILE = "Tests/$(TARGET_NAME)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.FinchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinchUI.app/FinchUI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Finch.app/Finch";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "FinchUI" */ = {
+		4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "Finch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A9061A31DF9BB4A0004D532 /* Debug */,
@@ -588,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchUI" */ = {
+		4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "Finch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A9061A61DF9BB4A0004D532 /* Debug */,
@@ -597,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchUITests" */ = {
+		4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A9061A91DF9BB4A0004D532 /* Debug */,
