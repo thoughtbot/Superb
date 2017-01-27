@@ -73,7 +73,7 @@
 
 /* Begin PBXFileReference section */
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
-		4A3776831DF9C8D8005480A1 /* FinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchProvider.swift; sourceTree = "<group>"; };
+		4A3776831DF9C8D8005480A1 /* FinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinchProvider.swift; path = Sources/Finch/FinchProvider.swift; sourceTree = SOURCE_ROOT; };
 		4A80B72E1E3260B600CD49B7 /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTokenStorage.swift; sourceTree = "<group>"; };
 		4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestExpectation.swift; sourceTree = "<group>"; };
 		4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAuthorizationProvider.swift; sourceTree = "<group>"; };
 		4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionLock.swift; sourceTree = "<group>"; };
-		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinchError.swift; sourceTree = "<group>"; };
+		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinchError.swift; path = Sources/Finch/FinchError.swift; sourceTree = SOURCE_ROOT; };
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
 		4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTokenStorageSpec.swift; sourceTree = "<group>"; };
 		4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTokenStorage.swift; sourceTree = "<group>"; };
@@ -133,10 +133,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A6A82111E3BAA9800A7D899 /* Finch */ = {
+			isa = PBXGroup;
+			children = (
+				4A80B72E1E3260B600CD49B7 /* Actor.swift */,
+				4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */,
+				4A90A4FF1E09F31F0077BC68 /* Atomic.swift */,
+				4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */,
+				4AF7D78C1E1C0CA8003847BD /* Channel.swift */,
+				4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */,
+				4A3776831DF9C8D8005480A1 /* FinchProvider.swift */,
+				4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */,
+				4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */,
+				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
+				4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */,
+				4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */,
+			);
+			path = Finch;
+			sourceTree = "<group>";
+		};
 		4A90617F1DF9BB4A0004D532 = {
 			isa = PBXGroup;
 			children = (
-				4A90618A1DF9BB4A0004D532 /* Finch */,
+				4A90618A1DF9BB4A0004D532 /* Sources */,
 				4A9061AB1DF9BB9F0004D532 /* Tests */,
 				4A9061891DF9BB4A0004D532 /* Products */,
 				4AA980BD1DFB55A0000604FB /* Frameworks */,
@@ -152,30 +171,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4A90618A1DF9BB4A0004D532 /* Finch */ = {
+		4A90618A1DF9BB4A0004D532 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4A6A82111E3BAA9800A7D899 /* Finch */,
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
-				4A80B72E1E3260B600CD49B7 /* Actor.swift */,
-				4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
-				4A90A4FF1E09F31F0077BC68 /* Atomic.swift */,
-				4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */,
-				4AF7D78C1E1C0CA8003847BD /* Channel.swift */,
-				4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */,
-				4A3776831DF9C8D8005480A1 /* FinchProvider.swift */,
-				4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */,
-				4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
-				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
-				4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */,
-				4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */,
 				4A90618F1DF9BB4A0004D532 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
 				4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */,
 				4A9061971DF9BB4A0004D532 /* Info.plist */,
 			);
-			name = Finch;
 			path = Sources;
 			sourceTree = "<group>";
 		};
