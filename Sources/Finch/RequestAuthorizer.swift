@@ -37,13 +37,11 @@ public final class RequestAuthorizer<Token> {
   ///
   /// - parameters:
   ///     - request: The `URLRequest` to authorize and perform.
-  ///     - qos: The `DispatchQoS.QoSClass` at which to enqueue this request.
-  ///       Defaults to `DispatchQoS.QoSClass.default`.
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  public func performAuthorized(_ request: URLRequest, qos: DispatchQoS.QoSClass = .default, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
-    DispatchQueue.global(qos: qos).async {
+  public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+    DispatchQueue.global().async {
       self.performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
     }
   }
