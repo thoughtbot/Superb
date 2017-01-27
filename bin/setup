@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 brew install carthage 2> /dev/null
 gem install xcpretty
