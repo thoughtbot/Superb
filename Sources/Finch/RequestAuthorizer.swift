@@ -1,14 +1,14 @@
 import Result
 import UIKit
 
-final class RequestAuthorizer<Token> {
+public final class RequestAuthorizer<Token> {
   let applicationDelegate: () -> UIApplicationDelegate?
   let authorizationProvider: AnyFinchProvider<Token>
 
   private let authenticationComplete: Channel<Result<Token, FinchError>>
   private let authenticationState: Actor<AuthenticationState<Token>>
 
-  init<Provider: FinchProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+  public init<Provider: FinchProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
     where Provider.Token == Token, Storage.Token == Token
   {
     self.applicationDelegate = applicationDelegate
@@ -42,7 +42,7 @@ final class RequestAuthorizer<Token> {
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  func performAuthorized(_ request: URLRequest, qos: DispatchQoS.QoSClass = .default, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+  public func performAuthorized(_ request: URLRequest, qos: DispatchQoS.QoSClass = .default, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
     DispatchQueue.global(qos: qos).async {
       self.performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
     }
@@ -241,7 +241,7 @@ final class RequestAuthorizer<Token> {
 }
 
 extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
-  convenience init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+  public convenience init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
     where Provider.Token == Token
   {
     let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)

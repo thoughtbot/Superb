@@ -1,19 +1,19 @@
-struct SimpleTokenStorage<Token>: TokenStorage {
+public struct SimpleTokenStorage<Token>: TokenStorage {
   private let token: Atomic<Token?>
 
-  init(token: Token? = nil) {
+  public init(token: Token? = nil) {
     self.token = Atomic(token)
   }
 
-  func fetchToken() -> Token? {
+  public func fetchToken() -> Token? {
     return token.value
   }
 
-  func saveToken(_ newToken: Token) {
+  public func saveToken(_ newToken: Token) {
     token.value = newToken
   }
 
-  func deleteToken() {
+  public func deleteToken() {
     token.value = nil
   }
 }

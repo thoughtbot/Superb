@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-               BuildableName = "Finch.app"
+               BlueprintIdentifier = "4A6A82161E3BAB3900A7D899"
+               BuildableName = "Finch.framework"
                BlueprintName = "Finch"
+               ReferencedContainer = "container:Finch.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
+               BuildableName = "FinchDemo.app"
+               BlueprintName = "FinchDemo"
                ReferencedContainer = "container:Finch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,8 +56,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-            BuildableName = "Finch.app"
+            BlueprintIdentifier = "4A6A82161E3BAB3900A7D899"
+            BuildableName = "Finch.framework"
             BlueprintName = "Finch"
             ReferencedContainer = "container:Finch.xcodeproj">
          </BuildableReference>
@@ -61,15 +75,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-            BuildableName = "Finch.app"
-            BlueprintName = "Finch"
+            BuildableName = "FinchDemo.app"
+            BlueprintName = "FinchDemo"
             ReferencedContainer = "container:Finch.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -82,8 +97,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-            BuildableName = "Finch.app"
+            BlueprintIdentifier = "4A6A82161E3BAB3900A7D899"
+            BuildableName = "Finch.framework"
             BlueprintName = "Finch"
             ReferencedContainer = "container:Finch.xcodeproj">
          </BuildableReference>

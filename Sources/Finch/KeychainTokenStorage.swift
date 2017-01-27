@@ -1,17 +1,17 @@
 import Foundation
 
-struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: TokenStorage {
+public struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: TokenStorage {
   let service: String
   let label: String?
   private let labelData: Data?
 
-  init(service: String, label: String? = nil) {
+  public init(service: String, label: String? = nil) {
     self.service = service
     self.label = label
     self.labelData = label.flatMap { $0.data(using: .utf8) }
   }
 
-  func fetchToken() throws -> Token? {
+  public func fetchToken() throws -> Token? {
     let query: NSMutableDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
@@ -39,7 +39,7 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
     return token
   }
 
-  func saveToken(_ token: Token) throws {
+  public func saveToken(_ token: Token) throws {
     let item: NSMutableDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
@@ -54,7 +54,7 @@ struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>: Token
     }
   }
 
-  func deleteToken() throws {
+  public func deleteToken() throws {
     let item: NSMutableDictionary = [
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,

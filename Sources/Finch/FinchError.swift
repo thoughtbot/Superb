@@ -1,6 +1,6 @@
 import Foundation
 
-enum FinchError: Error {
+public enum FinchError: Error {
   case authorizationResponseInvalid
   case keychainAccessFailure(OSStatus)
   case keychainDecodeFailure(Data)

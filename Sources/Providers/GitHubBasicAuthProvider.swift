@@ -1,9 +1,10 @@
+import Finch
 import Result
 import UIKit
 
 let createPersonalAccessTokenURL = URL(string: "https://api.github.com/authorizations")!
 
-final class GitHubBasicAuthProvider : FinchProvider {
+final class GitHubBasicAuthProvider: FinchProvider {
   static let identifier = "com.thoughtbot.finch.github.basic"
   static let keychainServiceName = "GitHub Personal Access Token"
 
