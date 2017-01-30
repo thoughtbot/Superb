@@ -7,3 +7,7 @@ dependencies:
     - bin/bootstrap-if-needed
   cache_directories:
     - "Carthage"
+
+test:
+  pre:
+    - bin/copy-secrets
