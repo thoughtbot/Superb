@@ -25,10 +25,7 @@
 		4A6A82321E3BAEAB00A7D899 /* Superb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6A82301E3BAEAB00A7D899 /* Superb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */; };
 		4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */; };
-		4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A90618F1DF9BB4A0004D532 /* Main.storyboard */; };
 		4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061921DF9BB4A0004D532 /* Assets.xcassets */; };
-		4A9061961DF9BB4A0004D532 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */; };
-		4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */; };
 		4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */; };
 		4A97A7D51E26D0FF00FC51EC /* RequestAuthorizerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */; };
 		4A97A7D71E26D61F00FC51EC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; };
@@ -39,6 +36,10 @@
 		4A9FE9111E2AF0DA0029C645 /* KeychainTokenStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */; };
 		4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */; };
 		4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */; };
+		4AA26C7A1E3FEE4400767E66 /* GitHubOAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */; };
+		4AA26C7B1E3FEE4800767E66 /* GitHubBasicAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */; };
+		4AA26C7C1E3FEE4B00767E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */; };
+		4AA26C7D1E3FEE4E00767E66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AA26C741E3FEDA000767E66 /* Main.storyboard */; };
 		4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA980BE1DFB55A0000604FB /* Result.framework */; };
 		4AAA9F891E1C818C0064F4C9 /* ChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */; };
 		4AAA9F8C1E1C82950064F4C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; };
@@ -48,7 +49,6 @@
 		4AE2AAE61E412C3400547D10 /* ProviderRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */; };
 		7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */; };
 		7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */; };
-		70DD2AF91DFB08CA00DD9695 /* GitHubBasicAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,9 +107,7 @@
 		4A9061881DF9BB4A0004D532 /* SuperbDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperbDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
-		4A9061901DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A9061921DF9BB4A0004D532 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4A9061951DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A9061971DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A90619C1DF9BB4A0004D532 /* SuperbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,6 +127,8 @@
 		4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainEncoding.swift; sourceTree = "<group>"; };
 		4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GitHub+Providers.swift"; sourceTree = "<group>"; };
 		4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
+		4AA26C751E3FEDA000767E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4AA26C781E3FEDAC00767E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAuthenticationProvider.swift; sourceTree = "<group>"; };
 		4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
@@ -217,15 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6A82111E3BAA9800A7D899 /* Superb */,
-				4A9061AC1DF9BD6E0004D532 /* Providers */,
-				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
-				4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */,
-				4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */,
-				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
-				4A90618F1DF9BB4A0004D532 /* Main.storyboard */,
-				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
-				4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */,
-				4A9061971DF9BB4A0004D532 /* Info.plist */,
+				4AA26C731E3FED0E00767E66 /* SuperbDemo */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -271,6 +263,22 @@
 				4A97A7DC1E280F9500FC51EC /* TestAuthenticationProvider.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		4AA26C731E3FED0E00767E66 /* SuperbDemo */ = {
+			isa = PBXGroup;
+			children = (
+				4A9061AC1DF9BD6E0004D532 /* Providers */,
+				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
+				4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */,
+				4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */,
+				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
+				4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */,
+				4AA26C741E3FEDA000767E66 /* Main.storyboard */,
+				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
+				4A9061971DF9BB4A0004D532 /* Info.plist */,
+			);
+			path = SuperbDemo;
 			sourceTree = "<group>";
 		};
 		4AA980BD1DFB55A0000604FB /* Frameworks */ = {
@@ -415,11 +423,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9061961DF9BB4A0004D532 /* LaunchScreen.storyboard in Resources */,
-				70DD2AF91DFB08CA00DD9695 /* GitHubBasicAuth.storyboard in Resources */,
-				4A9061AE1DF9BD980004D532 /* GitHubOAuth.storyboard in Resources */,
 				4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */,
-				4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */,
+				4AA26C7D1E3FEE4E00767E66 /* Main.storyboard in Resources */,
+				4AA26C7C1E3FEE4B00767E66 /* LaunchScreen.storyboard in Resources */,
+				4AA26C7A1E3FEE4400767E66 /* GitHubOAuth.storyboard in Resources */,
+				4AA26C7B1E3FEE4800767E66 /* GitHubBasicAuth.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,18 +524,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4A90618F1DF9BB4A0004D532 /* Main.storyboard */ = {
+		4AA26C741E3FEDA000767E66 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4A9061901DF9BB4A0004D532 /* Base */,
+				4AA26C751E3FEDA000767E66 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		4A9061941DF9BB4A0004D532 /* LaunchScreen.storyboard */ = {
+		4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4A9061951DF9BB4A0004D532 /* Base */,
+				4AA26C781E3FEDAC00767E66 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -684,7 +692,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = "Sources/$(TARGET_NAME)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -697,7 +705,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8E7TQ638ZD;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = "Sources/$(TARGET_NAME)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
