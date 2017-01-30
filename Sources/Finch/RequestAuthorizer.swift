@@ -1,7 +1,11 @@
 import Result
 import UIKit
 
-public final class RequestAuthorizer<Token> {
+public protocol RequestAuthorizerProtocol {
+  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void)
+}
+
+public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let applicationDelegate: () -> UIApplicationDelegate?
   let authorizationProvider: AnyFinchProvider<Token>
 

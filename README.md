@@ -32,26 +32,31 @@ searches through the registered providers to find the correct one to handle the
 redirect URL.
 
 ```swift
-// AppDelegate.swift
+// GitHub+Providers.swift
 
 import Finch
 import FinchGitHub
-import UIKit
 
-extension AppDelegate {
-  static let gitHubRequestAuthorizer: RequestAuthorizer = {
-    // Create a Finch RequestAuthorizer for GitHub OAuth
-    return RequestAuthorizer(
-      // Register a provider to handle callback URLs, such as with OAuth
-      authenticationProvider: Finch.register(
-        GitHubOAuthProvider(
-          clientId: "<your client id>",
-          clientSecret: "<your client secret>",
-          redirectURI: URL(string: "<your chosen redirect URI>")!
-        )
+extension GitHubOAuthProvider {
+  static var shared: GitHubOAuthProvider {
+    // Register a provider to handle callback URLs
+    return Finch.register(
+      GitHubOAuthProvider(
+        clientId: "<your client id>",
+        clientSecret: "<your client secret>",
+        redirectURI: URL(string: "<your chosen redirect URI>")!
       )
     )
-  }()
+  }
+}
+```
+
+```
+// AppDelegate.swift
+
+@UIApplicationMain
+final class AppDelegate: UIResponder, UIApplicationDelegate {
+  // ...
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
     // Pass the URL and options off to Finch.
@@ -60,37 +65,57 @@ extension AppDelegate {
 }
 ```
 
-Then, in our controller, we can use the `RequestAuthorizer` set up in the
-`AppDelegate` to fence the code that must be run with authentication, using
-`RequestAuthorizer.performAuthorized()`.
+Then, in our API client, we can use `RequestAuthorizer` to fence the code that
+must be run with authentication, using `RequestAuthorizer.performAuthorized()`.
 
 ```swift
-// GitHubProfileController.swift
+// GitHubAPIClient.swift
 
-// A simple controller for showing a user their GitHub profile.
-final class GitHubProfileController {
-  // Get the RequestAuthorizer singleton.
-  let authorizer = AppDelegate.gitHubRequestAuthorizer
+struct GitHubAPIClient {
+  static let oauthClient = GitHubAPIClient(
+    requestAuthorizer: RequestAuthorizer(
+      authorizationProvider: GitHubOAuthProvider.shared
+    )
+  )
 
-  func loadProfile() {
-    // Prepare the request against the GitHub API.
+  private let authorizer: RequestAuthorizerProtocol
+
+  init(requestAuthorizer: RequestAuthorizerProtocol) {
+    authorizer = requestAuthorizer
+  }
+
+  // An authorized request to get the current user's profile.
+  func getProfile(completionHandler: @escaping (Result<Profile, FinchError>) -> Void) {
     let request = URLRequest(url: URL(string: "https://api.github.com/user")!)
 
-    // Here we are (potentially) unauthenticated.
-    // The RequestAuthorizer will automatically authenticate the first time,
-    // or reauthenticate if the stored token is stale.
     authorizer.performAuthorized(request) { result in
       switch result {
-      case let .success(data, response):
-        // Here we are authenticated and have a response from the API,
-        // so we can parse the response data.
+      case let .success(data, _):
+        let profile = parseProfile(from: data)
+        completionHandler(.success(profile))
 
       case let .failure(error):
-        // Authentication failed, the HTTP response was an error, etc.
-        print(error)
+        completionHandler(.failure(error))
       }
     }
   }
+
+  // An unauthorized request.
+  func getZen(completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+    let request = URLRequest(url: URL(string: "https://api.github.com/zen")!)
+
+    URLSession.shared.dataTask(with: request) { data, _, error in
+      let result = parseZen(data, error)
+      completionHandler(result)
+    }.resume()
+  }
+}
+
+// later
+let api = GitHubAPIClient.oauthClient
+
+api.getProfile { result in
+  // ...
 }
 ```
 

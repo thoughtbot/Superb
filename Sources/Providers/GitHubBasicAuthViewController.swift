@@ -5,7 +5,7 @@ final class GitHubBasicAuthViewController: UIViewController {
   @IBOutlet var userContainer: UIView!
   @IBOutlet var userNameLabel: UILabel!
 
-  private var userRequest: URLRequest? = URLRequest(url: URL(string: "https://api.github.com/user")!)
+  let api = GitHubAPIClient.basicAuthClient
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -20,37 +20,20 @@ final class GitHubBasicAuthViewController: UIViewController {
   }
 
   @IBAction func getUser(_ sender: Any?) {
-    guard let userRequest = userRequest else { return }
-
-    defer { self.userRequest = nil }
-
-    AppDelegate.gitHubBasicAuthRequestAuthorizer.performAuthorized(userRequest) { result in
-      switch result {
-      case let .success(data?, _):
-        if let object = try? JSONSerialization.jsonObject(with: data) {
-          DispatchQueue.main.async {
-            self.showUser(object)
-          }
-        }
-      case let .success(data, response):
-        print(response ?? "<no response>")
-        if let description = data.flatMap({ String(data: $0, encoding: .utf8) }) {
-          print(description)
-        } else {
-          print(data ?? "<no data>")
-        }
-      case let .failure(error):
-        print(error)
+    api.getLogin { result in
+      if let error = result.error {
+        print("error:", error)
       }
+
+      self.showUser(result.value)
     }
   }
 
-  private func showUser(_ object: Any) {
+  private func showUser(_ login: String?) {
     userContainer.alpha = 0
     userContainer.isHidden = false
 
-    let user = object as? [String: Any]
-    userNameLabel.text = user?["login"] as? String
+    userNameLabel.text = login
 
     UIView.animate(withDuration: 0.3) {
       self.activityIndicator.alpha = 0

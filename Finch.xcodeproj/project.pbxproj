@@ -37,6 +37,8 @@
 		4A97A7DD1E280F9500FC51EC /* TestAuthorizationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */; };
 		4A97A7DF1E281EA200FC51EC /* ConditionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */; };
 		4A9FE9111E2AF0DA0029C645 /* KeychainTokenStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */; };
+		4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */; };
+		4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */; };
 		4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA980BE1DFB55A0000604FB /* Result.framework */; };
 		4AAA9F891E1C818C0064F4C9 /* ChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */; };
 		4AAA9F8C1E1C82950064F4C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; };
@@ -124,6 +126,8 @@
 		4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTokenStorage.swift; sourceTree = "<group>"; };
 		4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainEncoding.swift; sourceTree = "<group>"; };
+		4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GitHub+Providers.swift"; sourceTree = "<group>"; };
+		4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyFinchProvider.swift; sourceTree = "<group>"; };
 		4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 				4A6A82111E3BAA9800A7D899 /* Finch */,
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
+				4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */,
+				4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
 				4A90618F1DF9BB4A0004D532 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
@@ -470,8 +476,10 @@
 				4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */,
 				7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
+				4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */,
 				7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */,
 				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
+				4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +738,7 @@
 				4A6A82221E3BAB3900A7D899 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "Finch" */ = {
 			isa = XCConfigurationList;
