@@ -5,6 +5,8 @@ final class GitHubBasicAuthViewController: UIViewController {
   @IBOutlet var userContainer: UIView!
   @IBOutlet var userNameLabel: UILabel!
 
+  private var viewHasAppeared = false
+
   let api = GitHubAPIClient.basicAuthClient
 
   override func viewWillAppear(_ animated: Bool) {
@@ -16,7 +18,11 @@ final class GitHubBasicAuthViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    getUser(nil)
+    if !viewHasAppeared {
+      getUser(nil)
+    }
+
+    viewHasAppeared = true
   }
 
   @IBAction func getUser(_ sender: Any?) {
