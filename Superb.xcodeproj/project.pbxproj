@@ -40,6 +40,7 @@
 		4AA26C7B1E3FEE4800767E66 /* GitHubBasicAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */; };
 		4AA26C7C1E3FEE4B00767E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */; };
 		4AA26C7D1E3FEE4E00767E66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AA26C741E3FEDA000767E66 /* Main.storyboard */; };
+		4AA26C7F1E3FEED200767E66 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C7E1E3FEED200767E66 /* Secrets.swift */; };
 		4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA980BE1DFB55A0000604FB /* Result.framework */; };
 		4AAA9F891E1C818C0064F4C9 /* ChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */; };
 		4AAA9F8C1E1C82950064F4C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; };
@@ -129,6 +130,7 @@
 		4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
 		4AA26C751E3FEDA000767E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4AA26C781E3FEDAC00767E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4AA26C7E1E3FEED200767E66 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAuthenticationProvider.swift; sourceTree = "<group>"; };
 		4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */,
 				4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
+				4AA26C7E1E3FEED200767E66 /* Secrets.swift */,
 				4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */,
 				4AA26C741E3FEDA000767E66 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
@@ -328,6 +331,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "SuperbDemo" */;
 			buildPhases = (
+				4AA26C801E3FEEEB00767E66 /* Validate Secrets */,
 				4A9061841DF9BB4A0004D532 /* Sources */,
 				4A9061851DF9BB4A0004D532 /* Frameworks */,
 				4A9061861DF9BB4A0004D532 /* Resources */,
@@ -441,6 +445,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4AA26C801E3FEEEB00767E66 /* Validate Secrets */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Validate Secrets";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -f Sources/SuperbDemo/Secrets.swift ]; then\n  echo 2>&1 \"error: Secrets file not found. Run 'bin/copy-secrets' and fill in your own secret keys.\"\n  exit 1\nfi";
+			showEnvVarsInLog = 0;
+		};
 		4AA980C21DFB5600000604FB /* Embed Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
+				4AA26C7F1E3FEED200767E66 /* Secrets.swift in Sources */,
 				4A9061B01DF9C08C0004D532 /* GitHubOAuthViewController.swift in Sources */,
 				7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
