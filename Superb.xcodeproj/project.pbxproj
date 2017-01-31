@@ -457,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ! -f Sources/SuperbDemo/Secrets.swift ]; then\n  echo 2>&1 \"error: Secrets file not found. Run 'bin/copy-secrets' and fill in your own secret keys.\"\n  exit 1\nfi";
+			shellScript = "bin/validate-secrets";
 			showEnvVarsInLog = 0;
 		};
 		4AA980C21DFB5600000604FB /* Embed Carthage Frameworks */ = {
