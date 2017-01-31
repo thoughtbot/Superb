@@ -7,18 +7,18 @@ public protocol RequestAuthorizerProtocol {
 
 public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let applicationDelegate: () -> UIApplicationDelegate?
-  let authorizationProvider: AnyFinchProvider<Token>
+  let authorizationProvider: AnyAuthenticationProvider<Token>
 
   private let authenticationComplete: Channel<Result<Token, FinchError>>
   private let authenticationState: Actor<AuthenticationState<Token>>
 
-  public init<Provider: FinchProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+  public init<Provider: AuthenticationProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
     where Provider.Token == Token, Storage.Token == Token
   {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
     self.authenticationState = AuthenticationState.makeActor(tokenStorage: tokenStorage)
-    self.authorizationProvider = AnyFinchProvider(authorizationProvider)
+    self.authorizationProvider = AnyAuthenticationProvider(authorizationProvider)
   }
 
   /// Performs `request` based on the current authentication state.
@@ -243,7 +243,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 }
 
 extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
-  public convenience init<Provider: FinchProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+  public convenience init<Provider: AuthenticationProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
     where Provider.Token == Token
   {
     let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)

@@ -2,7 +2,7 @@
 import Result
 import UIKit
 
-final class TestAuthorizationProvider: FinchProvider {
+final class TestAuthenticationProvider: AuthenticationProvider {
   static let identifier = "test-provider"
   static let keychainServiceName = "Test Finch Provider"
 

@@ -4,11 +4,11 @@ import UIKit
 public enum Finch {
   private static var providers: [String: Any] = [:]
 
-  public static func register<Provider: FinchProvider>(_ makeProvider: @autoclosure () -> Provider) -> Provider {
+  public static func register<Provider: AuthenticationProvider>(_ makeProvider: @autoclosure () -> Provider) -> Provider {
     return register { makeProvider() }
   }
 
-  public static func register<Provider: FinchProvider>(makeProvider: () -> Provider) -> Provider {
+  public static func register<Provider: AuthenticationProvider>(makeProvider: () -> Provider) -> Provider {
     let id = Provider.identifier
 
     if let instance = providers[id] {
@@ -36,19 +36,19 @@ public protocol _CallbackHandler {
   func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool
 }
 
-public protocol _FinchProvider: _CallbackHandler {
+public protocol _AuthenticationProvider: _CallbackHandler {
   associatedtype Token
 
   func authorizationHeader(for token: Token) -> String
   func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<Token, FinchError>) -> Void)
 }
 
-public protocol FinchProvider: _FinchProvider {
+public protocol AuthenticationProvider: _AuthenticationProvider {
   static var identifier: String { get }
   static var keychainServiceName: String { get }
 }
 
-extension FinchProvider {
+extension AuthenticationProvider {
   public func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
     return false
   }

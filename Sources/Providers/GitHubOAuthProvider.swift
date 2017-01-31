@@ -6,7 +6,7 @@ import UIKit
 let authorizeURL = URL(string: "https://github.com/login/oauth/authorize")!
 let createAccessTokenURL = URL(string: "https://github.com/login/oauth/access_token")!
 
-final class GitHubOAuthProvider: FinchProvider {
+final class GitHubOAuthProvider: AuthenticationProvider {
   static let identifier = "com.thoughtbot.finch.github.oauth"
   static let keychainServiceName = "GitHub OAuth"
 

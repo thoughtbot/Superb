@@ -11,12 +11,12 @@
 		4A6A821E1E3BAB3900A7D899 /* Finch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Finch.framework */; };
 		4A6A821F1E3BAB3900A7D899 /* Finch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Finch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A6A82241E3BABB500A7D899 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A80B72E1E3260B600CD49B7 /* Actor.swift */; };
-		4A6A82251E3BABB500A7D899 /* AnyFinchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */; };
+		4A6A82251E3BABB500A7D899 /* AnyAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */; };
 		4A6A82261E3BABB500A7D899 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90A4FF1E09F31F0077BC68 /* Atomic.swift */; };
 		4A6A82271E3BABB500A7D899 /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */; };
 		4A6A82281E3BABB500A7D899 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7D78C1E1C0CA8003847BD /* Channel.swift */; };
 		4A6A82291E3BABB500A7D899 /* FinchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */; };
-		4A6A822A1E3BABB500A7D899 /* FinchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776831DF9C8D8005480A1 /* FinchProvider.swift */; };
+		4A6A822A1E3BABB500A7D899 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */; };
 		4A6A822B1E3BABB500A7D899 /* KeychainEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */; };
 		4A6A822C1E3BABB500A7D899 /* KeychainTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */; };
 		4A6A822D1E3BABB500A7D899 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
@@ -34,7 +34,7 @@
 		4A97A7D71E26D61F00FC51EC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; };
 		4A97A7D81E26D62700FC51EC /* OHHTTPStubs.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A97A7DB1E26EA8B00FC51EC /* RequestExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */; };
-		4A97A7DD1E280F9500FC51EC /* TestAuthorizationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */; };
+		4A97A7DD1E280F9500FC51EC /* TestAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DC1E280F9500FC51EC /* TestAuthenticationProvider.swift */; };
 		4A97A7DF1E281EA200FC51EC /* ConditionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */; };
 		4A9FE9111E2AF0DA0029C645 /* KeychainTokenStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */; };
 		4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */; };
@@ -96,7 +96,7 @@
 
 /* Begin PBXFileReference section */
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
-		4A3776831DF9C8D8005480A1 /* FinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinchProvider.swift; path = Sources/Finch/FinchProvider.swift; sourceTree = SOURCE_ROOT; };
+		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationProvider.swift; path = Sources/Finch/AuthenticationProvider.swift; sourceTree = SOURCE_ROOT; };
 		4A6A82171E3BAB3900A7D899 /* Finch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Finch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6A82301E3BAEAB00A7D899 /* Finch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Finch.h; sourceTree = "<group>"; };
 		4A6A82311E3BAEAB00A7D899 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizerSpec.swift; sourceTree = "<group>"; };
 		4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestExpectation.swift; sourceTree = "<group>"; };
-		4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAuthorizationProvider.swift; sourceTree = "<group>"; };
+		4A97A7DC1E280F9500FC51EC /* TestAuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAuthenticationProvider.swift; sourceTree = "<group>"; };
 		4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionLock.swift; sourceTree = "<group>"; };
 		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinchError.swift; path = Sources/Finch/FinchError.swift; sourceTree = SOURCE_ROOT; };
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GitHub+Providers.swift"; sourceTree = "<group>"; };
 		4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
 		4AA980BE1DFB55A0000604FB /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyFinchProvider.swift; sourceTree = "<group>"; };
+		4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAuthenticationProvider.swift; sourceTree = "<group>"; };
 		4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
 		4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4AAA9F8B1E1C82950064F4C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -173,12 +173,12 @@
 			isa = PBXGroup;
 			children = (
 				4A80B72E1E3260B600CD49B7 /* Actor.swift */,
-				4AA980C31DFB5FD6000604FB /* AnyFinchProvider.swift */,
+				4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */,
 				4A90A4FF1E09F31F0077BC68 /* Atomic.swift */,
+				4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */,
 				4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */,
 				4AF7D78C1E1C0CA8003847BD /* Channel.swift */,
 				4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */,
-				4A3776831DF9C8D8005480A1 /* FinchProvider.swift */,
 				4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */,
 				4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */,
 				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
@@ -265,7 +265,7 @@
 			children = (
 				4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */,
 				4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */,
-				4A97A7DC1E280F9500FC51EC /* TestAuthorizationProvider.swift */,
+				4A97A7DC1E280F9500FC51EC /* TestAuthenticationProvider.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -453,7 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A6A82251E3BABB500A7D899 /* AnyFinchProvider.swift in Sources */,
+				4A6A82251E3BABB500A7D899 /* AnyAuthenticationProvider.swift in Sources */,
 				4A6A822C1E3BABB500A7D899 /* KeychainTokenStorage.swift in Sources */,
 				4A6A82291E3BABB500A7D899 /* FinchError.swift in Sources */,
 				4A6A822E1E3BABB500A7D899 /* SimpleTokenStorage.swift in Sources */,
@@ -463,7 +463,7 @@
 				4A6A822F1E3BABB500A7D899 /* TokenStorage.swift in Sources */,
 				4A6A822B1E3BABB500A7D899 /* KeychainEncoding.swift in Sources */,
 				4A6A82261E3BABB500A7D899 /* Atomic.swift in Sources */,
-				4A6A822A1E3BABB500A7D899 /* FinchProvider.swift in Sources */,
+				4A6A822A1E3BABB500A7D899 /* AuthenticationProvider.swift in Sources */,
 				4A6A82241E3BABB500A7D899 /* Actor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,7 +491,7 @@
 				4A97A7DF1E281EA200FC51EC /* ConditionLock.swift in Sources */,
 				4A97A7DB1E26EA8B00FC51EC /* RequestExpectation.swift in Sources */,
 				4AAA9F891E1C818C0064F4C9 /* ChannelSpec.swift in Sources */,
-				4A97A7DD1E280F9500FC51EC /* TestAuthorizationProvider.swift in Sources */,
+				4A97A7DD1E280F9500FC51EC /* TestAuthenticationProvider.swift in Sources */,
 				4A97A7D51E26D0FF00FC51EC /* RequestAuthorizerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
