@@ -8,17 +8,19 @@ public protocol RequestAuthorizerProtocol {
 public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let applicationDelegate: () -> UIApplicationDelegate?
   let authenticationProvider: AnyAuthenticationProvider<Token>
+  let urlSession: URLSession
 
   private let authenticationComplete: Channel<Result<Token, SuperbError>>
   private let authenticationState: Actor<AuthenticationState<Token>>
 
-  public init<Provider: AuthenticationProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+  public init<Provider: AuthenticationProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate, urlSession: URLSession = .shared)
     where Provider.Token == Token, Storage.Token == Token
   {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
     self.authenticationState = AuthenticationState.makeActor(tokenStorage: tokenStorage)
     self.authenticationProvider = AnyAuthenticationProvider(authorizationProvider)
+    self.urlSession = urlSession
   }
 
   /// Performs `request` based on the current authentication state.
@@ -96,7 +98,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     var authorizedRequest = request
     authenticationProvider.authorize(&authorizedRequest, with: token)
 
-    let task = URLSession.shared.dataTask(with: authorizedRequest) { data, response, error in
+    let task = urlSession.dataTask(with: authorizedRequest) { data, response, error in
       let result: Result<(Data?, URLResponse?), SuperbError>
 
       if let error = error {
@@ -242,11 +244,11 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 }
 
 extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
-  public convenience init<Provider: AuthenticationProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
+  public convenience init<Provider: AuthenticationProvider>(authorizationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate, urlSession: URLSession = .shared)
     where Provider.Token == Token
   {
     let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)
-    self.init(authorizationProvider: authorizationProvider, tokenStorage: keychainTokenStorage, applicationDelegate: applicationDelegate)
+    self.init(authorizationProvider: authorizationProvider, tokenStorage: keychainTokenStorage, applicationDelegate: applicationDelegate, urlSession: urlSession)
   }
 }
 
