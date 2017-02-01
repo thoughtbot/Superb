@@ -16,7 +16,7 @@ final class GitHubOAuthProvider: AuthenticationProvider {
   private var currentAuthorization: (
     safariViewController: SFSafariViewController,
     delegate: SafariViewControllerDelegate,
-    completionHandler: (Result<String, SuperbError>) -> Void
+    completionHandler: (AuthenticationResult<String>) -> Void
   )?
 
   init(clientId: String, clientSecret: String, redirectURI: URL) {
@@ -29,7 +29,7 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
   }
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<String>) -> Void) {
     precondition(currentAuthorization == nil)
 
     var authorizeURLComponents = URLComponents(url: authorizeURL, resolvingAgainstBaseURL: false)!
@@ -48,7 +48,7 @@ final class GitHubOAuthProvider: AuthenticationProvider {
   private func failIfUnauthorized() {
     guard let completionHandler = currentAuthorization?.completionHandler else { return }
     currentAuthorization = nil
-    completionHandler(.failure(.unauthorized))
+    completionHandler(.cancelled)
   }
 
   func handleCallback(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
@@ -86,17 +86,17 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     return true
   }
 
-  private func handleAuthorizationResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
+  private func handleAuthorizationResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?, completionHandler: @escaping (AuthenticationResult<String>) -> Void) {
     defer { currentAuthorization = nil }
 
-    var result: Result<String, SuperbError>!
+    var result: AuthenticationResult<String>!
 
     defer {
       completionHandler(result)
     }
 
     guard error == nil else {
-      result = .failure(.requestFailed(error!))
+      result = .failed(GitHubAuthError.createAccessTokenFailed(error!))
       return
     }
 
@@ -106,11 +106,11 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     components.query = response
 
     guard let token = components.queryItems?.first(where: { $0.name == "access_token" })?.value else {
-      result = .failure(.authorizationResponseInvalid)
+      result = .failed(GitHubAuthError.tokenResponseInvalid(response ?? data))
       return
     }
 
-    result = .success(token)
+    result = .authenticated(token)
   }
 }
 

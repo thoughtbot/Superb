@@ -48,6 +48,8 @@
 		4AAA9F8F1E1C82B00064F4C9 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AAA9F901E1C82B00064F4C9 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AE2AAE61E412C3400547D10 /* ProviderRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */; };
+		4AFBA60D1E426EF000A570D0 /* AuthenticationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */; };
+		4AFBA6101E42742400A570D0 /* GitHubAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */; };
 		7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */; };
 		7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */; };
 /* End PBXBuildFile section */
@@ -138,6 +140,8 @@
 		4AAA9F8B1E1C82950064F4C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderRegistration.swift; sourceTree = "<group>"; };
 		4AF7D78C1E1C0CA8003847BD /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationResult.swift; sourceTree = "<group>"; };
+		4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAuthError.swift; sourceTree = "<group>"; };
 		7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthProvider.swift; sourceTree = "<group>"; };
 		7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthViewController.swift; sourceTree = "<group>"; };
 		70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubBasicAuth.storyboard; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 				4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */,
 				4A90A4FF1E09F31F0077BC68 /* Atomic.swift */,
 				4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */,
+				4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */,
 				4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */,
 				4AF7D78C1E1C0CA8003847BD /* Channel.swift */,
 				4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */,
@@ -249,6 +254,7 @@
 			children = (
 				4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */,
 				70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */,
+				4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */,
 				4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */,
 				4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */,
 				7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */,
@@ -489,6 +495,7 @@
 				4A6A822E1E3BABB500A7D899 /* SimpleTokenStorage.swift in Sources */,
 				4A6A82281E3BABB500A7D899 /* Channel.swift in Sources */,
 				4A6A822D1E3BABB500A7D899 /* RequestAuthorizer.swift in Sources */,
+				4AFBA60D1E426EF000A570D0 /* AuthenticationResult.swift in Sources */,
 				4A6A82271E3BABB500A7D899 /* AuthenticationState.swift in Sources */,
 				4A6A822F1E3BABB500A7D899 /* TokenStorage.swift in Sources */,
 				4A6A822B1E3BABB500A7D899 /* KeychainEncoding.swift in Sources */,
@@ -510,6 +517,7 @@
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
 				4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */,
 				7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */,
+				4AFBA6101E42742400A570D0 /* GitHubAuthError.swift in Sources */,
 				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
 				4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */,
 			);

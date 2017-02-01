@@ -14,7 +14,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
   }
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<String>) -> Void) {
     let alert = UIAlertController(title: "Sign in to GitHub", message: nil, preferredStyle: .alert)
 
     alert.addTextField { textField in
@@ -47,8 +47,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     password = sender.text ?? ""
   }
 
-  private func createAccessToken(login: String, password: String, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
-
+  private func createAccessToken(login: String, password: String, completionHandler: @escaping (AuthenticationResult<String>) -> Void) {
     let requestBody = try? JSONSerialization.data(withJSONObject: [
       "note": makePersonalAccessTokenNote()
     ])
@@ -59,27 +58,27 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     request.setValue(createAuthorizationHeader(login: login, password: password), forHTTPHeaderField: "Authorization")
 
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
-      var result: Result<String, SuperbError>!
+      var result: AuthenticationResult<String>!
 
       defer {
         completionHandler(result)
       }
 
       guard error == nil else {
-        result = .failure(.requestFailed(error!))
+        result = .failed(error!)
         return
       }
 
-      guard let data = data,
-        let object = try? JSONSerialization.jsonObject(with: data),
-        let response = object as? [String: Any],
+      let object = data.flatMap { try? JSONSerialization.jsonObject(with: $0) }
+
+      guard let response = object as? [String: Any],
         let token = response["token"] as? String
         else {
-          result = .failure(.authorizationResponseInvalid)
+          result = .failed(GitHubAuthError.tokenResponseInvalid(object ?? data))
           return
         }
 
-      result = .success(token)
+      result = .authenticated(token)
     }
 
     task.resume()

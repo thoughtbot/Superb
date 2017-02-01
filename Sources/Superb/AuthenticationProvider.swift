@@ -1,4 +1,3 @@
-import Result
 import UIKit
 
 public protocol CallbackHandler {
@@ -8,7 +7,7 @@ public protocol CallbackHandler {
 public protocol _AuthenticationProvider {
   associatedtype Token
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<Token, SuperbError>) -> Void)
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<Token>) -> Void)
   func authorize(_ request: inout URLRequest, with token: Token)
 }
 

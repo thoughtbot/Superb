@@ -10,7 +10,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let authenticationProvider: AnyAuthenticationProvider<Token>
   let urlSession: URLSession
 
-  private let authenticationComplete: Channel<Result<Token, SuperbError>>
+  private let authenticationComplete: Channel<AuthenticationResult<Token>>
   private let authenticationState: Actor<AuthenticationState<Token>>
 
   public init<Provider: AuthenticationProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate, urlSession: URLSession = .shared)
@@ -142,13 +142,26 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       of performing `request`.
   private func waitForAuthentication(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
     authenticationComplete.subscribe { result in
+      let complete: (() -> Void)?
+
       switch result {
-      case .success(let token):
+      case .authenticated(let token):
+        complete = nil
         self.perform(request, with: token, reauthenticate: false, completionHandler: completionHandler)
-      case .failure(let error):
-        DispatchQueue.main.async {
-          completionHandler(.failure(error))
+
+      case .cancelled:
+        complete = {
+          completionHandler(.failure(.authenticationCancelled))
         }
+
+      case .failed(let error):
+        complete = {
+          completionHandler(.failure(.authenticationFailed(error)))
+        }
+      }
+
+      if let complete = complete {
+        DispatchQueue.main.async(execute: complete)
       }
     }
   }
@@ -187,17 +200,29 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
           defer { self.authenticationComplete.broadcast(result) }
 
           let state: NewAuthenticationState<Token>
+          let complete: (() -> Void)?
 
           switch result {
-          case let .success(token):
+          case let .authenticated(token):
             state = .authenticated(token)
+            complete = nil
             self.perform(request, with: token, reauthenticate: false, completionHandler: completionHandler)
 
-          case let .failure(error):
+          case .cancelled:
             state = .unauthenticated
-            DispatchQueue.main.async {
-              completionHandler(.failure(error))
+            complete = {
+              completionHandler(.failure(.authenticationCancelled))
             }
+
+          case let .failed(error):
+            state = .unauthenticated
+            complete = {
+              completionHandler(.failure(.authenticationFailed(error)))
+            }
+          }
+
+          if let complete = complete {
+            DispatchQueue.main.async(execute: complete)
           }
 
           return state

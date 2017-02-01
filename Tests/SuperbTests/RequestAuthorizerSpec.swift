@@ -38,7 +38,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
       authorizer.performAuthorized(request) { _ in }
 
-      testProvider.complete(with: "dynamic-token")
+      testProvider.complete(with: .authenticated("dynamic-token"))
 
       requests.verify()
     }
@@ -64,7 +64,7 @@ final class RequestAuthorizerSpec: QuickSpec {
         error = result.error
       }
 
-      testProvider.complete(with: "new-token")
+      testProvider.complete(with: .authenticated("new-token"))
 
       requests.verify()
       expect(response?.statusCode).toEventually(equal(200))
@@ -98,7 +98,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
       group.wait()
 
-      testProvider.complete(with: "shared-token")
+      testProvider.complete(with: .authenticated("shared-token"))
 
       requests.verify()
       expect(statusCodes.count).toEventually(equal(limit))
@@ -130,12 +130,12 @@ final class RequestAuthorizerSpec: QuickSpec {
 
       group.wait()
 
-      testProvider.complete(with: .unauthorized)
+      testProvider.complete(with: .cancelled)
 
-      var allUnauthorized: Bool {
+      var allCancelled: Bool {
         for error in errors {
           switch error {
-          case .unauthorized:
+          case .authenticationCancelled:
             continue
           default:
             return false
@@ -146,7 +146,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
       requests.verify()
       expect(errors.count).toEventually(equal(limit))
-      expect(allUnauthorized).to(beTrue())
+      expect(allCancelled).to(beTrue())
     }
 
     describe("token storage") {
@@ -159,7 +159,7 @@ final class RequestAuthorizerSpec: QuickSpec {
         requests.expect(where: isPath("/example"))
 
         authorizer.performAuthorized(request) { _ in }
-        testProvider.complete(with: "new-token")
+        testProvider.complete(with: .authenticated("new-token"))
 
         expect(testTokenStorage.fetchToken()).toEventually(equal("new-token"))
 

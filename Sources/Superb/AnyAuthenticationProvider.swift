@@ -3,7 +3,7 @@ import UIKit
 
 internal final class AnyAuthenticationProvider<Token>: _AuthenticationProvider {
   let identifier: String
-  private let _authenticate: (UIViewController, @escaping (Result<Token, SuperbError>) -> Void) -> Void
+  private let _authenticate: (UIViewController, @escaping (AuthenticationResult<Token>) -> Void) -> Void
   private let _authorize: (inout URLRequest, Token) -> Void
 
   init<Base: AuthenticationProvider>(_ provider: Base) where Base.Token == Token {
@@ -12,7 +12,7 @@ internal final class AnyAuthenticationProvider<Token>: _AuthenticationProvider {
     _authorize = { provider.authorize(&$0, with: $1) }
   }
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<Token, SuperbError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<Token>) -> Void) {
     return _authenticate(viewController, completionHandler)
   }
 
