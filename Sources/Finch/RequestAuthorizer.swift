@@ -94,8 +94,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       response from performing `request`.
   private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
     var authorizedRequest = request
-    let authorization = authenticationProvider.authorizationHeader(for: token)
-    authorizedRequest.setValue(authorization, forHTTPHeaderField: "Authorization")
+    authenticationProvider.authorize(&authorizedRequest, with: token)
 
     let task = URLSession.shared.dataTask(with: authorizedRequest) { data, response, error in
       let result: Result<(Data?, URLResponse?), FinchError>

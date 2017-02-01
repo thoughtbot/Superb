@@ -11,8 +11,8 @@ final class TestAuthenticationProvider: AuthenticationProvider {
   private let authenticationLock = ConditionLock(label: "test-provider.authentication-lock", condition: AuthenticationCondition.ready)
   private let queue = DispatchQueue(label: "test-provider.queue")
 
-  func authorizationHeader(for token: String) -> String {
-    return token
+  func authorize(_ request: inout URLRequest, with token: String) {
+    request.setValue(token, forHTTPHeaderField: "Authorization")
   }
 
   func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {

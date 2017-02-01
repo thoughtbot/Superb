@@ -26,8 +26,8 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     self.redirectURI = redirectURI
   }
 
-  func authorizationHeader(for token: String) -> String {
-    return "token \(token)"
+  func authorize(_ request: inout URLRequest, with token: String) {
+    request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
   }
 
   func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
