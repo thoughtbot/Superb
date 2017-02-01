@@ -25,7 +25,7 @@ struct GitHubAPIClient {
     authorizer.performAuthorized(request) { result in
       switch result {
       case let .success(data, _):
-        let object = try! JSONSerialization.jsonObject(with: data!) as! [String: Any]
+        let object = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
         let login = object["login"] as! String
         completionHandler(.success(login))
 

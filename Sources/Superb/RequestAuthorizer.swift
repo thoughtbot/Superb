@@ -2,7 +2,7 @@ import Result
 import UIKit
 
 public protocol RequestAuthorizerProtocol {
-  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void)
+  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void)
 }
 
 public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
@@ -46,7 +46,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
+  public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     DispatchQueue.global().async {
       self.performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
     }
@@ -66,7 +66,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  private func performAuthorized(_ request: URLRequest, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
+  private func performAuthorized(_ request: URLRequest, reauthenticate: Bool, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     fetchAuthenticationState(handlingErrorsWith: completionHandler) { state, startedAuthenticating in
       switch state {
       case .authenticated(let token):
@@ -94,17 +94,19 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       response will be passed back to the caller.
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`.
-  private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
+  private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     var authorizedRequest = request
     authenticationProvider.authorize(&authorizedRequest, with: token)
 
     let task = urlSession.dataTask(with: authorizedRequest) { data, response, error in
-      let result: Result<(Data?, URLResponse?), SuperbError>
+      let result: Result<(Data, URLResponse), SuperbError>
 
       if let error = error {
         result = .failure(.requestFailed(request.url, error))
-      } else {
+      } else if let data = data, let response = response {
         result = .success(data, response)
+      } else {
+        fatalError("expected response data from the server, got \(response), \(data)")
       }
 
       guard let httpResponse = response as? HTTPURLResponse,
@@ -140,7 +142,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: Invoked with `SuperbError.unauthorized`
   ///       if authentication fails, otherwise invoked with the result
   ///       of performing `request`.
-  private func waitForAuthentication(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
+  private func waitForAuthentication(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     authenticationComplete.subscribe { result in
       let complete: (() -> Void)?
 
@@ -188,7 +190,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: A function to be invoked with the result of
   ///       performing `request`, or the appropriate `SuperbError` describing why
   ///       authorization failed.
-  private func authenticate(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
+  private func authenticate(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     DispatchQueue.main.async {
       guard let topViewController = self.topViewController else {
         completionHandler(.failure(.userInteractionRequired))
@@ -231,19 +233,19 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     }
   }
 
-  private func fetchAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
+  private func fetchAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
     handlingAuthenticationErrors(with: completionHandler) {
       try authenticationState.sync { try $0.fetch(body) }
     }
   }
 
-  private func updateAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
+  private func updateAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
     handlingAuthenticationErrors(with: completionHandler) {
       try authenticationState.sync { try $0.update(body) }
     }
   }
 
-  private func handlingAuthenticationErrors(with completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void, body: () throws -> Void) {
+  private func handlingAuthenticationErrors(with completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void, body: () throws -> Void) {
     let error: SuperbError
 
     do {
