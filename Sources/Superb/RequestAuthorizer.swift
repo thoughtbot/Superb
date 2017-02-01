@@ -102,7 +102,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
       let result: Result<(Data?, URLResponse?), SuperbError>
 
       if let error = error {
-        result = .failure(.requestFailed(error))
+        result = .failure(.requestFailed(request.url, error))
       } else {
         result = .success(data, response)
       }

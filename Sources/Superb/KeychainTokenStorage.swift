@@ -28,7 +28,7 @@ public struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>
     }
 
     guard status == noErr else {
-      throw SuperbError.keychainAccessFailure(status)
+      throw SuperbError.keychainReadFailure(status)
     }
 
     let data = result as! Data
@@ -50,7 +50,7 @@ public struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>
 
     let status = SecItemAdd(item, nil)
     guard status == noErr else {
-      throw SuperbError.keychainAccessFailure(status)
+      throw SuperbError.keychainWriteFailure(status)
     }
   }
 
@@ -69,7 +69,7 @@ public struct KeychainTokenStorage<Token: KeychainDecodable & KeychainEncodable>
     }
 
     guard status == noErr else {
-      throw SuperbError.keychainAccessFailure(status)
+      throw SuperbError.keychainWriteFailure(status)
     }
   }
 
