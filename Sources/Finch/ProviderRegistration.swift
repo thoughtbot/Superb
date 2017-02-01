@@ -21,7 +21,7 @@ public enum Finch {
 
   public static func handleAuthenticationRedirect(_ url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
     for (_, provider) in providers {
-      let handler = provider as! _CallbackHandler
+      let handler = provider as! CallbackHandler
       if handler.handleCallback(url, options: options) {
         return true
       }
