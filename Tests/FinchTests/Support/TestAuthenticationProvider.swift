@@ -15,7 +15,7 @@ final class TestAuthenticationProvider: AuthenticationProvider {
     return token
   }
 
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
     authenticationLock.lock(when: .ready)
     self.completionHandler = completionHandler
     authenticationLock.unlock(with: .authenticating)

@@ -7,7 +7,7 @@ public protocol RequestAuthorizerProtocol {
 
 public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let applicationDelegate: () -> UIApplicationDelegate?
-  let authorizationProvider: AnyAuthenticationProvider<Token>
+  let authenticationProvider: AnyAuthenticationProvider<Token>
 
   private let authenticationComplete: Channel<Result<Token, FinchError>>
   private let authenticationState: Actor<AuthenticationState<Token>>
@@ -18,7 +18,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
     self.authenticationState = AuthenticationState.makeActor(tokenStorage: tokenStorage)
-    self.authorizationProvider = AnyAuthenticationProvider(authorizationProvider)
+    self.authenticationProvider = AnyAuthenticationProvider(authorizationProvider)
   }
 
   /// Performs `request` based on the current authentication state.
@@ -94,7 +94,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       response from performing `request`.
   private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
     var authorizedRequest = request
-    let authorization = authorizationProvider.authorizationHeader(for: token)
+    let authorization = authenticationProvider.authorizationHeader(for: token)
     authorizedRequest.setValue(authorization, forHTTPHeaderField: "Authorization")
 
     let task = URLSession.shared.dataTask(with: authorizedRequest) { data, response, error in
@@ -181,7 +181,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
         return
       }
 
-      self.authorizationProvider.authorize(over: topViewController) { result in
+      self.authenticationProvider.authenticate(over: topViewController) { result in
         self.updateAuthenticationState(handlingErrorsWith: completionHandler) {
           defer { self.authenticationComplete.broadcast(result) }
 

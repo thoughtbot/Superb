@@ -15,7 +15,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     return "token \(token)"
   }
 
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
     let alert = UIAlertController(title: "Sign in to GitHub", message: nil, preferredStyle: .alert)
 
     alert.addTextField { textField in

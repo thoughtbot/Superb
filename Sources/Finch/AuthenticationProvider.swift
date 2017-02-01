@@ -9,7 +9,7 @@ public protocol _AuthenticationProvider {
   associatedtype Token
 
   func authorizationHeader(for token: Token) -> String
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<Token, FinchError>) -> Void)
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<Token, FinchError>) -> Void)
 }
 
 public protocol AuthenticationProvider: _AuthenticationProvider, CallbackHandler {

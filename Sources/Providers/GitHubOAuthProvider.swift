@@ -30,7 +30,7 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     return "token \(token)"
   }
 
-  func authorize(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
     precondition(currentAuthorization == nil)
 
     var authorizeURLComponents = URLComponents(url: authorizeURL, resolvingAgainstBaseURL: false)!
