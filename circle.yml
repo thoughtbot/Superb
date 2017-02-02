@@ -11,3 +11,5 @@ dependencies:
 test:
   pre:
     - bin/copy-secrets
+  post:
+    - pod lib lint
