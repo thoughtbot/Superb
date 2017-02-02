@@ -128,7 +128,7 @@ api.getProfile { result in
 Add the following to your Cartfile:
 
 ```
-github "thoughtbot/Superb" ~> 0.1
+github "thoughtbot/Superb" ~> 0.0.1
 ```
 
 Then run `carthage update`.
@@ -140,6 +140,24 @@ You will need to embed both `Superb.framework` and `Result.framework` in your
 application.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
+
+### [CocoaPods]
+
+[CocoaPods]: https://cocoapods.org
+
+Add the following to your [Podfile](https://guides.cocoapods.org/using/the-podfile.html):
+
+```ruby
+pod "Superb", "~> 0.0.1"
+```
+
+You will also need to make sure you're opting into using frameworks:
+
+```ruby
+use_frameworks!
+```
+
+Then run `pod install`.
 
 ## Troubleshooting
 
