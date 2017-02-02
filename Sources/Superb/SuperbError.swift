@@ -1,6 +1,6 @@
 import Foundation
 
-public enum FinchError: Error {
+public enum SuperbError: Error {
   case authorizationResponseInvalid
   case keychainAccessFailure(OSStatus)
   case keychainDecodeFailure(Data)
@@ -9,7 +9,7 @@ public enum FinchError: Error {
   case userInteractionRequired
 }
 
-extension FinchError: LocalizedError {
+extension SuperbError: LocalizedError {
   var localizedDescription: String {
     switch self {
     case .authorizationResponseInvalid:
@@ -19,7 +19,7 @@ extension FinchError: LocalizedError {
     case .keychainDecodeFailure:
       return "Keychain decode failed"
     case .requestFailed(let error):
-      return "FinchError.requestFailed(\(error.localizedDescription))"
+      return "SuperbError.requestFailed(\(error.localizedDescription))"
     case .unauthorized:
       return "🙅"
     case .userInteractionRequired:

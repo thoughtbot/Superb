@@ -1,6 +1,6 @@
-import Foundation
+import UIKit
 
-public enum Finch {
+public enum Superb {
   private static var providers: [String: Any] = [:]
 
   public static func register<Provider: AuthenticationProvider>(_ makeProvider: @autoclosure () -> Provider) -> Provider {

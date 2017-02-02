@@ -1,5 +1,4 @@
-import Finch
-import Result
+import Superb
 import SafariServices
 import UIKit
 
@@ -7,7 +6,7 @@ let authorizeURL = URL(string: "https://github.com/login/oauth/authorize")!
 let createAccessTokenURL = URL(string: "https://github.com/login/oauth/access_token")!
 
 final class GitHubOAuthProvider: AuthenticationProvider {
-  static let identifier = "com.thoughtbot.finch.github.oauth"
+  static let identifier = "com.thoughtbot.superb.github.oauth"
   static let keychainServiceName = "GitHub OAuth"
 
   let clientId: String
@@ -17,7 +16,7 @@ final class GitHubOAuthProvider: AuthenticationProvider {
   private var currentAuthorization: (
     safariViewController: SFSafariViewController,
     delegate: SafariViewControllerDelegate,
-    completionHandler: (Result<String, FinchError>) -> Void
+    completionHandler: (Result<String, SuperbError>) -> Void
   )?
 
   init(clientId: String, clientSecret: String, redirectURI: URL) {
@@ -30,7 +29,7 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
   }
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
     precondition(currentAuthorization == nil)
 
     var authorizeURLComponents = URLComponents(url: authorizeURL, resolvingAgainstBaseURL: false)!
@@ -87,10 +86,10 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     return true
   }
 
-  private func handleAuthorizationResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  private func handleAuthorizationResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
     defer { currentAuthorization = nil }
 
-    var result: Result<String, FinchError>!
+    var result: Result<String, SuperbError>!
 
     defer {
       completionHandler(result)

@@ -21,7 +21,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>finchui</string>
+				<string>superbdemo</string>
 			</array>
 		</dict>
 	</array>

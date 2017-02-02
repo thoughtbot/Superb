@@ -2,14 +2,14 @@ import Result
 import UIKit
 
 public protocol RequestAuthorizerProtocol {
-  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void)
+  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void)
 }
 
 public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let applicationDelegate: () -> UIApplicationDelegate?
   let authenticationProvider: AnyAuthenticationProvider<Token>
 
-  private let authenticationComplete: Channel<Result<Token, FinchError>>
+  private let authenticationComplete: Channel<Result<Token, SuperbError>>
   private let authenticationState: Actor<AuthenticationState<Token>>
 
   public init<Provider: AuthenticationProvider, Storage: TokenStorage>(authorizationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate)
@@ -44,7 +44,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+  public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
     DispatchQueue.global().async {
       self.performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
     }
@@ -64,7 +64,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  private func performAuthorized(_ request: URLRequest, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+  private func performAuthorized(_ request: URLRequest, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
     fetchAuthenticationState(handlingErrorsWith: completionHandler) { state, startedAuthenticating in
       switch state {
       case .authenticated(let token):
@@ -92,12 +92,12 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       response will be passed back to the caller.
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`.
-  private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+  private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
     var authorizedRequest = request
     authenticationProvider.authorize(&authorizedRequest, with: token)
 
     let task = URLSession.shared.dataTask(with: authorizedRequest) { data, response, error in
-      let result: Result<(Data?, URLResponse?), FinchError>
+      let result: Result<(Data?, URLResponse?), SuperbError>
 
       if let error = error {
         result = .failure(.requestFailed(error))
@@ -135,10 +135,10 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   /// - parameters:
   ///     - request: A `URLRequest` to perform if authentication
   ///       completes sucessfully.
-  ///     - completionHandler: Invoked with `FinchError.unauthorized`
+  ///     - completionHandler: Invoked with `SuperbError.unauthorized`
   ///       if authentication fails, otherwise invoked with the result
   ///       of performing `request`.
-  private func waitForAuthentication(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+  private func waitForAuthentication(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
     authenticationComplete.subscribe { result in
       switch result {
       case .success(let token):
@@ -171,9 +171,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   /// - parameters:
   ///     - request: A `URLRequest` to perform after authenticating successfully.
   ///     - completionHandler: A function to be invoked with the result of
-  ///       performing `request`, or the appropriate `FinchError` describing why
+  ///       performing `request`, or the appropriate `SuperbError` describing why
   ///       authorization failed.
-  private func authenticate(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void) {
+  private func authenticate(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void) {
     DispatchQueue.main.async {
       guard let topViewController = self.topViewController else {
         completionHandler(.failure(.userInteractionRequired))
@@ -204,25 +204,25 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     }
   }
 
-  private func fetchAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
+  private func fetchAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
     handlingAuthenticationErrors(with: completionHandler) {
       try authenticationState.sync { try $0.fetch(body) }
     }
   }
 
-  private func updateAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: () -> NewAuthenticationState<Token>) {
+  private func updateAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
     handlingAuthenticationErrors(with: completionHandler) {
       try authenticationState.sync { try $0.update(body) }
     }
   }
 
-  private func handlingAuthenticationErrors(with completionHandler: @escaping (Result<(Data?, URLResponse?), FinchError>) -> Void, body: () throws -> Void) {
-    let error: FinchError
+  private func handlingAuthenticationErrors(with completionHandler: @escaping (Result<(Data?, URLResponse?), SuperbError>) -> Void, body: () throws -> Void) {
+    let error: SuperbError
 
     do {
       try body()
       return
-    } catch let finchError as FinchError {
+    } catch let finchError as SuperbError {
       error = finchError
     } catch {
       fatalError("Unexpected error: \(error.localizedDescription)")

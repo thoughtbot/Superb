@@ -1,4 +1,4 @@
-# Finch
+# Superb
 
 Pluggable HTTP authentication for Swift.
 
@@ -26,21 +26,21 @@ When you register the app with your OAuth provider, you will give a redirect
 URI. This URI must use a URL scheme that is registered for your app in your
 app's `Info.plist`.
 
-Finch allows your app to support multiple authentication providers via a
-registration mechanism. iOS apps have a single entrypoint for URLs, so Finch
+Superb allows your app to support multiple authentication providers via a
+registration mechanism. iOS apps have a single entrypoint for URLs, so Superb
 searches through the registered providers to find the correct one to handle the
 redirect URL.
 
 ```swift
 // GitHub+Providers.swift
 
-import Finch
-import FinchGitHub
+import Superb
+import SuperbGitHub
 
 extension GitHubOAuthProvider {
   static var shared: GitHubOAuthProvider {
     // Register a provider to handle callback URLs
-    return Finch.register(
+    return Superb.register(
       GitHubOAuthProvider(
         clientId: "<your client id>",
         clientSecret: "<your client secret>",
@@ -59,8 +59,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   // ...
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-    // Pass the URL and options off to Finch.
-    return Finch.handleAuthenticationRedirect(url, options: options)
+    // Pass the URL and options off to Superb.
+    return Superb.handleAuthenticationRedirect(url, options: options)
   }
 }
 ```
@@ -85,7 +85,7 @@ struct GitHubAPIClient {
   }
 
   // An authorized request to get the current user's profile.
-  func getProfile(completionHandler: @escaping (Result<Profile, FinchError>) -> Void) {
+  func getProfile(completionHandler: @escaping (Result<Profile, SuperbError>) -> Void) {
     let request = URLRequest(url: URL(string: "https://api.github.com/user")!)
 
     authorizer.performAuthorized(request) { result in
@@ -101,7 +101,7 @@ struct GitHubAPIClient {
   }
 
   // An unauthorized request.
-  func getZen(completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func getZen(completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
     let request = URLRequest(url: URL(string: "https://api.github.com/zen")!)
 
     URLSession.shared.dataTask(with: request) { data, _, error in
@@ -128,7 +128,7 @@ api.getProfile { result in
 Add the following to your Cartfile:
 
 ```
-github "thoughtbot/Finch" ~> 0.1
+github "thoughtbot/Superb" ~> 0.1
 ```
 
 Then run `carthage update`.
@@ -136,7 +136,7 @@ Then run `carthage update`.
 Follow the current instructions in [Carthage's README][carthage-installation]
 for up to date installation instructions.
 
-You will need to embed both `Finch.framework` and `Result.framework` in your
+You will need to embed both `Superb.framework` and `Result.framework` in your
 application.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
@@ -145,9 +145,9 @@ application.
 
 ### Authentication always fails when using OAuth
 
-#### You forgot to call `Finch.register`.
+#### You forgot to call `Superb.register`.
 
-If you do not call `Finch.register` then your authentication provider will not
+If you do not call `Superb.register` then your authentication provider will not
 have a chance to receive callback URLs.
 
 ## Contributing
@@ -155,11 +155,11 @@ have a chance to receive callback URLs.
 See the [CONTRIBUTING] document. Thank you, [contributors]!
 
 [CONTRIBUTING]: CONTRIBUTING.md
-[contributors]: https://github.com/thoughtbot/Finch/graphs/contributors
+[contributors]: https://github.com/thoughtbot/Superb/graphs/contributors
 
 ## License
 
-Finch is Copyright (c) 2017 thoughtbot, inc. It is free software, and may be
+Superb is Copyright (c) 2017 thoughtbot, inc. It is free software, and may be
 redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: /LICENSE
@@ -168,7 +168,7 @@ redistributed under the terms specified in the [LICENSE] file.
 
 ![thoughtbot](https://thoughtbot.com/logo.png)
 
-Finch is maintained and funded by thoughtbot, inc. The names and logos for
+Superb is maintained and funded by thoughtbot, inc. The names and logos for
 thoughtbot are trademarks of thoughtbot, inc.
 
 We love open source software! See [our other projects][community] or look at

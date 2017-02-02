@@ -8,7 +8,7 @@ public protocol CallbackHandler {
 public protocol _AuthenticationProvider {
   associatedtype Token
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<Token, FinchError>) -> Void)
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<Token, SuperbError>) -> Void)
   func authorize(_ request: inout URLRequest, with token: Token)
 }
 

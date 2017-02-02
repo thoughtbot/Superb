@@ -8,7 +8,7 @@ final class Actor<Base> {
 
   init(_ instance: Base, target: DispatchQueue? = nil) {
     self.instance = instance
-    self.queue = DispatchQueue(label: "com.thoughtbot.finch.\(Actor.self).queue", target: target)
+    self.queue = DispatchQueue(label: "com.thoughtbot.superb.\(Actor.self).queue", target: target)
   }
 
   func sync<Result>(_ message: (inout Base) throws -> Result) rethrows -> Result {

@@ -4,7 +4,7 @@ import Foundation
 /// to 0 or more subscribers.
 final class Channel<Message> {
   private let subscribers: Atomic<[(Message) -> Void]> = Atomic([])
-  private let queue = DispatchQueue(label: "com.thoughtbot.finch.\(Channel.self).subscribe", attributes: .concurrent)
+  private let queue = DispatchQueue(label: "com.thoughtbot.superb.\(Channel.self).subscribe", attributes: .concurrent)
 
   /// Subscribe to the next message.
   ///

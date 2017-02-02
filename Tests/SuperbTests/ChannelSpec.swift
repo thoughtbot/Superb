@@ -1,4 +1,4 @@
-@testable import Finch
+@testable import Superb
 import Quick
 import Nimble
 

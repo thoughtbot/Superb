@@ -5,7 +5,7 @@ while contributing.
 
 ## Dependencies
 
-Finch uses [Carthage][] for dependency management. Running `bin/setup` will
+Superb uses [Carthage][] for dependency management. Running `bin/setup` will
 install Carthage if it isn't already installed, then download the
 dependencies.
 

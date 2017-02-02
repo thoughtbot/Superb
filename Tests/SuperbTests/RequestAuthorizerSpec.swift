@@ -1,4 +1,4 @@
-import Finch
+import Superb
 import Result
 import Quick
 import Nimble
@@ -57,7 +57,7 @@ final class RequestAuthorizerSpec: QuickSpec {
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "new-token"))
 
       var response: HTTPURLResponse?
-      var error: FinchError?
+      var error: SuperbError?
 
       authorizer.performAuthorized(request) { result in
         response = result.value?.1 as? HTTPURLResponse
@@ -109,7 +109,7 @@ final class RequestAuthorizerSpec: QuickSpec {
       let testProvider = TestAuthenticationProvider()
       let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
-      var errors: [FinchError] = []
+      var errors: [SuperbError] = []
       let queue = DispatchQueue(label: "response queue")
       let group = DispatchGroup()
 

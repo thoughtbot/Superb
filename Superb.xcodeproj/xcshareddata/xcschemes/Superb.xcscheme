@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A6A82161E3BAB3900A7D899"
-               BuildableName = "Finch.framework"
-               BlueprintName = "Finch"
-               ReferencedContainer = "container:Finch.xcodeproj">
+               BuildableName = "Superb.framework"
+               BlueprintName = "Superb"
+               ReferencedContainer = "container:Superb.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-               BuildableName = "FinchDemo.app"
-               BlueprintName = "FinchDemo"
-               ReferencedContainer = "container:Finch.xcodeproj">
+               BuildableName = "SuperbDemo.app"
+               BlueprintName = "SuperbDemo"
+               ReferencedContainer = "container:Superb.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A90619B1DF9BB4A0004D532"
-               BuildableName = "FinchTests.xctest"
-               BlueprintName = "FinchTests"
-               ReferencedContainer = "container:Finch.xcodeproj">
+               BuildableName = "SuperbTests.xctest"
+               BlueprintName = "SuperbTests"
+               ReferencedContainer = "container:Superb.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A6A82161E3BAB3900A7D899"
-            BuildableName = "Finch.framework"
-            BlueprintName = "Finch"
-            ReferencedContainer = "container:Finch.xcodeproj">
+            BuildableName = "Superb.framework"
+            BlueprintName = "Superb"
+            ReferencedContainer = "container:Superb.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A9061871DF9BB4A0004D532"
-            BuildableName = "FinchDemo.app"
-            BlueprintName = "FinchDemo"
-            ReferencedContainer = "container:Finch.xcodeproj">
+            BuildableName = "SuperbDemo.app"
+            BlueprintName = "SuperbDemo"
+            ReferencedContainer = "container:Superb.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -98,9 +98,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4A6A82161E3BAB3900A7D899"
-            BuildableName = "Finch.framework"
-            BlueprintName = "Finch"
-            ReferencedContainer = "container:Finch.xcodeproj">
+            BuildableName = "Superb.framework"
+            BlueprintName = "Superb"
+            ReferencedContainer = "container:Superb.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

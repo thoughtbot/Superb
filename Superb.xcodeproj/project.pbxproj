@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */; };
-		4A6A821E1E3BAB3900A7D899 /* Finch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Finch.framework */; };
-		4A6A821F1E3BAB3900A7D899 /* Finch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Finch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; };
+		4A6A821F1E3BAB3900A7D899 /* Superb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A6A82241E3BABB500A7D899 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A80B72E1E3260B600CD49B7 /* Actor.swift */; };
 		4A6A82251E3BABB500A7D899 /* AnyAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */; };
 		4A6A82261E3BABB500A7D899 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90A4FF1E09F31F0077BC68 /* Atomic.swift */; };
 		4A6A82271E3BABB500A7D899 /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */; };
 		4A6A82281E3BABB500A7D899 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7D78C1E1C0CA8003847BD /* Channel.swift */; };
-		4A6A82291E3BABB500A7D899 /* FinchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */; };
+		4A6A82291E3BABB500A7D899 /* SuperbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69401DF9F3D5001BB7B2 /* SuperbError.swift */; };
 		4A6A822A1E3BABB500A7D899 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */; };
 		4A6A822B1E3BABB500A7D899 /* KeychainEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */; };
 		4A6A822C1E3BABB500A7D899 /* KeychainTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */; };
 		4A6A822D1E3BABB500A7D899 /* RequestAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */; };
 		4A6A822E1E3BABB500A7D899 /* SimpleTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */; };
 		4A6A822F1E3BABB500A7D899 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */; };
-		4A6A82321E3BAEAB00A7D899 /* Finch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6A82301E3BAEAB00A7D899 /* Finch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A6A82321E3BAEAB00A7D899 /* Superb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6A82301E3BAEAB00A7D899 /* Superb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */; };
 		4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */; };
 		4A9061911DF9BB4A0004D532 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A90618F1DF9BB4A0004D532 /* Main.storyboard */; };
@@ -57,14 +57,14 @@
 			containerPortal = 4A9061801DF9BB4A0004D532 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4A6A82161E3BAB3900A7D899;
-			remoteInfo = Finch;
+			remoteInfo = Superb;
 		};
 		4A90619D1DF9BB4A0004D532 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4A9061801DF9BB4A0004D532 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4A9061871DF9BB4A0004D532;
-			remoteInfo = Finch;
+			remoteInfo = Superb;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -75,7 +75,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4A6A821F1E3BAB3900A7D899 /* Finch.framework in Embed Frameworks */,
+				4A6A821F1E3BAB3900A7D899 /* Superb.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,21 +97,21 @@
 
 /* Begin PBXFileReference section */
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
-		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationProvider.swift; path = Sources/Finch/AuthenticationProvider.swift; sourceTree = SOURCE_ROOT; };
-		4A6A82171E3BAB3900A7D899 /* Finch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Finch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A6A82301E3BAEAB00A7D899 /* Finch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Finch.h; sourceTree = "<group>"; };
+		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
+		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A6A82301E3BAEAB00A7D899 /* Superb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superb.h; sourceTree = "<group>"; };
 		4A6A82311E3BAEAB00A7D899 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A80B72E1E3260B600CD49B7 /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTokenStorage.swift; sourceTree = "<group>"; };
 		4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
-		4A9061881DF9BB4A0004D532 /* FinchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A9061881DF9BB4A0004D532 /* SuperbDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperbDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
 		4A9061901DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A9061921DF9BB4A0004D532 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A9061951DF9BB4A0004D532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A9061971DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A90619C1DF9BB4A0004D532 /* FinchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A90619C1DF9BB4A0004D532 /* SuperbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubOAuth.storyboard; sourceTree = "<group>"; };
 		4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestExpectation.swift; sourceTree = "<group>"; };
 		4A97A7DC1E280F9500FC51EC /* TestAuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAuthenticationProvider.swift; sourceTree = "<group>"; };
 		4A97A7DE1E281EA200FC51EC /* ConditionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionLock.swift; sourceTree = "<group>"; };
-		4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinchError.swift; path = Sources/Finch/FinchError.swift; sourceTree = SOURCE_ROOT; };
+		4A9F69401DF9F3D5001BB7B2 /* SuperbError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperbError.swift; sourceTree = "<group>"; };
 		4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizer.swift; sourceTree = "<group>"; };
 		4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTokenStorageSpec.swift; sourceTree = "<group>"; };
 		4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTokenStorage.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */,
-				4A6A821E1E3BAB3900A7D899 /* Finch.framework in Frameworks */,
+				4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +171,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A6A82111E3BAA9800A7D899 /* Finch */ = {
+		4A6A82111E3BAA9800A7D899 /* Superb */ = {
 			isa = PBXGroup;
 			children = (
 				4A80B72E1E3260B600CD49B7 /* Actor.swift */,
@@ -180,17 +180,17 @@
 				4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */,
 				4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */,
 				4AF7D78C1E1C0CA8003847BD /* Channel.swift */,
-				4A9F69401DF9F3D5001BB7B2 /* FinchError.swift */,
 				4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */,
 				4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */,
 				4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */,
 				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
 				4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */,
+				4A9F69401DF9F3D5001BB7B2 /* SuperbError.swift */,
 				4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */,
-				4A6A82301E3BAEAB00A7D899 /* Finch.h */,
+				4A6A82301E3BAEAB00A7D899 /* Superb.h */,
 				4A6A82311E3BAEAB00A7D899 /* Info.plist */,
 			);
-			path = Finch;
+			path = Superb;
 			sourceTree = "<group>";
 		};
 		4A90617F1DF9BB4A0004D532 = {
@@ -206,9 +206,9 @@
 		4A9061891DF9BB4A0004D532 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4A9061881DF9BB4A0004D532 /* FinchDemo.app */,
-				4A90619C1DF9BB4A0004D532 /* FinchTests.xctest */,
-				4A6A82171E3BAB3900A7D899 /* Finch.framework */,
+				4A9061881DF9BB4A0004D532 /* SuperbDemo.app */,
+				4A90619C1DF9BB4A0004D532 /* SuperbTests.xctest */,
+				4A6A82171E3BAB3900A7D899 /* Superb.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,7 +216,7 @@
 		4A90618A1DF9BB4A0004D532 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4A6A82111E3BAA9800A7D899 /* Finch */,
+				4A6A82111E3BAA9800A7D899 /* Superb */,
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
 				4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */,
@@ -230,7 +230,7 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		4A90619F1DF9BB4A0004D532 /* FinchTests */ = {
+		4A90619F1DF9BB4A0004D532 /* SuperbTests */ = {
 			isa = PBXGroup;
 			children = (
 				4A97A7D91E26EA7100FC51EC /* Support */,
@@ -239,13 +239,13 @@
 				4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */,
 				4A9061A21DF9BB4A0004D532 /* Info.plist */,
 			);
-			path = FinchTests;
+			path = SuperbTests;
 			sourceTree = "<group>";
 		};
 		4A9061AB1DF9BB9F0004D532 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4A90619F1DF9BB4A0004D532 /* FinchTests */,
+				4A90619F1DF9BB4A0004D532 /* SuperbTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -291,16 +291,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A6A82321E3BAEAB00A7D899 /* Finch.h in Headers */,
+				4A6A82321E3BAEAB00A7D899 /* Superb.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4A6A82161E3BAB3900A7D899 /* Finch */ = {
+		4A6A82161E3BAB3900A7D899 /* Superb */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4A6A82201E3BAB3900A7D899 /* Build configuration list for PBXNativeTarget "Finch" */;
+			buildConfigurationList = 4A6A82201E3BAB3900A7D899 /* Build configuration list for PBXNativeTarget "Superb" */;
 			buildPhases = (
 				4A6A82121E3BAB3900A7D899 /* Sources */,
 				4A6A82131E3BAB3900A7D899 /* Frameworks */,
@@ -311,14 +311,14 @@
 			);
 			dependencies = (
 			);
-			name = Finch;
-			productName = Finch;
-			productReference = 4A6A82171E3BAB3900A7D899 /* Finch.framework */;
+			name = Superb;
+			productName = Superb;
+			productReference = 4A6A82171E3BAB3900A7D899 /* Superb.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4A9061871DF9BB4A0004D532 /* FinchDemo */ = {
+		4A9061871DF9BB4A0004D532 /* SuperbDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchDemo" */;
+			buildConfigurationList = 4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "SuperbDemo" */;
 			buildPhases = (
 				4A9061841DF9BB4A0004D532 /* Sources */,
 				4A9061851DF9BB4A0004D532 /* Frameworks */,
@@ -331,14 +331,14 @@
 			dependencies = (
 				4A6A821D1E3BAB3900A7D899 /* PBXTargetDependency */,
 			);
-			name = FinchDemo;
-			productName = Finch;
-			productReference = 4A9061881DF9BB4A0004D532 /* FinchDemo.app */;
+			name = SuperbDemo;
+			productName = Superb;
+			productReference = 4A9061881DF9BB4A0004D532 /* SuperbDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4A90619B1DF9BB4A0004D532 /* FinchTests */ = {
+		4A90619B1DF9BB4A0004D532 /* SuperbTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchTests" */;
+			buildConfigurationList = 4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "SuperbTests" */;
 			buildPhases = (
 				4A9061981DF9BB4A0004D532 /* Sources */,
 				4A9061991DF9BB4A0004D532 /* Frameworks */,
@@ -350,9 +350,9 @@
 			dependencies = (
 				4A90619E1DF9BB4A0004D532 /* PBXTargetDependency */,
 			);
-			name = FinchTests;
-			productName = FinchTests;
-			productReference = 4A90619C1DF9BB4A0004D532 /* FinchTests.xctest */;
+			name = SuperbTests;
+			productName = SuperbTests;
+			productReference = 4A90619C1DF9BB4A0004D532 /* SuperbTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -383,7 +383,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "Finch" */;
+			buildConfigurationList = 4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "Superb" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -396,9 +396,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4A6A82161E3BAB3900A7D899 /* Finch */,
-				4A9061871DF9BB4A0004D532 /* FinchDemo */,
-				4A90619B1DF9BB4A0004D532 /* FinchTests */,
+				4A6A82161E3BAB3900A7D899 /* Superb */,
+				4A9061871DF9BB4A0004D532 /* SuperbDemo */,
+				4A90619B1DF9BB4A0004D532 /* SuperbTests */,
 			);
 		};
 /* End PBXProject section */
@@ -458,7 +458,7 @@
 			files = (
 				4A6A82251E3BABB500A7D899 /* AnyAuthenticationProvider.swift in Sources */,
 				4A6A822C1E3BABB500A7D899 /* KeychainTokenStorage.swift in Sources */,
-				4A6A82291E3BABB500A7D899 /* FinchError.swift in Sources */,
+				4A6A82291E3BABB500A7D899 /* SuperbError.swift in Sources */,
 				4A6A822E1E3BABB500A7D899 /* SimpleTokenStorage.swift in Sources */,
 				4A6A82281E3BABB500A7D899 /* Channel.swift in Sources */,
 				4A6A822D1E3BABB500A7D899 /* RequestAuthorizer.swift in Sources */,
@@ -505,12 +505,12 @@
 /* Begin PBXTargetDependency section */
 		4A6A821D1E3BAB3900A7D899 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4A6A82161E3BAB3900A7D899 /* Finch */;
+			target = 4A6A82161E3BAB3900A7D899 /* Superb */;
 			targetProxy = 4A6A821C1E3BAB3900A7D899 /* PBXContainerItemProxy */;
 		};
 		4A90619E1DF9BB4A0004D532 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4A9061871DF9BB4A0004D532 /* FinchDemo */;
+			target = 4A9061871DF9BB4A0004D532 /* SuperbDemo */;
 			targetProxy = 4A90619D1DF9BB4A0004D532 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -626,7 +626,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.thoughtbot.$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thoughtbot.$(TARGET_NAME:lower)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -671,7 +671,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.thoughtbot.$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thoughtbot.$(TARGET_NAME:lower)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -714,7 +714,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinchDemo.app/FinchDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperbDemo.app/SuperbDemo";
 			};
 			name = Debug;
 		};
@@ -728,14 +728,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinchDemo.app/FinchDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperbDemo.app/SuperbDemo";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4A6A82201E3BAB3900A7D899 /* Build configuration list for PBXNativeTarget "Finch" */ = {
+		4A6A82201E3BAB3900A7D899 /* Build configuration list for PBXNativeTarget "Superb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A6A82211E3BAB3900A7D899 /* Debug */,
@@ -744,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "Finch" */ = {
+		4A9061831DF9BB4A0004D532 /* Build configuration list for PBXProject "Superb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A9061A31DF9BB4A0004D532 /* Debug */,
@@ -753,7 +753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchDemo" */ = {
+		4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "SuperbDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A9061A61DF9BB4A0004D532 /* Debug */,
@@ -762,7 +762,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "FinchTests" */ = {
+		4A9061A81DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "SuperbTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A9061A91DF9BB4A0004D532 /* Debug */,

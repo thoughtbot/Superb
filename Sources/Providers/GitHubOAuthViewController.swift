@@ -1,4 +1,4 @@
-import Finch
+import Superb
 import UIKit
 
 final class GitHubOAuthViewController: UIViewController {

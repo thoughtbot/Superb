@@ -1,11 +1,10 @@
-import Finch
-import Result
+import Superb
 import UIKit
 
 let createPersonalAccessTokenURL = URL(string: "https://api.github.com/authorizations")!
 
 final class GitHubBasicAuthProvider: AuthenticationProvider {
-  static let identifier = "com.thoughtbot.finch.github.basic"
+  static let identifier = "com.thoughtbot.superb.github.basic"
   static let keychainServiceName = "GitHub Personal Access Token"
 
   private var login = ""
@@ -15,7 +14,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
   }
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
     let alert = UIAlertController(title: "Sign in to GitHub", message: nil, preferredStyle: .alert)
 
     alert.addTextField { textField in
@@ -48,7 +47,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     password = sender.text ?? ""
   }
 
-  private func createAccessToken(login: String, password: String, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  private func createAccessToken(login: String, password: String, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
 
     let requestBody = try? JSONSerialization.data(withJSONObject: [
       "note": makePersonalAccessTokenNote()
@@ -60,7 +59,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     request.setValue(createAuthorizationHeader(login: login, password: password), forHTTPHeaderField: "Authorization")
 
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
-      var result: Result<String, FinchError>!
+      var result: Result<String, SuperbError>!
 
       defer {
         completionHandler(result)
@@ -89,7 +88,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
   private func makePersonalAccessTokenNote() -> String {
     let date = iso8601Formatter.string(from: Date())
 
-    return "Finch GitHub Basic Auth Sign In \(date)"
+    return "Superb GitHub Basic Auth Sign In \(date)"
   }
 
   private func createAuthorizationHeader(login: String, password: String) -> String {

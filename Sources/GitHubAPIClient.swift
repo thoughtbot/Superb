@@ -1,4 +1,4 @@
-import Finch
+import Superb
 
 struct GitHubAPIClient {
   static let basicAuthClient = GitHubAPIClient(
@@ -19,7 +19,7 @@ struct GitHubAPIClient {
     authorizer = requestAuthorizer
   }
 
-  func getLogin(completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func getLogin(completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
     let request = URLRequest(url: URL(string: "https://api.github.com/user")!)
 
     authorizer.performAuthorized(request) { result in

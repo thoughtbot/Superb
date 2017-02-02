@@ -1,11 +1,11 @@
-import Finch
+import Superb
 import Quick
 import Nimble
 
 final class KeychainTokenStorageSpec: QuickSpec {
   override func spec() {
     let account = "test account"
-    let service = "finch tests"
+    let service = "superb tests"
 
     func deleteTestToken() {
       let item: NSDictionary = [

@@ -1,12 +1,12 @@
-@testable import Finch
+@testable import Superb
 import Result
 import UIKit
 
 final class TestAuthenticationProvider: AuthenticationProvider {
   static let identifier = "test-provider"
-  static let keychainServiceName = "Test Finch Provider"
+  static let keychainServiceName = "Test Authentication Provider"
 
-  private var completionHandler: ((Result<String, FinchError>) -> Void)?
+  private var completionHandler: ((Result<String, SuperbError>) -> Void)?
 
   private let authenticationLock = ConditionLock(label: "test-provider.authentication-lock", condition: AuthenticationCondition.ready)
   private let queue = DispatchQueue(label: "test-provider.queue")
@@ -15,7 +15,7 @@ final class TestAuthenticationProvider: AuthenticationProvider {
     request.setValue(token, forHTTPHeaderField: "Authorization")
   }
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, FinchError>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
     authenticationLock.lock(when: .ready)
     self.completionHandler = completionHandler
     authenticationLock.unlock(with: .authenticating)
@@ -25,11 +25,11 @@ final class TestAuthenticationProvider: AuthenticationProvider {
     complete(with: .success(token))
   }
 
-  func complete(with error: FinchError) {
+  func complete(with error: SuperbError) {
     complete(with: .failure(error))
   }
 
-  private func complete(with result: Result<String, FinchError>) {
+  private func complete(with result: Result<String, SuperbError>) {
     queue.async { [authenticationLock] in
       authenticationLock.lock(when: .authenticating)
       guard let completionHandler = self.completionHandler else {
