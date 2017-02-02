@@ -51,7 +51,7 @@ extension GitHubOAuthProvider {
 }
 ```
 
-```
+```swift
 // AppDelegate.swift
 
 @UIApplicationMain
