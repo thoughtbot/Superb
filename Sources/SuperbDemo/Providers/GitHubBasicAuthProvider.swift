@@ -96,8 +96,10 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
     return "Basic \(rawValue.base64EncodedString())"
   }
 
-  private let iso8601Formatter: ISO8601DateFormatter = {
-    let formatter = ISO8601DateFormatter()
+  private let iso8601Formatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+    formatter.locale = Locale(identifier: "en_US_POSIX")
     formatter.timeZone = .autoupdatingCurrent
     return formatter
   }()

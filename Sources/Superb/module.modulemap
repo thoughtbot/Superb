@@ -1,0 +1,6 @@
+framework module Superb [system] {
+  umbrella header "Superb.h"
+
+  export *
+  module * { export * }
+}
