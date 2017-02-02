@@ -141,7 +141,7 @@ application.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
-### [CocoaPods]
+### [CocoaPods][]
 
 [CocoaPods]: https://cocoapods.org
 
