@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "Superb"
-  s.version = "0.1.0"
+  s.version = %x(git describe --tags --abbrev=0).chomp
   s.summary = "Pluggable HTTP authentication for Swift."
   s.homepage = "https://github.com/thoughtbot/Superb"
   s.license = { type: "MIT", file: "LICENSE" }
