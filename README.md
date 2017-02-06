@@ -119,6 +119,10 @@ api.getProfile { result in
 }
 ```
 
+## List of Authentication Providers
+
+- [GitHub](https://github.com/thoughtbot/SuperbGitHub)
+
 ## Installation
 
 ### [Carthage][]
