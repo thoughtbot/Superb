@@ -1,4 +1,5 @@
 import Superb
+import SuperbGitHub
 
 struct GitHubAPIClient {
   static let basicAuthClient = GitHubAPIClient(

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */; };
 		4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; };
 		4A6A821F1E3BAB3900A7D899 /* Superb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A6A82241E3BABB500A7D899 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A80B72E1E3260B600CD49B7 /* Actor.swift */; };
@@ -47,10 +46,10 @@
 		4AAA9F8D1E1C82950064F4C9 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; };
 		4AAA9F8F1E1C82B00064F4C9 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AAA9F901E1C82B00064F4C9 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4AC651071E48F99D00A8F996 /* SuperbGitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC651061E48F99D00A8F996 /* SuperbGitHub.framework */; };
+		4AC651081E48F9AF00A8F996 /* SuperbGitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC651061E48F99D00A8F996 /* SuperbGitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AE2AAE61E412C3400547D10 /* ProviderRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */; };
 		4AFBA60D1E426EF000A570D0 /* AuthenticationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */; };
-		4AFBA6101E42742400A570D0 /* GitHubAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */; };
-		7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */; };
 		7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +78,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				4A6A821F1E3BAB3900A7D899 /* Superb.framework in Embed Frameworks */,
+				4AC651081E48F9AF00A8F996 /* SuperbGitHub.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +99,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
 		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6A82301E3BAEAB00A7D899 /* Superb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superb.h; sourceTree = "<group>"; };
@@ -138,11 +137,10 @@
 		4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
 		4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4AAA9F8B1E1C82950064F4C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		4AC651061E48F99D00A8F996 /* SuperbGitHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SuperbGitHub.framework; path = SuperbGitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderRegistration.swift; sourceTree = "<group>"; };
 		4AF7D78C1E1C0CA8003847BD /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationResult.swift; sourceTree = "<group>"; };
-		4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAuthError.swift; sourceTree = "<group>"; };
-		7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthProvider.swift; sourceTree = "<group>"; };
 		7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthViewController.swift; sourceTree = "<group>"; };
 		70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubBasicAuth.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC651071E48F99D00A8F996 /* SuperbGitHub.framework in Frameworks */,
 				4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */,
 				4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */,
 			);
@@ -254,10 +253,7 @@
 			children = (
 				4A9061AD1DF9BD980004D532 /* GitHubOAuth.storyboard */,
 				70DD2AF81DFB08CA00DD9695 /* GitHubBasicAuth.storyboard */,
-				4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */,
-				4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */,
 				4A9061AF1DF9C08C0004D532 /* GitHubOAuthViewController.swift */,
-				7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */,
 				7016D5821DFB11FD00B594ED /* GitHubBasicAuthViewController.swift */,
 			);
 			path = Providers;
@@ -297,6 +293,7 @@
 				4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */,
 				4AAA9F8B1E1C82950064F4C9 /* Quick.framework */,
 				4AA980BE1DFB55A0000604FB /* Result.framework */,
+				4AC651061E48F99D00A8F996 /* SuperbGitHub.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -516,9 +513,6 @@
 				7016D5831DFB11FD00B594ED /* GitHubBasicAuthViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
 				4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */,
-				7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */,
-				4AFBA6101E42742400A570D0 /* GitHubAuthError.swift in Sources */,
-				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
 				4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

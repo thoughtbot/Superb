@@ -1,4 +1,5 @@
 import Superb
+import SuperbGitHub
 
 extension GitHubBasicAuthProvider {
   static var shared: GitHubBasicAuthProvider {
