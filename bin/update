@@ -2,5 +2,5 @@
 
 set -e
 
-carthage update --no-use-binaries --platform iOS --toolchain com.apple.dt.toolchain.XcodeDefault "$@"
+carthage update --no-use-binaries --platform iOS "$@"
 cp Cartfile.resolved Carthage/
