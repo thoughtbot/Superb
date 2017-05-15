@@ -106,7 +106,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
       } else if let data = data, let response = response {
         result = .success(data, response)
       } else {
-        fatalError("expected response data from the server, got \(response), \(data)")
+        fatalError("expected response data from the server, got \(response ??? "nil"), \(data ??? "nil")")
       }
 
       guard let httpResponse = response as? HTTPURLResponse,
