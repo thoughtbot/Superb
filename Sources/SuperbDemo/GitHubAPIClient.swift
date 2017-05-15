@@ -1,3 +1,4 @@
+import Argo
 import Superb
 
 struct GitHubAPIClient {
@@ -19,19 +20,23 @@ struct GitHubAPIClient {
     authorizer = requestAuthorizer
   }
 
-  func getLogin(completionHandler: @escaping (Result<String, SuperbError>) -> Void) {
+  func getProfile(_ completionHandler: @escaping (Result<Profile, AnyError>) -> Void) {
     let request = URLRequest(url: URL(string: "https://api.github.com/user")!)
 
     authorizer.performAuthorized(request) { result in
-      switch result {
-      case let .success(data, _):
-        let object = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
-        let login = object["login"] as! String
-        completionHandler(.success(login))
+      let profile = result
+        .mapError(AnyError.init)
+        .tryMap(Profile.parse)
 
-      case let .failure(error):
-        completionHandler(.failure(error))
-      }
+      completionHandler(profile)
     }
+  }
+}
+
+extension Decodable {
+  static func parse(data: Data, response _: URLResponse) throws -> DecodedType {
+    let object = try JSONSerialization.jsonObject(with: data)
+    let json = JSON(object)
+    return try Self.decode(json).dematerialize()
   }
 }

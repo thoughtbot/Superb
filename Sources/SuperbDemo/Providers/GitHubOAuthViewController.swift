@@ -27,20 +27,20 @@ final class GitHubOAuthViewController: UIViewController {
   }
 
   @IBAction func getUser(_ sender: Any?) {
-    api.getLogin { result in
-      if let error = result.error {
+    api.getProfile { result in
+      if let error = result.error?.error {
         print("error:", error)
       }
 
-      self.showUser(result.value)
+      self.showProfile(result.value)
     }
   }
 
-  private func showUser(_ login: String?) {
+  private func showProfile(_ profile: Profile?) {
     userContainer.alpha = 0
     userContainer.isHidden = false
 
-    userNameLabel.text = login
+    userNameLabel.text = profile?.login
 
     UIView.animate(withDuration: 0.3) {
       self.activityIndicator.alpha = 0

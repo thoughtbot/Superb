@@ -47,6 +47,13 @@
 		4AAA9F8D1E1C82950064F4C9 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; };
 		4AAA9F8F1E1C82B00064F4C9 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AAA9F901E1C82B00064F4C9 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA9F8B1E1C82950064F4C9 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4AABC5AD1ECA48A100C41F2F /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AABC5AA1ECA48A100C41F2F /* Argo.framework */; };
+		4AABC5AE1ECA48A100C41F2F /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AABC5AB1ECA48A100C41F2F /* Runes.framework */; };
+		4AABC5AF1ECA48A100C41F2F /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AABC5AC1ECA48A100C41F2F /* Curry.framework */; };
+		4AABC5B01ECA48A900C41F2F /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AABC5AA1ECA48A100C41F2F /* Argo.framework */; };
+		4AABC5B11ECA48A900C41F2F /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AABC5AC1ECA48A100C41F2F /* Curry.framework */; };
+		4AABC5B21ECA48A900C41F2F /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AABC5AB1ECA48A100C41F2F /* Runes.framework */; };
+		4AABC5B31ECA492100C41F2F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4460C11ECA453A0034FC59 /* Profile.swift */; };
 		4AC65E6D1ECA3ADF009D43A0 /* NilCoalescing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC65E6C1ECA3ADF009D43A0 /* NilCoalescing.swift */; };
 		4AE2AAE61E412C3400547D10 /* ProviderRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */; };
 		4AFBA60D1E426EF000A570D0 /* AuthenticationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */; };
@@ -102,6 +109,7 @@
 /* Begin PBXFileReference section */
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
 		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
+		4A4460C11ECA453A0034FC59 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6A82301E3BAEAB00A7D899 /* Superb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superb.h; sourceTree = "<group>"; };
 		4A6A82311E3BAEAB00A7D899 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +147,9 @@
 		4AAA9F881E1C818C0064F4C9 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
 		4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4AAA9F8B1E1C82950064F4C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		4AABC5AA1ECA48A100C41F2F /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Argo.framework; path = Carthage/Build/iOS/Argo.framework; sourceTree = "<group>"; };
+		4AABC5AB1ECA48A100C41F2F /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = Carthage/Build/iOS/Runes.framework; sourceTree = "<group>"; };
+		4AABC5AC1ECA48A100C41F2F /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Build/iOS/Curry.framework; sourceTree = "<group>"; };
 		4AC65E6C1ECA3ADF009D43A0 /* NilCoalescing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilCoalescing.swift; sourceTree = "<group>"; };
 		4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderRegistration.swift; sourceTree = "<group>"; };
 		4AF7D78C1E1C0CA8003847BD /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -154,6 +165,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AABC5AE1ECA48A100C41F2F /* Runes.framework in Frameworks */,
+				4AABC5AD1ECA48A100C41F2F /* Argo.framework in Frameworks */,
+				4AABC5AF1ECA48A100C41F2F /* Curry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +177,9 @@
 			files = (
 				4AA980BF1DFB55A0000604FB /* Result.framework in Frameworks */,
 				4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */,
+				4AABC5B01ECA48A900C41F2F /* Argo.framework in Frameworks */,
+				4AABC5B11ECA48A900C41F2F /* Curry.framework in Frameworks */,
+				4AABC5B21ECA48A900C41F2F /* Runes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +300,7 @@
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
 				4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */,
 				4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */,
+				4A4460C11ECA453A0034FC59 /* Profile.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
 				4AA26C7E1E3FEED200767E66 /* Secrets.swift */,
 				4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */,
@@ -296,10 +314,13 @@
 		4AA980BD1DFB55A0000604FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4AABC5AA1ECA48A100C41F2F /* Argo.framework */,
+				4AABC5AC1ECA48A100C41F2F /* Curry.framework */,
 				4AAA9F8A1E1C82950064F4C9 /* Nimble.framework */,
 				4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */,
 				4AAA9F8B1E1C82950064F4C9 /* Quick.framework */,
 				4AA980BE1DFB55A0000604FB /* Result.framework */,
+				4AABC5AB1ECA48A100C41F2F /* Runes.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -476,6 +497,9 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Argo.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Curry.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Runes.framework",
 			);
 			name = "Embed Carthage Frameworks";
 			outputPaths = (
@@ -522,6 +546,7 @@
 				4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */,
 				7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */,
 				4AFBA6101E42742400A570D0 /* GitHubAuthError.swift in Sources */,
+				4AABC5B31ECA492100C41F2F /* Profile.swift in Sources */,
 				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
 				4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */,
 			);
