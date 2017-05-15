@@ -3,6 +3,8 @@ import UIKit
 final class GitHubBasicAuthViewController: UIViewController {
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
   @IBOutlet var userContainer: UIView!
+  @IBOutlet var userImageView: UIImageView!
+  @IBOutlet var userLoginLabel: UILabel!
   @IBOutlet var userNameLabel: UILabel!
 
   private var viewHasAppeared = false
@@ -39,7 +41,18 @@ final class GitHubBasicAuthViewController: UIViewController {
     userContainer.alpha = 0
     userContainer.isHidden = false
 
-    userNameLabel.text = profile?.login
+    userLoginLabel.text = profile?.login
+    userNameLabel.text = profile?.name
+
+    if let avatar = profile?.avatar {
+      DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        guard let data = try? Data(contentsOf: avatar) else { return }
+        let image = UIImage(data: data)
+        DispatchQueue.main.async {
+          self?.userImageView?.image = image
+        }
+      }
+    }
 
     UIView.animate(withDuration: 0.3) {
       self.activityIndicator.alpha = 0

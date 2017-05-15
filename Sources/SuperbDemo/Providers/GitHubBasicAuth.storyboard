@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XkF-f8-SgM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XkF-f8-SgM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +27,7 @@
             </objects>
             <point key="canvasLocation" x="-185" y="196"/>
         </scene>
-        <!--GitHubBasicAuth-->
+        <!--Profile-->
         <scene sceneID="gL3-Mu-l0N">
             <objects>
                 <viewController id="xFl-Le-nbD" customClass="GitHubBasicAuthViewController" customModule="SuperbDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,38 +39,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAH-m2-X7Z">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Ws-bF-JzE">
+                                <rect key="frame" x="16" y="84" width="343" height="563"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-c6-ccU">
-                                        <rect key="frame" x="8" y="8" width="359" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cTT-rR-xcu">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="cTT-rR-xcu" secondAttribute="height" multiplier="1:1" id="bsy-sf-TLs"/>
+                                            <constraint firstAttribute="width" priority="999" constant="115" id="nrq-xw-ZEb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6wi-uQ-btI">
+                                        <rect key="frame" x="123" y="0.0" width="220" height="38.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8G-BJ-eB1">
+                                                <rect key="frame" x="0.0" y="0.0" width="220" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGw-E0-xbf">
+                                                <rect key="frame" x="0.0" y="20.5" width="220" height="18"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="6rs-c6-ccU" firstAttribute="top" secondItem="yAH-m2-X7Z" secondAttribute="topMargin" id="1AL-OU-yMg"/>
-                                    <constraint firstItem="6rs-c6-ccU" firstAttribute="leading" secondItem="yAH-m2-X7Z" secondAttribute="leadingMargin" id="NjX-HF-ycX"/>
-                                    <constraint firstItem="6rs-c6-ccU" firstAttribute="trailing" secondItem="yAH-m2-X7Z" secondAttribute="trailingMargin" id="ON9-F8-hdH"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Nba-0G-PIq">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rIp-uq-wVr" firstAttribute="top" secondItem="yAH-m2-X7Z" secondAttribute="bottom" id="Ddr-Fo-f47"/>
+                            <constraint firstItem="1Ws-bF-JzE" firstAttribute="top" secondItem="SB2-Nt-fL8" secondAttribute="bottom" constant="20" id="8Pw-ke-1VP"/>
+                            <constraint firstItem="rIp-uq-wVr" firstAttribute="top" secondItem="1Ws-bF-JzE" secondAttribute="bottom" constant="20" id="XMV-6a-tuf"/>
                             <constraint firstItem="Nba-0G-PIq" firstAttribute="centerX" secondItem="KAY-ty-yio" secondAttribute="centerX" id="XXf-CB-KnU"/>
-                            <constraint firstItem="yAH-m2-X7Z" firstAttribute="top" secondItem="SB2-Nt-fL8" secondAttribute="bottom" id="bSk-VW-nzc"/>
-                            <constraint firstItem="yAH-m2-X7Z" firstAttribute="leading" secondItem="KAY-ty-yio" secondAttribute="leading" id="drO-Ni-Vbs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1Ws-bF-JzE" secondAttribute="trailing" id="Zou-CD-kKe"/>
                             <constraint firstItem="Nba-0G-PIq" firstAttribute="centerY" secondItem="KAY-ty-yio" secondAttribute="centerY" id="eU9-hA-Low"/>
-                            <constraint firstAttribute="trailing" secondItem="yAH-m2-X7Z" secondAttribute="trailing" id="qYM-9B-NNh"/>
+                            <constraint firstItem="1Ws-bF-JzE" firstAttribute="leading" secondItem="KAY-ty-yio" secondAttribute="leadingMargin" id="wM7-2c-l3t"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="GitHubBasicAuth" id="RsL-iB-4eB">
+                    <navigationItem key="navigationItem" title="Profile" id="RsL-iB-4eB">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="VHw-jF-3vs">
                             <connections>
                                 <segue destination="bnj-NU-dyT" kind="unwind" identifier="unwindToProviders" unwindAction="unwindToProviders:" id="Kom-5g-cpr"/>
@@ -78,8 +91,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="Nba-0G-PIq" id="RLd-7U-ImU"/>
-                        <outlet property="userContainer" destination="yAH-m2-X7Z" id="LmF-2s-6jc"/>
-                        <outlet property="userNameLabel" destination="6rs-c6-ccU" id="I5W-hq-xq9"/>
+                        <outlet property="userContainer" destination="1Ws-bF-JzE" id="X9c-0R-XjU"/>
+                        <outlet property="userImageView" destination="cTT-rR-xcu" id="xrZ-cJ-ifW"/>
+                        <outlet property="userLoginLabel" destination="hGw-E0-xbf" id="D57-GK-caH"/>
+                        <outlet property="userNameLabel" destination="P8G-BJ-eB1" id="5cL-N1-JIg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K94-z4-iZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
