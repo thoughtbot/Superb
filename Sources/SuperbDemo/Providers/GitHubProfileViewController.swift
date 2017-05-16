@@ -1,6 +1,7 @@
+import Superb
 import UIKit
 
-final class GitHubBasicAuthViewController: UIViewController {
+final class GitHubProfileViewController: UIViewController {
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
   @IBOutlet var userContainer: UIView!
   @IBOutlet var userImageView: UIImageView!
@@ -9,7 +10,7 @@ final class GitHubBasicAuthViewController: UIViewController {
 
   private var viewHasAppeared = false
 
-  let api = GitHubAPIClient.basicAuthClient
+  var api: GitHubAPIClient?
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -28,23 +29,25 @@ final class GitHubBasicAuthViewController: UIViewController {
   }
 
   @IBAction func getUser(_ sender: Any?) {
-    api.getProfile { result in
-      if let error = result.error?.error {
+    api!.getProfile { result in
+      switch result {
+      case let .success(profile):
+        self.showProfile(profile)
+
+      case let .failure(error):
         print("error:", error)
       }
-
-      self.showProfile(result.value)
     }
   }
 
-  private func showProfile(_ profile: Profile?) {
+  private func showProfile(_ profile: Profile) {
     userContainer.alpha = 0
     userContainer.isHidden = false
 
-    userLoginLabel.text = profile?.login
-    userNameLabel.text = profile?.name
+    userLoginLabel.text = profile.login
+    userNameLabel.text = profile.name
 
-    if let avatar = profile?.avatar {
+    if let avatar = profile.avatar {
       DispatchQueue.global(qos: .userInitiated).async { [weak self] in
         guard let data = try? Data(contentsOf: avatar) else { return }
         let image = UIImage(data: data)

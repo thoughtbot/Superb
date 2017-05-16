@@ -9,21 +9,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--GitHubOAuth-->
+        <!--GitHubAuth-->
         <scene sceneID="2aq-F0-nps">
             <objects>
-                <viewControllerPlaceholder storyboardName="GitHubOAuth" id="9Cw-uZ-Ecd" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="GitHubAuth" id="9Cw-uZ-Ecd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ip-Zv-n2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1877" y="-594"/>
         </scene>
-        <!--GitHubBasicAuth-->
+        <!--GitHubAuth-->
         <scene sceneID="aOq-UM-SFg">
             <objects>
-                <viewControllerPlaceholder storyboardName="GitHubBasicAuth" id="Ydv-Oq-uhF" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="GitHubAuth" id="Ydv-Oq-uhF" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBc-mc-EMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1889" y="-491"/>
+            <point key="canvasLocation" x="1877" y="-492"/>
         </scene>
         <!--Choose A Provider-->
         <scene sceneID="oSO-Sl-XsQ">

@@ -30,7 +30,7 @@
         <!--Profile-->
         <scene sceneID="gL3-Mu-l0N">
             <objects>
-                <viewController id="xFl-Le-nbD" customClass="GitHubBasicAuthViewController" customModule="SuperbDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xFl-Le-nbD" customClass="GitHubProfileViewController" customModule="SuperbDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SB2-Nt-fL8"/>
                         <viewControllerLayoutGuide type="bottom" id="rIp-uq-wVr"/>
