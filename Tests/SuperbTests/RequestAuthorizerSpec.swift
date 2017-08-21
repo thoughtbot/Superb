@@ -166,5 +166,31 @@ final class RequestAuthorizerSpec: QuickSpec {
         requests.verify()
       }
     }
+
+    describe("clearToken") {
+      it("removes the token from token storage") {
+        let testTokenStorage = SimpleTokenStorage(token: "some-token")
+        let authorizer = RequestAuthorizer(authorizationProvider: TestAuthenticationProvider(), tokenStorage: testTokenStorage)
+
+        try? authorizer.clearToken()
+
+        expect(testTokenStorage.fetchToken()).to(beNil())
+      }
+
+      it("doesn't affect pending requests while authenticating") {
+        let testProvider = TestAuthenticationProvider()
+        let testTokenStorage = SimpleTokenStorage(token: "old-token")
+        let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
+        let request = testRequest(path: "/example")
+
+        requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "new-token"))
+
+        try? authorizer.clearToken()
+        authorizer.performAuthorized(request) { _ in }
+        testProvider.complete(with: .authenticated("new-token"))
+
+        requests.verify()
+      }
+    }
   }
 }

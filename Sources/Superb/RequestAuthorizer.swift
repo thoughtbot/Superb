@@ -52,6 +52,17 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     }
   }
 
+  /// Safely clears the token from the underlying token storage.
+  ///
+  /// - throws: An error if the call to `TokenStorage.deleteToken()` fails.
+  ///
+  /// - note: If called while authenticating, this method will have no
+  ///   effect on the authentication process, i.e., pending requests will
+  ///   still be performed using the new token once authentication completes.
+  public func clearToken() throws {
+    try authenticationState.sync { try $0.clearToken() }
+  }
+
   /// Entry point for performing authorized requests, reauthenticating if
   /// necessary. Uses the current `authorizationState` to determine whether
   /// to perform the request, authenticate first, or wait for authentication
