@@ -4,7 +4,7 @@ machine:
 
 checkout:
   post:
-    - git fetch --unshallow
+    - git fetch --unshallow 2>/dev/null || true
 
 dependencies:
   override:
