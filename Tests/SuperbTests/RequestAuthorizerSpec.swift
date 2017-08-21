@@ -21,7 +21,7 @@ final class RequestAuthorizerSpec: QuickSpec {
     it("authorizes a request with the current token") {
       let testProvider = TestAuthenticationProvider()
       let testTokenStorage = SimpleTokenStorage(token: "test-token")
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
+      let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: testTokenStorage)
       let request = testRequest(path: "/example")
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "test-token"))
@@ -31,7 +31,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("calls the request authorizer when unathenticated") {
       let testProvider = TestAuthenticationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: SimpleTokenStorage())
+      let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: SimpleTokenStorage())
       let request = testRequest(path: "/example")
 
       requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "dynamic-token"))
@@ -46,7 +46,7 @@ final class RequestAuthorizerSpec: QuickSpec {
     it("calls the request authorizer and retries on a 401 response") {
       let testProvider = TestAuthenticationProvider()
       let testTokenStorage = SimpleTokenStorage(token: "stale-token")
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
+      let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: testTokenStorage)
       let request = testRequest(path: "/example")
 
       requests.expect(
@@ -73,7 +73,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("authorizes multiple pending requests") {
       let testProvider = TestAuthenticationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: SimpleTokenStorage())
+      let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
       var statusCodes: [Int] = []
       let queue = DispatchQueue(label: "response queue")
@@ -107,7 +107,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
     it("notifies multiple pending requests of authentication failure") {
       let testProvider = TestAuthenticationProvider()
-      let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: SimpleTokenStorage())
+      let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
       var errors: [SuperbError] = []
       let queue = DispatchQueue(label: "response queue")
@@ -153,7 +153,7 @@ final class RequestAuthorizerSpec: QuickSpec {
       it("updates the stored token after authenticating") {
         let testProvider = TestAuthenticationProvider()
         let testTokenStorage = SimpleTokenStorage<String>()
-        let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
+        let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: testTokenStorage)
         let request = testRequest(path: "/example")
 
         requests.expect(where: isPath("/example"))
@@ -170,7 +170,7 @@ final class RequestAuthorizerSpec: QuickSpec {
     describe("clearToken") {
       it("removes the token from token storage") {
         let testTokenStorage = SimpleTokenStorage(token: "some-token")
-        let authorizer = RequestAuthorizer(authorizationProvider: TestAuthenticationProvider(), tokenStorage: testTokenStorage)
+        let authorizer = RequestAuthorizer(authenticationProvider: TestAuthenticationProvider(), tokenStorage: testTokenStorage)
 
         try? authorizer.clearToken()
 
@@ -180,7 +180,7 @@ final class RequestAuthorizerSpec: QuickSpec {
       it("doesn't affect pending requests while authenticating") {
         let testProvider = TestAuthenticationProvider()
         let testTokenStorage = SimpleTokenStorage(token: "old-token")
-        let authorizer = RequestAuthorizer(authorizationProvider: testProvider, tokenStorage: testTokenStorage)
+        let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: testTokenStorage)
         let request = testRequest(path: "/example")
 
         requests.expect(where: isPath("/example") && hasHeaderNamed("Authorization", value: "new-token"))

@@ -4,13 +4,13 @@ import Superb
 struct GitHubAPIClient {
   static let basicAuthClient = GitHubAPIClient(
     requestAuthorizer: RequestAuthorizer(
-      authorizationProvider: GitHubBasicAuthProvider.shared
+      authenticationProvider: GitHubBasicAuthProvider.shared
     )
   )
 
   static let oauthClient = GitHubAPIClient(
     requestAuthorizer: RequestAuthorizer(
-      authorizationProvider: GitHubOAuthProvider.shared
+      authenticationProvider: GitHubOAuthProvider.shared
     )
   )
 
