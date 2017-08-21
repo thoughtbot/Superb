@@ -2,6 +2,10 @@ machine:
   xcode:
     version: "8.3"
 
+checkout:
+  post:
+    - git fetch --unshallow
+
 dependencies:
   override:
     - bin/bootstrap-if-needed
