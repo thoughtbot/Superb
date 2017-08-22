@@ -11,6 +11,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: gem install cocoapods
       - run: pod lib lint
 
   test:
