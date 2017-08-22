@@ -18,7 +18,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: bin/bootstrap
+      - run: bin/setup
       - run: bin/copy-secrets
       - run: bin/test
 
