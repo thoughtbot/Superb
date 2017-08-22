@@ -10,6 +10,9 @@ jobs:
       - run: git fetch --unshallow 2>/dev/null || true
 
   dependencies:
+    machine:
+      xcode:
+        version: "8.3"
     steps:
       - restore_cache:
           key: dependency-cache
@@ -22,6 +25,9 @@ jobs:
             - "~/.cocoapods"
 
   test:
+    machine:
+      xcode:
+        version: "8.3"
     steps:
       - run: bin/copy-secrets
       - run: bin/test
