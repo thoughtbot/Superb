@@ -1,0 +1,30 @@
+version: 2
+
+defaults: &defaults
+  machine:
+    xcode:
+      version: "8.3"
+  working_directory: ~/Superb
+
+jobs:
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: gem install cocoapods
+      - run: pod lib lint
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: bin/setup
+      - run: bin/copy-secrets
+      - run: bin/test
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
+      - lint
