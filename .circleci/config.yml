@@ -7,40 +7,24 @@ defaults: &defaults
   working_directory: ~/Superb
 
 jobs:
-  checkout:
+  lint:
     <<: *defaults
     steps:
       - checkout
-      - run: git fetch --unshallow 2>/dev/null || true
-
-  dependencies:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: dependency-cache
-      - run: bin/bootstrap-if-needed
-      - run: pod setup
-      - save_cache:
-          key: dependency-cache
-          paths:
-            - "Carthage"
-            - "~/.cocoapods"
+      - git fetch --unshallow 2>/dev/null || true
+      - pod lib lint
 
   test:
     <<: *defaults
     steps:
+      - checkout
+      - run: bin/bootstrap
       - run: bin/copy-secrets
       - run: bin/test
-      - run: pod lib lint
 
 workflows:
   version: 2
   test:
     jobs:
-      - checkout
-      - dependencies:
-          requires:
-            - checkout
-      - test:
-          requires:
-            - dependencies
+      - test
+      - lint
