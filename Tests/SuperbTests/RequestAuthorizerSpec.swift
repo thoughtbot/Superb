@@ -110,7 +110,6 @@ final class RequestAuthorizerSpec: QuickSpec {
       let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
       var errors: [SuperbError] = []
-      let queue = DispatchQueue(label: "response queue")
       let group = DispatchGroup()
 
       let limit = 50
@@ -121,7 +120,7 @@ final class RequestAuthorizerSpec: QuickSpec {
 
         authorizer.performAuthorized(testRequest(path: example)) { result in
           if let error = result.error {
-            queue.sync { errors.append(error) }
+            DispatchQueue.main.async { errors.append(error) }
           }
         }
 
