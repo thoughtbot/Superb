@@ -132,7 +132,7 @@ api.getProfile { result in
 Add the following to your Cartfile:
 
 ```
-github "thoughtbot/Superb" ~> 0.1
+github "thoughtbot/Superb" ~> 0.2
 ```
 
 Then run `carthage update`.
@@ -152,7 +152,7 @@ application.
 Add the following to your [Podfile](https://guides.cocoapods.org/using/the-podfile.html):
 
 ```ruby
-pod "Superb", "~> 0.1.0"
+pod "Superb", "~> 0.2.0"
 ```
 
 You will also need to make sure you're opting into using frameworks:
