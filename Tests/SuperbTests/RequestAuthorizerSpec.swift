@@ -144,9 +144,9 @@ final class RequestAuthorizerSpec: QuickSpec {
         return true
       }
 
-      requests.verify()
       expect(errors.count).toEventually(equal(limit))
       expect(allCancelled).to(beTrue())
+      requests.verify()
     }
 
     describe("token storage") {
