@@ -11,8 +11,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - git fetch --unshallow 2>/dev/null || true
-      - pod lib lint
+      - run: pod lib lint
 
   test:
     <<: *defaults
