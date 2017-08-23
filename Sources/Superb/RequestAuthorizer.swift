@@ -79,10 +79,11 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 
       case .unauthenticated:
         startedAuthenticating = true
-        authenticate(thenPerform: request, completionHandler: completionHandler)
+        enqueuePendingRequest(request, completionHandler: completionHandler)
+        authenticate(errorHandler: completionHandler)
 
       case .authenticating:
-        waitForAuthentication(thenPerform: request, completionHandler: completionHandler)
+        enqueuePendingRequest(request, completionHandler: completionHandler)
       }
     }
   }
@@ -133,8 +134,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     task.resume()
   }
 
-  /// Waits for authentication to complete, performing `request` if
-  /// successfully authorized.
+  /// Enqueues a pending request that will be performed once authentication is complete.
   ///
   /// - note: In order to ensure pending requests see a consistent view
   ///   of the authentication state, this method **must** be called in the
@@ -147,7 +147,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: Invoked with `SuperbError.unauthorized`
   ///       if authentication fails, otherwise invoked with the result
   ///       of performing `request`.
-  private func waitForAuthentication(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
+  private func enqueuePendingRequest(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     authenticationComplete.subscribe { result in
       let complete: (() -> Void)?
 
@@ -192,47 +192,25 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///
   /// - parameters:
   ///     - request: A `URLRequest` to perform after authenticating successfully.
-  ///     - completionHandler: A function to be invoked with the result of
-  ///       performing `request`, or the appropriate `SuperbError` describing why
-  ///       authorization failed.
-  private func authenticate(thenPerform request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
+  ///     - errorHandler: If authorization fails, this function will be invoked
+  ///       with an appropriate `SuperbError` describing the reason.
+  private func authenticate<T>(errorHandler: @escaping (Result<T, SuperbError>) -> Void) {
     DispatchQueue.main.async {
       guard let topViewController = self.topViewController else {
-        completionHandler(.failure(.userInteractionRequired))
+        errorHandler(.failure(.userInteractionRequired))
         return
       }
 
       self.authenticationProvider.authenticate(over: topViewController) { result in
-        self.updateAuthenticationState(handlingErrorsWith: completionHandler) {
+        self.updateAuthenticationState(handlingErrorsWith: errorHandler) {
           defer { self.authenticationComplete.broadcast(result) }
-
-          let state: NewAuthenticationState<Token>
-          let complete: (() -> Void)?
 
           switch result {
           case let .authenticated(token):
-            state = .authenticated(token)
-            complete = nil
-            self.perform(request, with: token, reauthenticate: false, completionHandler: completionHandler)
-
-          case .cancelled:
-            state = .unauthenticated
-            complete = {
-              completionHandler(.failure(.authenticationCancelled))
-            }
-
-          case let .failed(error):
-            state = .unauthenticated
-            complete = {
-              completionHandler(.failure(.authenticationFailed(error)))
-            }
+            return .authenticated(token)
+          case .cancelled, .failed:
+            return .unauthenticated
           }
-
-          if let complete = complete {
-            DispatchQueue.main.async(execute: complete)
-          }
-
-          return state
         }
       }
     }
