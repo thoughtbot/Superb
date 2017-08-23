@@ -37,19 +37,13 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   /// automatically, then once completed performs the request again with
   /// the new token.
   ///
-  /// - note: All requests are enqueued on the global concurrent queue
-  ///   of the specified `DispatchQoS.QoSClass`. This method returns
-  ///   immediately after enqueueing the request.
-  ///
   /// - parameters:
   ///     - request: The `URLRequest` to authorize and perform.
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
   public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
-    DispatchQueue.global().async {
-      self.performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
-    }
+    performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
   }
 
   /// Safely clears the token from the underlying token storage.
