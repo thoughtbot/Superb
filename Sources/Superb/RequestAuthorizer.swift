@@ -12,10 +12,12 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 
   private let authenticationComplete: Channel<AuthenticationResult<Token>>
   private let authenticationState: Actor<AuthenticationState<Token>>
-
-  public init<Provider: AuthenticationProvider, Storage: TokenStorage>(authenticationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate, urlSession: URLSession = .shared)
-    where Provider.Token == Token, Storage.Token == Token
-  {
+  public init<Provider: AuthenticationProvider, Storage: TokenStorage>(
+    authenticationProvider: Provider,
+    tokenStorage: Storage,
+    applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate,
+    urlSession: URLSession = .shared
+  ) where Provider.Token == Token, Storage.Token == Token {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
     self.authenticationState = AuthenticationState.makeActor(tokenStorage: tokenStorage)
@@ -254,9 +256,11 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 }
 
 extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
-  public convenience init<Provider: AuthenticationProvider>(authenticationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate, urlSession: URLSession = .shared)
-    where Provider.Token == Token
-  {
+  public convenience init<Provider: AuthenticationProvider>(
+    authenticationProvider: Provider,
+    applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate,
+    urlSession: URLSession = .shared
+  ) where Provider.Token == Token {
     let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)
     self.init(authenticationProvider: authenticationProvider, tokenStorage: keychainTokenStorage, applicationDelegate: applicationDelegate, urlSession: urlSession)
   }
