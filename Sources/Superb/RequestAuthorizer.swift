@@ -11,7 +11,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let urlSession: URLSession
 
   private let authenticationComplete: Channel<AuthenticationResult<Token>>
-  private let authenticationState: Actor<AuthenticationState<Token>>
+  private var authenticationState: AuthenticationState<Token>
+  private let queue: DispatchQueue
+
   public init<Provider: AuthenticationProvider, Storage: TokenStorage>(
     authenticationProvider: Provider,
     tokenStorage: Storage,
@@ -20,8 +22,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ) where Provider.Token == Token, Storage.Token == Token {
     self.applicationDelegate = applicationDelegate
     self.authenticationComplete = Channel()
-    self.authenticationState = AuthenticationState.makeActor(tokenStorage: tokenStorage)
+    self.authenticationState = AuthenticationState(tokenStorage: tokenStorage)
     self.authenticationProvider = AnyAuthenticationProvider(authenticationProvider)
+    self.queue = DispatchQueue(label: "com.thoughtbot.superb.\(type(of: self))")
     self.urlSession = urlSession
   }
 
@@ -56,7 +59,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///   effect on the authentication process, i.e., pending requests will
   ///   still be performed using the new token once authentication completes.
   public func clearToken() throws {
-    try authenticationState.sync { try $0.clearToken() }
+    try queue.sync {
+      try authenticationState.clearToken()
+    }
   }
 
   /// Entry point for performing authorized requests, reauthenticating if
@@ -128,7 +133,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
         }
 
       self.handlingAuthenticationErrors(with: completionHandler) {
-        try self.authenticationState.sync { try $0.clearToken() }
+        try self.clearToken()
         self.performAuthorized(request, reauthenticate: false, completionHandler: completionHandler)
       }
     }
@@ -220,13 +225,13 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 
   private func fetchAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
     handlingAuthenticationErrors(with: errorHandler) {
-      try authenticationState.sync { try $0.fetch(body) }
+      try queue.sync { try authenticationState.fetch(body) }
     }
   }
 
   private func updateAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
     handlingAuthenticationErrors(with: errorHandler) {
-      try authenticationState.sync { try $0.update(body) }
+      try queue.sync { try authenticationState.update(body) }
     }
   }
 

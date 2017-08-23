@@ -4,11 +4,7 @@ struct AuthenticationState<Token> {
   private var isAuthenticating = false
   private let storage: AnyTokenStorage<Token>
 
-  static func makeActor<Storage: TokenStorage>(tokenStorage: Storage) -> Actor<AuthenticationState> where Storage.Token == Token {
-    return Actor(AuthenticationState(tokenStorage: tokenStorage))
-  }
-
-  private init<Storage: TokenStorage>(tokenStorage: Storage) where Storage.Token == Token {
+  init<Storage: TokenStorage>(tokenStorage: Storage) where Storage.Token == Token {
     storage = AnyTokenStorage(tokenStorage)
   }
 

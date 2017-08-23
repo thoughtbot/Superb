@@ -11,7 +11,6 @@
 		4A4FA2C21F4B8A170033E59E /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */; };
 		4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; };
 		4A6A821F1E3BAB3900A7D899 /* Superb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4A6A82241E3BABB500A7D899 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A80B72E1E3260B600CD49B7 /* Actor.swift */; };
 		4A6A82251E3BABB500A7D899 /* AnyAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */; };
 		4A6A82261E3BABB500A7D899 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90A4FF1E09F31F0077BC68 /* Atomic.swift */; };
 		4A6A82271E3BABB500A7D899 /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */; };
@@ -114,7 +113,6 @@
 		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6A82301E3BAEAB00A7D899 /* Superb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superb.h; sourceTree = "<group>"; };
 		4A6A82311E3BAEAB00A7D899 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A80B72E1E3260B600CD49B7 /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTokenStorage.swift; sourceTree = "<group>"; };
 		4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		4A9061881DF9BB4A0004D532 /* SuperbDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperbDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,7 +197,6 @@
 		4A6A82111E3BAA9800A7D899 /* Superb */ = {
 			isa = PBXGroup;
 			children = (
-				4A80B72E1E3260B600CD49B7 /* Actor.swift */,
 				4AA980C31DFB5FD6000604FB /* AnyAuthenticationProvider.swift */,
 				4A90A4FF1E09F31F0077BC68 /* Atomic.swift */,
 				4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */,
@@ -531,7 +528,6 @@
 				4A6A82261E3BABB500A7D899 /* Atomic.swift in Sources */,
 				4A6A822A1E3BABB500A7D899 /* AuthenticationProvider.swift in Sources */,
 				4AE2AAE61E412C3400547D10 /* ProviderRegistration.swift in Sources */,
-				4A6A82241E3BABB500A7D899 /* Actor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
