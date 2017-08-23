@@ -109,18 +109,23 @@ final class RequestAuthorizerSpec: QuickSpec {
       let testProvider = TestAuthenticationProvider()
       let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
+      var completedRequests: Set<String> = []
       var errors: [SuperbError] = []
       let group = DispatchGroup()
 
-      let limit = 50
-      (0..<limit).forEach { _ in group.enter() }
+      let examples = (1...50).map { "/example\($0)" }
+      examples.forEach { _ in group.enter() }
 
-      DispatchQueue.concurrentPerform(iterations: limit) { i in
-        let example = "/example\(i + 1)"
+      DispatchQueue.concurrentPerform(iterations: examples.count) { i in
+        let example = examples[i]
+        let request = testRequest(path: example)
 
-        authorizer.performAuthorized(testRequest(path: example)) { result in
-          if let error = result.error {
-            DispatchQueue.main.async { errors.append(error) }
+        authorizer.performAuthorized(request) { result in
+          DispatchQueue.main.async {
+            completedRequests.insert(example)
+            if let error = result.error {
+              errors.append(error)
+            }
           }
         }
 
@@ -143,7 +148,8 @@ final class RequestAuthorizerSpec: QuickSpec {
         return true
       }
 
-      expect(errors.count).toEventually(equal(limit))
+      expect(completedRequests).toEventually(equal(Set(examples)), timeout: 5)
+      expect(errors.count).to(equal(examples.count))
       expect(allCancelled).to(beTrue())
       requests.verify()
     }
