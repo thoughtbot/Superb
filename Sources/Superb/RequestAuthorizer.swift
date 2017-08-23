@@ -238,19 +238,19 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     }
   }
 
-  private func fetchAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
-    handlingAuthenticationErrors(with: completionHandler) {
+  private func fetchAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
+    handlingAuthenticationErrors(with: errorHandler) {
       try authenticationState.sync { try $0.fetch(body) }
     }
   }
 
-  private func updateAuthenticationState(handlingErrorsWith completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
-    handlingAuthenticationErrors(with: completionHandler) {
+  private func updateAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
+    handlingAuthenticationErrors(with: errorHandler) {
       try authenticationState.sync { try $0.update(body) }
     }
   }
 
-  private func handlingAuthenticationErrors(with completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void, body: () throws -> Void) {
+  private func handlingAuthenticationErrors<T>(with errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: () throws -> Void) {
     let error: SuperbError
 
     do {
@@ -263,7 +263,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     }
 
     DispatchQueue.main.async {
-      completionHandler(.failure(error))
+      errorHandler(.failure(error))
     }
   }
 
