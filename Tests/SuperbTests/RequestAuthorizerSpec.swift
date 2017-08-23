@@ -170,7 +170,9 @@ final class RequestAuthorizerSpec: QuickSpec {
     describe("clearToken") {
       it("removes the token from token storage") {
         let testTokenStorage = SimpleTokenStorage(token: "some-token")
-        let authorizer = RequestAuthorizer(authenticationProvider: TestAuthenticationProvider(), tokenStorage: testTokenStorage)
+        let authorizer = RequestAuthorizer(
+          authenticationProvider: TestAuthenticationProvider(),
+          tokenStorage: testTokenStorage)
 
         try? authorizer.clearToken()
 

@@ -1,0 +1,18 @@
+excluded:
+  - .build
+  - Carthage
+  - Pods
+
+disabled_rules:
+  - force_cast
+
+identifier_name:
+  excluded:
+    - i
+large_tuple:
+  warning: 3
+  error: 3
+line_length:
+  ignores_function_declarations: true
+trailing_comma:
+  mandatory_comma: true

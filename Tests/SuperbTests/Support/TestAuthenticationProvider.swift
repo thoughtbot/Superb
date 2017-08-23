@@ -8,7 +8,9 @@ final class TestAuthenticationProvider: AuthenticationProvider {
 
   private var completionHandler: ((AuthenticationResult<String>) -> Void)?
 
-  private let authenticationLock = ConditionLock(label: "test-provider.authentication-lock", condition: AuthenticationCondition.ready)
+  private let authenticationLock = ConditionLock(
+    label: "test-provider.authentication-lock",
+    condition: AuthenticationCondition.ready)
   private let queue = DispatchQueue(label: "test-provider.queue")
 
   func authorize(_ request: inout URLRequest, with token: String) {

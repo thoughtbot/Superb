@@ -49,7 +49,7 @@ final class GitHubBasicAuthProvider: AuthenticationProvider {
 
   private func createAccessToken(login: String, password: String, completionHandler: @escaping (AuthenticationResult<String>) -> Void) {
     let requestBody = try? JSONSerialization.data(withJSONObject: [
-      "note": makePersonalAccessTokenNote()
+      "note": makePersonalAccessTokenNote(),
     ])
 
     var request = URLRequest(url: createPersonalAccessTokenURL)

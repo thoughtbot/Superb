@@ -6,20 +6,19 @@ public protocol RequestAuthorizerProtocol {
 }
 
 public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
-  let applicationDelegate: () -> UIApplicationDelegate?
   let authenticationProvider: AnyAuthenticationProvider<Token>
+  let rootViewController: () -> UIViewController?
   let urlSession: URLSession
 
   private let authenticationComplete: Channel<AuthenticationResult<Token>>
   private let authenticationState: Actor<AuthenticationState<Token>>
 
   public init<Provider: AuthenticationProvider, Storage: TokenStorage>(authenticationProvider: Provider, tokenStorage: Storage, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate, urlSession: URLSession = .shared)
-    where Provider.Token == Token, Storage.Token == Token
-  {
-    self.applicationDelegate = applicationDelegate
+  where Provider.Token == Token, Storage.Token == Token {
     self.authenticationComplete = Channel()
     self.authenticationState = AuthenticationState.makeActor(tokenStorage: tokenStorage)
     self.authenticationProvider = AnyAuthenticationProvider(authenticationProvider)
+    self.rootViewController = { applicationDelegate()?.window??.rootViewController }
     self.urlSession = urlSession
   }
 
@@ -274,19 +273,21 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   }
 
   private var topViewController: UIViewController? {
-    guard let rootViewController = applicationDelegate()?.window??.rootViewController
-      else { return nil }
-
+    guard let rootViewController = self.rootViewController() else { return nil }
     return rootViewController.topPresentedViewController ?? rootViewController
   }
 }
 
 extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
   public convenience init<Provider: AuthenticationProvider>(authenticationProvider: Provider, applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate, urlSession: URLSession = .shared)
-    where Provider.Token == Token
-  {
-    let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)
-    self.init(authenticationProvider: authenticationProvider, tokenStorage: keychainTokenStorage, applicationDelegate: applicationDelegate, urlSession: urlSession)
+  where Provider.Token == Token {
+    self.init(
+      authenticationProvider: authenticationProvider,
+      tokenStorage: KeychainTokenStorage(
+        service: Provider.keychainServiceName,
+        label: Provider.identifier),
+      applicationDelegate: applicationDelegate,
+      urlSession: urlSession)
   }
 }
 

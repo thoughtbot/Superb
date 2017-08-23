@@ -70,37 +70,55 @@ extension SuperbError: LocalizedError {
     case .keychainReadFailure(let code),
          .keychainWriteFailure(let code):
       return String(
-        format: NSLocalizedString("Failed to access the keychain (code %@).", bundle: .superb, comment: "Error description for keychain access failure"),
+        format: NSLocalizedString("Failed to access the keychain (code %@).",
+          bundle: .superb,
+          comment: "Error description for keychain access failure"),
         arguments: [code]
       )
 
     case .requestFailed:
-      return NSLocalizedString("Authentication failed because the server responded with an error.", bundle: .superb, comment: "Error description for authentication request failed")
+      return NSLocalizedString("Authentication failed because the server responded with an error.",
+        bundle: .superb,
+        comment: "Error description for authentication request failed")
     }
   }
 
   public var failureReason: String? {
     switch self {
     case .authenticationCancelled:
-      return NSLocalizedString("Authentication was cancelled.", bundle: .superb, comment: "Failure reason for authentication cancelled")
+      return NSLocalizedString("Authentication was cancelled.",
+        bundle: .superb,
+        comment: "Failure reason for authentication cancelled")
 
     case .authenticationFailed:
-      return NSLocalizedString("Authentication failed.", bundle: .superb, comment: "Failure reason for authentication failed")
+      return NSLocalizedString("Authentication failed.",
+        bundle: .superb,
+        comment: "Failure reason for authentication failed")
 
     case .keychainReadFailure:
-      return NSLocalizedString("The keychain could not be read.", bundle: .superb, comment: "Failure reason for keychain read failed")
+      return NSLocalizedString("The keychain could not be read.",
+        bundle: .superb,
+        comment: "Failure reason for keychain read failed")
 
     case .keychainWriteFailure:
-      return NSLocalizedString("The keychain could not be written.", bundle: .superb, comment: "Failure reason for keychain write failed")
+      return NSLocalizedString("The keychain could not be written.",
+        bundle: .superb,
+        comment: "Failure reason for keychain write failed")
 
     case .keychainDecodeFailure:
-      return NSLocalizedString("The data was not in a recognisable format.", bundle: .superb, comment: "Failure reason for data decode failure")
+      return NSLocalizedString("The data was not in a recognisable format.",
+        bundle: .superb,
+        comment: "Failure reason for data decode failure")
 
     case .requestFailed:
-      return NSLocalizedString("The server returned an error.", bundle: .superb, comment: "Failure reason for authentication request failed")
+      return NSLocalizedString("The server returned an error.",
+        bundle: .superb,
+        comment: "Failure reason for authentication request failed")
 
     case .userInteractionRequired:
-      return NSLocalizedString("The user interface was unavailable.", bundle: .superb, comment: "Failure reason for UI unavailable")
+      return NSLocalizedString("The user interface was unavailable.",
+        bundle: .superb,
+        comment: "Failure reason for UI unavailable")
     }
   }
 

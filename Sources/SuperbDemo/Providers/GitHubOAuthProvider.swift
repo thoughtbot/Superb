@@ -74,8 +74,8 @@ final class GitHubOAuthProvider: AuthenticationProvider {
     request.httpBody = requestBody
     request.httpMethod = "POST"
 
-    let task = URLSession.shared.dataTask(with: request) { [weak self, completionHandler = authorization.completionHandler] data, response, error in
-      self?.handleAuthorizationResponse(data, response, error, completionHandler: completionHandler)
+    let task = URLSession.shared.dataTask(with: request) { [weak self, authorization] data, response, error in
+      self?.handleAuthorizationResponse(data, response, error, completionHandler: authorization.completionHandler)
     }
 
     task.resume()
