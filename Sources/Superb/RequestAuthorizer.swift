@@ -75,14 +75,14 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     fetchAuthenticationState(handlingErrorsWith: completionHandler) { state, startedAuthenticating in
       switch state {
       case .authenticated(let token):
-        self.perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
+        perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
 
       case .unauthenticated:
         startedAuthenticating = true
-        self.authenticate(thenPerform: request, completionHandler: completionHandler)
+        authenticate(thenPerform: request, completionHandler: completionHandler)
 
       case .authenticating:
-        self.waitForAuthentication(thenPerform: request, completionHandler: completionHandler)
+        waitForAuthentication(thenPerform: request, completionHandler: completionHandler)
       }
     }
   }
