@@ -10,8 +10,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let authenticationProvider: AnyAuthenticationProvider<Token>
   let urlSession: URLSession
 
-  private let authenticationComplete: Channel<AuthenticationResult<Token>>
   private var authenticationState: AuthenticationState<Token>
+  private var pendingRequests: [PendingRequest] = []
+
   private let callbackQueue: DispatchQueue
   private let messageQueue: DispatchQueue
 
@@ -23,7 +24,6 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     urlSession: URLSession = .shared
   ) where Provider.Token == Token, Storage.Token == Token {
     self.applicationDelegate = applicationDelegate
-    self.authenticationComplete = Channel()
     self.authenticationState = AuthenticationState(tokenStorage: tokenStorage)
     self.authenticationProvider = AnyAuthenticationProvider(authenticationProvider)
     self.callbackQueue = callbackQueue
@@ -146,10 +146,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 
   /// Enqueues a pending request that will be performed once authentication is complete.
   ///
-  /// - note: In order to ensure pending requests see a consistent view
-  ///   of the authentication state, this method **must** be called in the
-  ///   `body` block of `fetchAuthenticationState()`, after checking that the
-  ///   state is `.authenticating`.
+  /// - precondition: Must be called on `messageQueue`.
   ///
   /// - parameters:
   ///     - request: A `URLRequest` to perform if authentication
@@ -158,29 +155,40 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       if authentication fails, otherwise invoked with the result
   ///       of performing `request`.
   private func enqueuePendingRequest(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
-    authenticationComplete.subscribe { result in
-      let complete: (() -> Void)?
+    let request = PendingRequest(request: request, completionHandler: completionHandler)
+    pendingRequests.append(request)
+  }
 
-      switch result {
-      case .authenticated(let token):
-        complete = nil
-        self.perform(request, with: token, reauthenticate: false, completionHandler: completionHandler)
+  /// Notifies pending requests of the result of authentication, starting them if necessary.
+  ///
+  /// - precondition: Must be called on `messageQueue`.
+  private func notifyPendingRequests(with authenticationResult: AuthenticationResult<Token>) {
+    let complete: (PendingRequest) -> Void
 
-      case .cancelled:
-        complete = {
-          completionHandler(.failure(.authenticationCancelled))
-        }
+    switch authenticationResult {
+    case .authenticated(let token):
+      complete = { pending in
+        self.perform(pending.request, with: token, reauthenticate: false, completionHandler: pending.completionHandler)
+      }
 
-      case .failed(let error):
-        complete = {
-          completionHandler(.failure(.authenticationFailed(error)))
+    case .cancelled:
+      complete = { pending in
+        self.callbackQueue.async {
+          pending.completionHandler(.failure(.authenticationCancelled))
         }
       }
 
-      if let complete = complete {
-        self.callbackQueue.async(execute: complete)
+    case .failed(let error):
+      complete = { pending in
+        self.callbackQueue.async {
+          pending.completionHandler(.failure(.authenticationFailed(error)))
+        }
       }
     }
+
+    let pendingRequests = self.pendingRequests
+    self.pendingRequests.removeAll()
+    pendingRequests.forEach(complete)
   }
 
   /// Invokes the auth provider to authenticate, updating `authenticationState`
@@ -215,7 +223,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 
       self.authenticationProvider.authenticate(over: topViewController) { result in
         self.updateAuthenticationState(handlingErrorsWith: errorHandler) {
-          defer { self.authenticationComplete.broadcast(result) }
+          defer { self.notifyPendingRequests(with: result) }
 
           switch result {
           case let .authenticated(token):
