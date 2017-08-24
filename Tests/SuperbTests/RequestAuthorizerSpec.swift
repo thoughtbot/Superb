@@ -113,7 +113,7 @@ final class RequestAuthorizerSpec: QuickSpec {
       var errors: [SuperbError] = []
       let group = DispatchGroup()
 
-      let examples = (1...50).map { "/example\($0)" }
+      let examples = (1...5000).map { "/example\($0)" }
       examples.forEach { _ in group.enter() }
 
       DispatchQueue.concurrentPerform(iterations: examples.count) { i in
@@ -148,7 +148,7 @@ final class RequestAuthorizerSpec: QuickSpec {
         return true
       }
 
-      expect(completedRequests).toEventually(equal(Set(examples)), timeout: 5)
+      expect(completedRequests).toEventually(equal(Set(examples)))
       expect(errors.count).to(equal(examples.count))
       expect(allCancelled).to(beTrue())
       requests.verify()

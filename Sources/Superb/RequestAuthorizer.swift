@@ -85,15 +85,15 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     fetchAuthenticationState(handlingErrorsWith: completionHandler) { state, startedAuthenticating in
       switch state {
       case .authenticated(let token):
-        perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
+        self.perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
 
       case .unauthenticated:
         startedAuthenticating = true
-        enqueuePendingRequest(request, completionHandler: completionHandler)
-        authenticate(errorHandler: completionHandler)
+        self.enqueuePendingRequest(request, completionHandler: completionHandler)
+        self.authenticate(errorHandler: completionHandler)
 
       case .authenticating:
-        enqueuePendingRequest(request, completionHandler: completionHandler)
+        self.enqueuePendingRequest(request, completionHandler: completionHandler)
       }
     }
   }
@@ -228,18 +228,18 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     }
   }
 
-  private func fetchAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
-    handlingAuthenticationErrors(with: errorHandler) {
-      try messageQueue.sync {
-        try authenticationState.fetch(body)
+  private func fetchAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: @escaping (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
+    messageQueue.async {
+      self.handlingAuthenticationErrors(with: errorHandler) {
+        try self.authenticationState.fetch(body)
       }
     }
   }
 
-  private func updateAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
-    handlingAuthenticationErrors(with: errorHandler) {
-      try messageQueue.sync {
-        try authenticationState.update(body)
+  private func updateAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: @escaping () -> NewAuthenticationState<Token>) {
+    messageQueue.async {
+      self.handlingAuthenticationErrors(with: errorHandler) {
+        try self.authenticationState.update(body)
       }
     }
   }
