@@ -12,11 +12,13 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 
   private let authenticationComplete: Channel<AuthenticationResult<Token>>
   private var authenticationState: AuthenticationState<Token>
-  private let queue: DispatchQueue
+  private let callbackQueue: DispatchQueue
+  private let messageQueue: DispatchQueue
 
   public init<Provider: AuthenticationProvider, Storage: TokenStorage>(
     authenticationProvider: Provider,
     tokenStorage: Storage,
+    queue callbackQueue: DispatchQueue = .main,
     applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate,
     urlSession: URLSession = .shared
   ) where Provider.Token == Token, Storage.Token == Token {
@@ -24,7 +26,8 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     self.authenticationComplete = Channel()
     self.authenticationState = AuthenticationState(tokenStorage: tokenStorage)
     self.authenticationProvider = AnyAuthenticationProvider(authenticationProvider)
-    self.queue = DispatchQueue(label: "com.thoughtbot.superb.\(type(of: self))")
+    self.callbackQueue = callbackQueue
+    self.messageQueue = DispatchQueue(label: "com.thoughtbot.superb.\(type(of: self))")
     self.urlSession = urlSession
   }
 
@@ -59,7 +62,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///   effect on the authentication process, i.e., pending requests will
   ///   still be performed using the new token once authentication completes.
   public func clearToken() throws {
-    try queue.sync {
+    try messageQueue.sync {
       try authenticationState.clearToken()
     }
   }
@@ -126,7 +129,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
         httpResponse.statusCode == 401,
         reauthenticate
         else {
-          DispatchQueue.main.async {
+          self.callbackQueue.async {
             completionHandler(result)
           }
           return
@@ -175,7 +178,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
       }
 
       if let complete = complete {
-        DispatchQueue.main.async(execute: complete)
+        self.callbackQueue.async(execute: complete)
       }
     }
   }
@@ -204,7 +207,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   private func authenticate<T>(errorHandler: @escaping (Result<T, SuperbError>) -> Void) {
     DispatchQueue.main.async {
       guard let topViewController = self.topViewController else {
-        errorHandler(.failure(.userInteractionRequired))
+        self.callbackQueue.async {
+          errorHandler(.failure(.userInteractionRequired))
+        }
         return
       }
 
@@ -225,13 +230,17 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 
   private func fetchAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
     handlingAuthenticationErrors(with: errorHandler) {
-      try queue.sync { try authenticationState.fetch(body) }
+      try messageQueue.sync {
+        try authenticationState.fetch(body)
+      }
     }
   }
 
   private func updateAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
     handlingAuthenticationErrors(with: errorHandler) {
-      try queue.sync { try authenticationState.update(body) }
+      try messageQueue.sync {
+        try authenticationState.update(body)
+      }
     }
   }
 
@@ -247,7 +256,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
       fatalError("Unexpected error: \(error.localizedDescription)")
     }
 
-    DispatchQueue.main.async {
+    callbackQueue.async {
       errorHandler(.failure(error))
     }
   }
@@ -263,11 +272,12 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
 extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
   public convenience init<Provider: AuthenticationProvider>(
     authenticationProvider: Provider,
+    queue: DispatchQueue = .main,
     applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate,
     urlSession: URLSession = .shared
   ) where Provider.Token == Token {
     let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)
-    self.init(authenticationProvider: authenticationProvider, tokenStorage: keychainTokenStorage, applicationDelegate: applicationDelegate, urlSession: urlSession)
+    self.init(authenticationProvider: authenticationProvider, tokenStorage: keychainTokenStorage, queue: queue, applicationDelegate: applicationDelegate, urlSession: urlSession)
   }
 }
 
