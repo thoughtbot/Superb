@@ -5,6 +5,13 @@ import Nimble
 
 final class RequestAuthorizerSpec: QuickSpec {
   override func spec() {
+    func delayedResponse(by interval: CFTimeInterval = 0.1, _ response: @escaping OHHTTPStubsResponseBlock) -> OHHTTPStubsResponseBlock {
+      return { request in
+        CFRunLoopRunInMode(.defaultMode, interval, false)
+        return response(request)
+      }
+    }
+
     func emptyResponse(withStatus statusCode: Int32) -> OHHTTPStubsResponseBlock {
       return { _ in OHHTTPStubsResponse(data: Data(), statusCode: statusCode, headers: nil) }
     }
@@ -194,6 +201,58 @@ final class RequestAuthorizerSpec: QuickSpec {
         authorizer.performAuthorized(request) { _ in }
         testProvider.complete(with: .authenticated("new-token"))
 
+        requests.verify()
+      }
+    }
+
+    describe("cancellation") {
+      it("cancels the underlying request") {
+        let testTokenStorage = SimpleTokenStorage(token: "some-token")
+        let authorizer = RequestAuthorizer(authenticationProvider: TestAuthenticationProvider(), tokenStorage: testTokenStorage)
+
+        var isCancelled: Bool?
+        let request = testRequest(path: "/long-request")
+
+        requests.expect(where: isPath("/long-request"), andReturn: delayedResponse(emptyResponse(withStatus: 200)))
+
+        let task = authorizer.performAuthorized(request) { result in
+          DispatchQueue.main.async {
+            switch result {
+            case let .failure(.requestFailed(url, URLError.cancelled)) where url == request.url:
+              isCancelled = true
+            default:
+              isCancelled = false
+            }
+          }
+        }
+
+        task.cancel()
+
+        expect(isCancelled).toEventually(beTrue())
+        requests.verify()
+      }
+
+      it("calls the completion handler with URLError.cancelled for pending requests") {
+        let unauthenticatedStorage = SimpleTokenStorage<String>()
+        let authorizer = RequestAuthorizer(authenticationProvider: TestAuthenticationProvider(), tokenStorage: unauthenticatedStorage)
+
+        var isCancelled: Bool?
+        let request = testRequest(path: "/never")
+
+        let task = authorizer.performAuthorized(request) { result in
+          DispatchQueue.main.async {
+            switch result {
+            case let .failure(.requestFailed(url, URLError.cancelled)) where url == request.url:
+              isCancelled = true
+            default:
+              isCancelled = false
+            }
+          }
+        }
+
+        task.cancel()
+
+        expect(isCancelled).toEventually(beTrue())
         requests.verify()
       }
     }

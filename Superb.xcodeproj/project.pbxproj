@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A22646D1F4F6063007362C6 /* RequestState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22646C1F4F6063007362C6 /* RequestState.swift */; };
 		4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */; };
 		4A4FA2C21F4B8A170033E59E /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */; };
 		4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; };
@@ -26,7 +27,9 @@
 		4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */; };
 		4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061921DF9BB4A0004D532 /* Assets.xcassets */; };
 		4A9061B01DF9C08C0004D532 /* GitHubProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* GitHubProfileViewController.swift */; };
-		4A90F2BD1F4F127700C2F23C /* PendingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */; };
+		4A90F2BD1F4F127700C2F23C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90F2BC1F4F127700C2F23C /* Request.swift */; };
+		4A90F2BF1F4F2FDD00C2F23C /* AuthorizedRequestTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90F2BE1F4F2FDD00C2F23C /* AuthorizedRequestTask.swift */; };
+		4A90F2C11F4F5DE200C2F23C /* URLError+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90F2C01F4F5DE200C2F23C /* URLError+Factory.swift */; };
 		4A97A7D51E26D0FF00FC51EC /* RequestAuthorizerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */; };
 		4A97A7D71E26D61F00FC51EC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; };
 		4A97A7D81E26D62700FC51EC /* OHHTTPStubs.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -105,6 +108,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A22646C1F4F6063007362C6 /* RequestState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestState.swift; sourceTree = "<group>"; };
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
 		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		4A4460C11ECA453A0034FC59 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -123,7 +127,9 @@
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9061AF1DF9C08C0004D532 /* GitHubProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubProfileViewController.swift; sourceTree = "<group>"; };
 		4A90A4FF1E09F31F0077BC68 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
-		4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingRequest.swift; sourceTree = "<group>"; };
+		4A90F2BC1F4F127700C2F23C /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		4A90F2BE1F4F2FDD00C2F23C /* AuthorizedRequestTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizedRequestTask.swift; sourceTree = "<group>"; };
+		4A90F2C01F4F5DE200C2F23C /* URLError+Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLError+Factory.swift"; sourceTree = "<group>"; };
 		4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizerSpec.swift; sourceTree = "<group>"; };
 		4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestExpectation.swift; sourceTree = "<group>"; };
@@ -200,16 +206,19 @@
 				4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */,
 				4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */,
 				4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */,
+				4A90F2BE1F4F2FDD00C2F23C /* AuthorizedRequestTask.swift */,
 				4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */,
 				4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */,
 				4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */,
 				4AC65E6C1ECA3ADF009D43A0 /* NilCoalescing.swift */,
-				4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */,
 				4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */,
+				4A90F2BC1F4F127700C2F23C /* Request.swift */,
 				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
+				4A22646C1F4F6063007362C6 /* RequestState.swift */,
 				4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */,
 				4A9F69401DF9F3D5001BB7B2 /* SuperbError.swift */,
 				4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */,
+				4A90F2C01F4F5DE200C2F23C /* URLError+Factory.swift */,
 				4A6A82301E3BAEAB00A7D899 /* Superb.h */,
 				4A6A82311E3BAEAB00A7D899 /* Info.plist */,
 			);
@@ -510,11 +519,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A6A82251E3BABB500A7D899 /* AnyAuthenticationProvider.swift in Sources */,
+				4A90F2C11F4F5DE200C2F23C /* URLError+Factory.swift in Sources */,
 				4A4FA2C21F4B8A170033E59E /* Deprecations+Removals.swift in Sources */,
 				4A6A822C1E3BABB500A7D899 /* KeychainTokenStorage.swift in Sources */,
-				4A90F2BD1F4F127700C2F23C /* PendingRequest.swift in Sources */,
+				4A90F2BD1F4F127700C2F23C /* Request.swift in Sources */,
 				4A6A82291E3BABB500A7D899 /* SuperbError.swift in Sources */,
+				4A90F2BF1F4F2FDD00C2F23C /* AuthorizedRequestTask.swift in Sources */,
 				4A6A822E1E3BABB500A7D899 /* SimpleTokenStorage.swift in Sources */,
+				4A22646D1F4F6063007362C6 /* RequestState.swift in Sources */,
 				4AC65E6D1ECA3ADF009D43A0 /* NilCoalescing.swift in Sources */,
 				4A6A822D1E3BABB500A7D899 /* RequestAuthorizer.swift in Sources */,
 				4AABC5B51ECA57A500C41F2F /* URL.swift in Sources */,

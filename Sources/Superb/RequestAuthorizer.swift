@@ -2,7 +2,8 @@ import Result
 import UIKit
 
 public protocol RequestAuthorizerProtocol {
-  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void)
+  @discardableResult
+  func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) -> AuthorizedRequestTask
 }
 
 public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
@@ -11,7 +12,8 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   let urlSession: URLSession
 
   private var authenticationState: AuthenticationState<Token>
-  private var pendingRequests: [PendingRequest] = []
+  private var pendingRequests: [Request] = []
+  private var requestState: [Request: RequestState] = [:]
 
   private let callbackQueue: DispatchQueue
   private let messageQueue: DispatchQueue
@@ -50,8 +52,16 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
-    performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
+  ///
+  /// - returns: An `AuthorizedRequestTask` representing the request. Keep
+  ///   a reference to this object if you need to cancel the request.
+  @discardableResult
+  public func performAuthorized(
+    _ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void
+  ) -> AuthorizedRequestTask {
+    let task = AuthorizedRequestTask(urlRequest: request, requestAuthorizer: self)
+    performAuthorized(task.request, reauthenticate: true, completionHandler: completionHandler)
+    return task
   }
 
   /// Safely clears the token from the underlying token storage.
@@ -67,13 +77,36 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     }
   }
 
+  /// Called by `AuthorizedRequestTask` when a request should be cancelled.
+  internal func cancelRequest(_ request: Request) {
+    messageQueue.async {
+      guard let state = self.requestState[request] else { return }
+
+      switch state {
+      case let .pending(completionHandler):
+        self.requestState[request] = .cancelled
+        self.callbackQueue.async {
+          let cancelledError = URLError.makeCancelledError()
+          completionHandler(.failure(.requestFailed(request.url, cancelledError)))
+        }
+
+      case let .running(task):
+        self.requestState[request] = .cancelled
+        task.cancel()
+
+      case .cancelled:
+        break
+      }
+    }
+  }
+
   /// Entry point for performing authorized requests, reauthenticating if
   /// necessary. Uses the current `authorizationState` to determine whether
   /// to perform the request, authenticate first, or wait for authentication
   /// to complete before performing the request.
   ///
   /// - parameters:
-  ///     - request: A `URLRequest` to authorize and perform.
+  ///     - request: A `Request` to authorize and perform.
   ///     - reauthenticate: If `true`, a 401 response will intercepted
   ///       and the auth provider asked to reauthenticate, before
   ///       automicatically retrying `request`. If `false`, the 401
@@ -81,7 +114,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`, or the error returned
   ///       from authentication.
-  private func performAuthorized(_ request: URLRequest, reauthenticate: Bool, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
+  private func performAuthorized(_ request: Request, reauthenticate: Bool, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     fetchAuthenticationState(handlingErrorsWith: completionHandler) { state, startedAuthenticating in
       switch state {
       case .authenticated(let token):
@@ -101,8 +134,10 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   /// Performs `request`, authorizing it with the provided `token`,
   /// reauthenticating upon a 401 response if necessary.
   ///
+  /// - precondition: Must be called on `messageQueue`.
+  ///
   /// - parameters:
-  ///     - request: A `URLRequest` to authorize and perform.
+  ///     - request: A `Request` to authorize and perform.
   ///     - token: A token used to set the `Authorization` header.
   ///     - reauthenticate: If `true`, a 401 response will intercepted
   ///       and the auth provider asked to reauthenticate, before
@@ -110,8 +145,8 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       response will be passed back to the caller.
   ///     - completionHandler: A function to be invoked with the
   ///       response from performing `request`.
-  private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
-    var authorizedRequest = request
+  private func perform(_ request: Request, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
+    var authorizedRequest = request.urlRequest
     authenticationProvider.authorize(&authorizedRequest, with: token)
 
     let task = urlSession.dataTask(with: authorizedRequest) { data, response, error in
@@ -129,6 +164,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
         httpResponse.statusCode == 401,
         reauthenticate
         else {
+          self.messageQueue.async {
+            self.requestState[request] = nil
+          }
           self.callbackQueue.async {
             completionHandler(result)
           }
@@ -141,6 +179,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
       }
     }
 
+    requestState[request] = .running(task)
     task.resume()
   }
 
@@ -149,46 +188,61 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   /// - precondition: Must be called on `messageQueue`.
   ///
   /// - parameters:
-  ///     - request: A `URLRequest` to perform if authentication
-  ///       completes sucessfully.
+  ///     - request: A `Request` to perform if authentication completes sucessfully.
   ///     - completionHandler: Invoked with `SuperbError.unauthorized`
   ///       if authentication fails, otherwise invoked with the result
   ///       of performing `request`.
-  private func enqueuePendingRequest(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
-    let request = PendingRequest(request: request, completionHandler: completionHandler)
+  private func enqueuePendingRequest(_ request: Request, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     pendingRequests.append(request)
+    requestState[request] = .pending(completionHandler)
   }
 
   /// Notifies pending requests of the result of authentication, starting them if necessary.
   ///
   /// - precondition: Must be called on `messageQueue`.
   private func notifyPendingRequests(with authenticationResult: AuthenticationResult<Token>) {
-    let complete: (PendingRequest) -> Void
+    let notify: (Request, @escaping RequestState.CompletionHandler) -> Void
 
     switch authenticationResult {
     case .authenticated(let token):
-      complete = { pending in
-        self.perform(pending.request, with: token, reauthenticate: false, completionHandler: pending.completionHandler)
+      notify = { request, completionHandler in
+        self.perform(request, with: token, reauthenticate: false, completionHandler: completionHandler)
       }
 
     case .cancelled:
-      complete = { pending in
+      notify = { request, completionHandler in
+        self.requestState[request] = nil
         self.callbackQueue.async {
-          pending.completionHandler(.failure(.authenticationCancelled))
+          completionHandler(.failure(.authenticationCancelled))
         }
       }
 
     case .failed(let error):
-      complete = { pending in
+      notify = { request, completionHandler in
+        self.requestState[request] = nil
         self.callbackQueue.async {
-          pending.completionHandler(.failure(.authenticationFailed(error)))
+          completionHandler(.failure(.authenticationFailed(error)))
         }
       }
     }
 
     let pendingRequests = self.pendingRequests
     self.pendingRequests.removeAll()
-    pendingRequests.forEach(complete)
+
+    for request in pendingRequests {
+      let state = requestState[request]!
+
+      switch state {
+      case let .pending(completionHandler):
+        notify(request, completionHandler)
+
+      case .cancelled:
+        break
+
+      case .running:
+        assertionFailure("inconsistent request state")
+      }
+    }
   }
 
   /// Invokes the auth provider to authenticate, updating `authenticationState`
