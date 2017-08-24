@@ -250,8 +250,8 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     do {
       try body()
       return
-    } catch let finchError as SuperbError {
-      error = finchError
+    } catch let superbError as SuperbError {
+      error = superbError
     } catch {
       fatalError("Unexpected error: \(error.localizedDescription)")
     }
