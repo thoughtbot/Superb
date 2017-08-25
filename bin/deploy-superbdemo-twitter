@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+git subtree push --prefix=superbdemo-twitter/ heroku master
