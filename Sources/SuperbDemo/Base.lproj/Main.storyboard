@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CxG-fD-mpb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CxG-fD-mpb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--GitHubAuth-->
+        <!--Profile-->
         <scene sceneID="2aq-F0-nps">
             <objects>
-                <viewControllerPlaceholder storyboardName="GitHubAuth" id="9Cw-uZ-Ecd" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Profile" id="9Cw-uZ-Ecd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ip-Zv-n2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877" y="-594"/>
+            <point key="canvasLocation" x="1876" y="-716"/>
         </scene>
-        <!--GitHubAuth-->
+        <!--Profile-->
         <scene sceneID="aOq-UM-SFg">
             <objects>
-                <viewControllerPlaceholder storyboardName="GitHubAuth" id="Ydv-Oq-uhF" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Profile" id="Ydv-Oq-uhF" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBc-mc-EMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877" y="-492"/>
+            <point key="canvasLocation" x="1876" y="-677"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="1Uu-OJ-Wnb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="yQb-o8-IJl" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1uG-uv-lwZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1876" y="-588"/>
         </scene>
         <!--Choose A Provider-->
         <scene sceneID="oSO-Sl-XsQ">
@@ -52,6 +60,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="9Cw-uZ-Ecd" kind="presentation" identifier="GitHub: Web Application Flow" modalPresentationStyle="formSheet" id="od1-LX-r2A"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="7pI-YC-7fn" style="IBUITableViewCellStyleDefault" id="l70-0n-Z93">
                                         <rect key="frame" x="0.0" y="100" width="375" height="44"/>
@@ -69,6 +80,33 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Ydv-Oq-uhF" kind="presentation" identifier="GitHub: Non-Web Application Flow" modalPresentationStyle="formSheet" id="5lN-eh-iC3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Twitter" id="TH8-e8-GF9">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="KOc-zu-gVX" style="IBUITableViewCellStyleDefault" id="Xer-R4-Kgp">
+                                        <rect key="frame" x="0.0" y="200" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xer-R4-Kgp" id="NK4-TQ-x4W">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Web Application Flow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="KOc-zu-gVX">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="yQb-o8-IJl" kind="presentation" identifier="Twitter: Web Application Flow" modalPresentationStyle="formSheet" id="PwZ-4Z-Gsc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -79,10 +117,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Choose A Provider" id="ZfF-SR-fMo"/>
-                    <connections>
-                        <segue destination="9Cw-uZ-Ecd" kind="presentation" identifier="Web Application Flow" modalPresentationStyle="formSheet" id="ucm-z4-CCy"/>
-                        <segue destination="Ydv-Oq-uhF" kind="presentation" identifier="Non-Web Application Flow" modalPresentationStyle="formSheet" id="3Hx-NL-9tw"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pjJ-Y1-Jhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

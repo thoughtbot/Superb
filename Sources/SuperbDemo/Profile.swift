@@ -15,4 +15,11 @@ extension Profile: Decodable {
       <*> json <|? "name"
       <*> json <|? "avatar_url"
   }
+
+  static func decodeTwitterProfile(_ json: JSON) -> Decoded<Profile> {
+    return curry(Profile.init)
+      <^> json <| "screen_name"
+      <*> json <|? "name"
+      <*> json <|? "profile_image_url"
+  }
 }

@@ -2,23 +2,23 @@ import UIKit
 
 final class ProvidersViewController: UITableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let profileViewController = segue.destination.childViewControllers.first! as! GitHubProfileViewController
+    let profileViewController = segue.destination.childViewControllers.first! as! ProfileViewController
 
     switch segue.identifier {
-    case "Web Application Flow"?:
+    case "GitHub: Web Application Flow"?:
       profileViewController.api = GitHubAPIClient.oauthClient
-    case "Non-Web Application Flow"?:
+
+    case "GitHub: Non-Web Application Flow"?:
       profileViewController.api = GitHubAPIClient.basicAuthClient
+
+    case "Twitter: Web Application Flow"?:
+      profileViewController.api = TwitterAPIClient.oauthClient
+
     case let identifier:
       fatalError("unknown segue '\(identifier ?? "")'")
     }
   }
 
   @IBAction func unwindToProviders(_ segue: UIStoryboardSegue) {
-  }
-
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let identifier = tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
-    performSegue(withIdentifier: identifier, sender: nil)
   }
 }

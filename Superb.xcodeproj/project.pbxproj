@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A0ED2891F54ACCE00B655D8 /* TwitterAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ED2881F54ACCE00B655D8 /* TwitterAPIClient.swift */; };
+		4A0ED28B1F54AD0400B655D8 /* Decodable+Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ED28A1F54AD0400B655D8 /* Decodable+Parse.swift */; };
+		4A0ED28D1F54B0F500B655D8 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ED28C1F54B0F500B655D8 /* APIClient.swift */; };
 		4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */; };
+		4A4481F91F671FE000C3A2DF /* Twitter+Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4481F71F671FD500C3A2DF /* Twitter+Providers.swift */; };
+		4A4B0A261F5069960038627D /* TwitterOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4B0A241F5069920038627D /* TwitterOAuthProvider.swift */; };
 		4A4FA2C21F4B8A170033E59E /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */; };
 		4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; };
 		4A6A821F1E3BAB3900A7D899 /* Superb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -25,7 +30,7 @@
 		4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */; };
 		4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */; };
 		4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061921DF9BB4A0004D532 /* Assets.xcassets */; };
-		4A9061B01DF9C08C0004D532 /* GitHubProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* GitHubProfileViewController.swift */; };
+		4A9061B01DF9C08C0004D532 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* ProfileViewController.swift */; };
 		4A90F2BD1F4F127700C2F23C /* PendingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */; };
 		4A97A7D51E26D0FF00FC51EC /* RequestAuthorizerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */; };
 		4A97A7D71E26D61F00FC51EC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; };
@@ -36,7 +41,7 @@
 		4A9FE9111E2AF0DA0029C645 /* KeychainTokenStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */; };
 		4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */; };
 		4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */; };
-		4AA26C7B1E3FEE4800767E66 /* GitHubAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DD2AF81DFB08CA00DD9695 /* GitHubAuth.storyboard */; };
+		4AA26C7B1E3FEE4800767E66 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DD2AF81DFB08CA00DD9695 /* Profile.storyboard */; };
 		4AA26C7C1E3FEE4B00767E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */; };
 		4AA26C7D1E3FEE4E00767E66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AA26C741E3FEDA000767E66 /* Main.storyboard */; };
 		4AA26C7F1E3FEED200767E66 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA26C7E1E3FEED200767E66 /* Secrets.swift */; };
@@ -105,9 +110,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A0ED2881F54ACCE00B655D8 /* TwitterAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIClient.swift; sourceTree = "<group>"; };
+		4A0ED28A1F54AD0400B655D8 /* Decodable+Parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+Parse.swift"; sourceTree = "<group>"; };
+		4A0ED28C1F54B0F500B655D8 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubOAuthProvider.swift; sourceTree = "<group>"; };
 		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		4A4460C11ECA453A0034FC59 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		4A4481F71F671FD500C3A2DF /* Twitter+Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Twitter+Providers.swift"; sourceTree = "<group>"; };
+		4A4B0A241F5069920038627D /* TwitterOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOAuthProvider.swift; sourceTree = "<group>"; };
+		4A4B0A271F507E7F0038627D /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deprecations+Removals.swift"; sourceTree = "<group>"; };
 		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6A82301E3BAEAB00A7D899 /* Superb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superb.h; sourceTree = "<group>"; };
@@ -121,7 +132,7 @@
 		4A9061971DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A90619C1DF9BB4A0004D532 /* SuperbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9061A21DF9BB4A0004D532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A9061AF1DF9C08C0004D532 /* GitHubProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubProfileViewController.swift; sourceTree = "<group>"; };
+		4A9061AF1DF9C08C0004D532 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4A90A4FF1E09F31F0077BC68 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingRequest.swift; sourceTree = "<group>"; };
 		4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizerSpec.swift; sourceTree = "<group>"; };
@@ -153,7 +164,7 @@
 		4AFBA60C1E426EF000A570D0 /* AuthenticationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationResult.swift; sourceTree = "<group>"; };
 		4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAuthError.swift; sourceTree = "<group>"; };
 		7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubBasicAuthProvider.swift; sourceTree = "<group>"; };
-		70DD2AF81DFB08CA00DD9695 /* GitHubAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GitHubAuth.storyboard; sourceTree = "<group>"; };
+		70DD2AF81DFB08CA00DD9695 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,11 +278,12 @@
 		4A9061AC1DF9BD6E0004D532 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
-				70DD2AF81DFB08CA00DD9695 /* GitHubAuth.storyboard */,
+				70DD2AF81DFB08CA00DD9695 /* Profile.storyboard */,
 				4AFBA60E1E42741F00A570D0 /* GitHubAuthError.swift */,
 				7016D5801DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift */,
 				4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */,
-				4A9061AF1DF9C08C0004D532 /* GitHubProfileViewController.swift */,
+				4A9061AF1DF9C08C0004D532 /* ProfileViewController.swift */,
+				4A4B0A241F5069920038627D /* TwitterOAuthProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -290,17 +302,22 @@
 			isa = PBXGroup;
 			children = (
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
+				4A0ED28C1F54B0F500B655D8 /* APIClient.swift */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
+				4A0ED28A1F54AD0400B655D8 /* Decodable+Parse.swift */,
 				4AA26C6C1E3FD2CF00767E66 /* GitHub+Providers.swift */,
 				4AA26C701E3FD4D300767E66 /* GitHubAPIClient.swift */,
 				4A4460C11ECA453A0034FC59 /* Profile.swift */,
 				4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */,
 				4AA26C7E1E3FEED200767E66 /* Secrets.swift */,
+				4A4481F71F671FD500C3A2DF /* Twitter+Providers.swift */,
+				4A0ED2881F54ACCE00B655D8 /* TwitterAPIClient.swift */,
 				4AABC5B41ECA57A500C41F2F /* URL.swift */,
 				4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */,
 				4AA26C741E3FEDA000767E66 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
 				4A9061971DF9BB4A0004D532 /* Info.plist */,
+				4A4B0A271F507E7F0038627D /* Bridging-Header.h */,
 			);
 			path = SuperbDemo;
 			sourceTree = "<group>";
@@ -454,7 +471,7 @@
 				4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */,
 				4AA26C7D1E3FEE4E00767E66 /* Main.storyboard in Resources */,
 				4AA26C7C1E3FEE4B00767E66 /* LaunchScreen.storyboard in Resources */,
-				4AA26C7B1E3FEE4800767E66 /* GitHubAuth.storyboard in Resources */,
+				4AA26C7B1E3FEE4800767E66 /* Profile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,9 +550,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */,
+				4A0ED28D1F54B0F500B655D8 /* APIClient.swift in Sources */,
 				4AA26C7F1E3FEED200767E66 /* Secrets.swift in Sources */,
-				4A9061B01DF9C08C0004D532 /* GitHubProfileViewController.swift in Sources */,
+				4A9061B01DF9C08C0004D532 /* ProfileViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
+				4A4B0A261F5069960038627D /* TwitterOAuthProvider.swift in Sources */,
+				4A4481F91F671FE000C3A2DF /* Twitter+Providers.swift in Sources */,
+				4A0ED28B1F54AD0400B655D8 /* Decodable+Parse.swift in Sources */,
+				4A0ED2891F54ACCE00B655D8 /* TwitterAPIClient.swift in Sources */,
 				4AA26C711E3FD4D300767E66 /* GitHubAPIClient.swift in Sources */,
 				7016D5811DFB0B9A00B594ED /* GitHubBasicAuthProvider.swift in Sources */,
 				4AFBA6101E42742400A570D0 /* GitHubAuthError.swift in Sources */,
@@ -747,6 +769,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/SuperbDemo/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -761,6 +784,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/SuperbDemo/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
