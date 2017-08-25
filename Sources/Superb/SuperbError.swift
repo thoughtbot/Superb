@@ -24,7 +24,7 @@ public enum SuperbError: Error {
 }
 
 extension SuperbError: CustomNSError {
-  public static let errorDomain = "FinchError"
+  public static let errorDomain = "SuperbError"
 
   public var errorCode: Int {
     switch self {
