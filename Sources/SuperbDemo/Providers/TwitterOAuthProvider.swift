@@ -1,3 +1,4 @@
+import CommonCrypto.CommonHMAC
 import Superb
 import UIKit
 

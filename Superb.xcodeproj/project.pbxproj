@@ -118,7 +118,6 @@
 		4A4460C11ECA453A0034FC59 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		4A4481F71F671FD500C3A2DF /* Twitter+Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Twitter+Providers.swift"; sourceTree = "<group>"; };
 		4A4B0A241F5069920038627D /* TwitterOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOAuthProvider.swift; sourceTree = "<group>"; };
-		4A4B0A271F507E7F0038627D /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deprecations+Removals.swift"; sourceTree = "<group>"; };
 		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6A82301E3BAEAB00A7D899 /* Superb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superb.h; sourceTree = "<group>"; };
@@ -317,7 +316,6 @@
 				4AA26C741E3FEDA000767E66 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
 				4A9061971DF9BB4A0004D532 /* Info.plist */,
-				4A4B0A271F507E7F0038627D /* Bridging-Header.h */,
 			);
 			path = SuperbDemo;
 			sourceTree = "<group>";
@@ -373,6 +371,7 @@
 			buildConfigurationList = 4A9061A51DF9BB4A0004D532 /* Build configuration list for PBXNativeTarget "SuperbDemo" */;
 			buildPhases = (
 				4AA26C801E3FEEEB00767E66 /* Validate Secrets */,
+				4A0ED2851F54A7FB00B655D8 /* Generate CommonCrypto Module Map */,
 				4A9061841DF9BB4A0004D532 /* Sources */,
 				4A9061851DF9BB4A0004D532 /* Frameworks */,
 				4A9061861DF9BB4A0004D532 /* Resources */,
@@ -485,6 +484,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4A0ED2851F54A7FB00B655D8 /* Generate CommonCrypto Module Map */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CommonCrypto Module Map";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bin/generate-crypto-module Sources/SuperbDemo";
+			showEnvVarsInLog = 0;
+		};
 		4AA26C801E3FEEEB00767E66 /* Validate Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -769,8 +783,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/SuperbDemo/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) Sources/SuperbDemo/include/$(PLATFORM_NAME)/CommonCrypto";
 			};
 			name = Debug;
 		};
@@ -784,8 +798,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/SuperbDemo/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) Sources/SuperbDemo/include/$(PLATFORM_NAME)/CommonCrypto";
 			};
 			name = Release;
 		};
