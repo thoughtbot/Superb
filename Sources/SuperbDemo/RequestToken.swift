@@ -6,14 +6,8 @@ struct RequestToken {
   let isOAuthCallbackConfirmed: Bool
 
   init?(from queryItems: [URLQueryItem]) {
-    var parameters: [String: String] = [:]
-    for item in queryItems {
-      if let value = item.value {
-        parameters[item.name] = value
-      }
-    }
-
-    guard let token = parameters["oauth_token"],
+    guard let parameters = Dictionary(queryItems: queryItems, filteringEmptyKeys: true),
+      let token = parameters["oauth_token"],
       let secret = parameters["oauth_token_secret"],
       let callbackConfirmed = parameters["oauth_callback_confirmed"]
     else { return nil }
