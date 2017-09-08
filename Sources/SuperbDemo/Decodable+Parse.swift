@@ -1,7 +1,7 @@
 import Argo
 import Foundation
 
-extension Decodable {
+extension Argo.Decodable {
   static func parse(data: Data, response _: URLResponse, decode decoder: (JSON) -> Decoded<DecodedType>) throws -> DecodedType {
     let object = try JSONSerialization.jsonObject(with: data)
     let json = JSON(object)
