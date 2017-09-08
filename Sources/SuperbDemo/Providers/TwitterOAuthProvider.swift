@@ -20,8 +20,32 @@ final class TwitterOAuthProvider: AuthenticationProvider {
     safari: SFSafariViewController
   )?
 
-  func authorize(_ request: inout URLRequest, with token: String) {
-    print("here")
+  func authorize(_ request: inout URLRequest, with token: AccessToken) throws {
+    guard let url = request.url,
+      let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+    else {
+      return
+    }
+
+    let bodyQueryItems = request.httpBody
+      .flatMap(String.init(decoding:))
+      .flatMap(URLQueryItem.queryItems(from:)) ?? []
+
+    let urlQueryItems = components.queryItems ?? []
+
+    var parameters: [String: String] = [:]
+    for item in (bodyQueryItems + urlQueryItems) {
+      guard let value = item.value else { continue }
+      parameters[item.name] = value
+    }
+
+    try request.applyTwitterSignature(
+      consumerKey: Secrets.Twitter.consumerKey,
+      consumerSecret: Secrets.Twitter.consumerSecret,
+      oauthToken: token.token,
+      oauthTokenSecret: token.secret,
+      parameters: parameters
+    )
   }
 
   func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<AccessToken>) -> Void) {
