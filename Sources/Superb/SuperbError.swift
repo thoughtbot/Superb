@@ -7,6 +7,9 @@ public enum SuperbError: Error {
   /// An error occurred during authentication.
   case authenticationFailed(Error)
 
+  /// An error was thrown during authorization.
+  case authorizationFailed(Error)
+
   /// A problem occurred while reading from the keychain.
   case keychainReadFailure(OSStatus)
 
@@ -32,6 +35,8 @@ extension SuperbError: CustomNSError {
       return 10
     case .authenticationFailed:
       return 11
+    case .authorizationFailed:
+      return 12
 
     case .keychainReadFailure:
       return 20
@@ -63,6 +68,7 @@ extension SuperbError: LocalizedError {
     switch self {
     case .authenticationCancelled,
          .authenticationFailed,
+         .authorizationFailed,
          .keychainDecodeFailure,
          .userInteractionRequired:
       return failureReason
@@ -87,6 +93,9 @@ extension SuperbError: LocalizedError {
     case .authenticationFailed:
       return NSLocalizedString("Authentication failed.", bundle: .superb, comment: "Failure reason for authentication failed")
 
+    case .authorizationFailed:
+      return NSLocalizedString("Authrozization failed.", bundle: .superb, comment: "Failure reason for authorization failed")
+
     case .keychainReadFailure:
       return NSLocalizedString("The keychain could not be read.", bundle: .superb, comment: "Failure reason for keychain read failed")
 
@@ -107,6 +116,7 @@ extension SuperbError: LocalizedError {
   public var underlyingError: Error? {
     switch self {
     case .authenticationFailed(let error),
+         .authorizationFailed(let error),
          .requestFailed(_, let error):
       return error
 
@@ -126,6 +136,7 @@ extension SuperbError: LocalizedError {
 
     case .authenticationCancelled,
          .authenticationFailed,
+         .authorizationFailed,
          .keychainReadFailure,
          .keychainWriteFailure,
          .keychainDecodeFailure,

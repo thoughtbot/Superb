@@ -112,7 +112,15 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       response from performing `request`.
   private func perform(_ request: URLRequest, with token: Token, reauthenticate: Bool, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
     var authorizedRequest = request
-    authenticationProvider.authorize(&authorizedRequest, with: token)
+
+    do {
+      try authenticationProvider.authorize(&authorizedRequest, with: token)
+    } catch {
+      callbackQueue.async {
+        completionHandler(.failure(.authorizationFailed(error)))
+      }
+      return
+    }
 
     let task = urlSession.dataTask(with: authorizedRequest) { data, response, error in
       let result: Result<(Data, URLResponse), SuperbError>
