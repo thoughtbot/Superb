@@ -12,7 +12,7 @@ struct VerifierToken {
       if parameters["denied"] != nil {
         throw TwitterAuthError.authenticationDenied
       } else {
-        throw TwitterAuthError.requestFailed(nil)
+        throw TwitterAuthError.parseFailed
       }
     }
 

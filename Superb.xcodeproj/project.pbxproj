@@ -36,6 +36,7 @@
 		4A6A822E1E3BABB500A7D899 /* SimpleTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */; };
 		4A6A822F1E3BABB500A7D899 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE90F1E2AF0C80029C645 /* TokenStorage.swift */; };
 		4A6A82321E3BAEAB00A7D899 /* Superb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6A82301E3BAEAB00A7D899 /* Superb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A7914701F63351300068E67 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A79146F1F63351300068E67 /* AccessToken.swift */; };
 		4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */; };
 		4A90618E1DF9BB4A0004D532 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90618D1DF9BB4A0004D532 /* ProvidersViewController.swift */; };
 		4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061921DF9BB4A0004D532 /* Assets.xcassets */; };
@@ -140,6 +141,7 @@
 		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6A82301E3BAEAB00A7D899 /* Superb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superb.h; sourceTree = "<group>"; };
 		4A6A82311E3BAEAB00A7D899 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A79146F1F63351300068E67 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		4A8BDBA71E2DCB0500F29E62 /* SimpleTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTokenStorage.swift; sourceTree = "<group>"; };
 		4A8BDBA91E2DD0E600F29E62 /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		4A9061881DF9BB4A0004D532 /* SuperbDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperbDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9061AC1DF9BD6E0004D532 /* Providers */,
+				4A79146F1F63351300068E67 /* AccessToken.swift */,
 				4A0ED28C1F54B0F500B655D8 /* APIClient.swift */,
 				4A90618B1DF9BB4A0004D532 /* AppDelegate.swift */,
 				4A0ED2921F54B4EA00B655D8 /* CharacterSet+TwitterPercentEncoding.swift */,
@@ -614,6 +617,7 @@
 				4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */,
 				4AA26C6D1E3FD2CF00767E66 /* GitHub+Providers.swift in Sources */,
 				4A0ED2971F54BD5D00B655D8 /* RequestToken.swift in Sources */,
+				4A7914701F63351300068E67 /* AccessToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

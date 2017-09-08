@@ -24,7 +24,7 @@ final class TwitterOAuthProvider: AuthenticationProvider {
     print("here")
   }
 
-  func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<String>) -> Void) {
+  func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<AccessToken>) -> Void) {
     precondition(currentAuthentication == nil, "already authenticating")
 
     let cancelHandler = { completionHandler(.cancelled) }
@@ -33,8 +33,9 @@ final class TwitterOAuthProvider: AuthenticationProvider {
     createRequestToken(errorHandler: errorHandler) { requestToken in
       DispatchQueue.main.async {
         self.authenticateViaTwitter(using: requestToken, over: viewController, cancelHandler: cancelHandler, errorHandler: errorHandler) { verifierToken in
-          print(verifierToken)
-          completionHandler(.cancelled)
+          self.createAccessToken(using: verifierToken, errorHandler: errorHandler) { accessToken in
+            completionHandler(.authenticated(accessToken))
+          }
         }
       }
     }
@@ -135,5 +136,58 @@ private extension TwitterOAuthProvider {
     DispatchQueue.main.async(execute: continuation)
 
     return true
+  }
+}
+
+// - MARK: 3. Create Access Token
+
+private extension TwitterOAuthProvider {
+  func createAccessToken(using verifierToken: VerifierToken, errorHandler: @escaping (Error) -> Void, completionHandler: @escaping (AccessToken) -> Void) {
+    var parameters = URLComponents()
+    parameters.queryItems = [URLQueryItem(name: "oauth_verifier", value: verifierToken.verifier)]
+
+    var request = URLRequest(url: URL(string: "https://api.twitter.com/oauth/access_token")!)
+    request.httpBody = parameters.query?.data(using: .utf8)
+    request.httpMethod = "POST"
+
+    do {
+      try request.applyTwitterSignature(
+        consumerKey: Secrets.Twitter.consumerKey,
+        consumerSecret: Secrets.Twitter.consumerSecret,
+        oauthToken: verifierToken.token,
+        parameters: [
+          "oauth_verifier": verifierToken.verifier,
+        ]
+      )
+    } catch {
+      errorHandler(error)
+      return
+    }
+
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+      guard error == nil else {
+        errorHandler(error!)
+        return
+      }
+
+      let body = data.flatMap(String.init(decoding:))
+      let response = response as! HTTPURLResponse
+
+      guard response.statusCode == 200, let query = body else {
+        errorHandler(TwitterAuthError.requestFailed(body))
+        return
+      }
+
+      guard let queryItems = URLQueryItem.queryItems(from: query),
+        let token = AccessToken(from: queryItems)
+      else {
+        errorHandler(TwitterAuthError.parseFailed)
+        return
+      }
+
+      completionHandler(token)
+    }
+
+    task.resume()
   }
 }
