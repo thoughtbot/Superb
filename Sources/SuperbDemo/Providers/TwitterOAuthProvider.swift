@@ -27,9 +27,12 @@ final class TwitterOAuthProvider: AuthenticationProvider {
   func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<String>) -> Void) {
     precondition(currentAuthentication == nil, "already authenticating")
 
-    createRequestToken(errorHandler: completionHandler) { requestToken in
+    let cancelHandler = { completionHandler(.cancelled) }
+    let errorHandler = { completionHandler(.failed($0)) }
+
+    createRequestToken(errorHandler: errorHandler) { requestToken in
       DispatchQueue.main.async {
-        self.authenticateViaTwitter(using: requestToken, over: viewController, errorHandler: completionHandler) { verifierToken in
+        self.authenticateViaTwitter(using: requestToken, over: viewController, cancelHandler: cancelHandler, errorHandler: errorHandler) { verifierToken in
           print(verifierToken)
           completionHandler(.cancelled)
         }
@@ -45,7 +48,7 @@ final class TwitterOAuthProvider: AuthenticationProvider {
 // - MARK: 1. Create Request Token
 
 private extension TwitterOAuthProvider {
-  func createRequestToken<T>(errorHandler: @escaping (AuthenticationResult<T>) -> Void, completionHandler: @escaping (RequestToken) -> Void) {
+  func createRequestToken(errorHandler: @escaping (Error) -> Void, completionHandler: @escaping (RequestToken) -> Void) {
     var request = URLRequest(url: URL(string: "https://api.twitter.com/oauth/request_token")!)
     request.httpMethod = "POST"
 
@@ -58,13 +61,13 @@ private extension TwitterOAuthProvider {
         ]
       )
     } catch {
-      errorHandler(.failed(error))
+      errorHandler(error)
       return
     }
 
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
       guard error == nil else {
-        errorHandler(.failed(error!))
+        errorHandler(error!)
         return
       }
 
@@ -72,7 +75,7 @@ private extension TwitterOAuthProvider {
       let response = response as! HTTPURLResponse
 
       guard response.statusCode == 200, let query = body else {
-        errorHandler(.failed(TwitterAuthError.requestFailed(body)))
+        errorHandler(TwitterAuthError.requestFailed(body))
         return
       }
 
@@ -80,7 +83,7 @@ private extension TwitterOAuthProvider {
         let token = RequestToken(from: queryItems),
         token.isOAuthCallbackConfirmed
       else {
-        errorHandler(.failed(TwitterAuthError.parseFailed))
+        errorHandler(TwitterAuthError.parseFailed)
         return
       }
 
@@ -94,14 +97,12 @@ private extension TwitterOAuthProvider {
 // - MARK: 2. Sign In via Twitter
 
 private extension TwitterOAuthProvider {
-  func authenticateViaTwitter<T>(using requestToken: RequestToken, over viewController: UIViewController, errorHandler: @escaping (AuthenticationResult<T>) -> Void, completionHandler: @escaping (VerifierToken) -> Void) {
+  func authenticateViaTwitter(using requestToken: RequestToken, over viewController: UIViewController, cancelHandler: @escaping () -> Void, errorHandler: @escaping (Error) -> Void, completionHandler: @escaping (VerifierToken) -> Void) {
     var components = URLComponents(string: "https://api.twitter.com/oauth/authenticate")!
     components.queryItems = [URLQueryItem(name: "oauth_token", value: requestToken.token)]
 
     let safari = SFSafariViewController(url: components.url!)
     let delegate = SafariViewControllerDelegate { [weak self] _ in self?.failIfUnauthenticated() }
-    let cancelHandler = { errorHandler(.cancelled) }
-    let errorHandler = { errorHandler(.failed($0)) }
     currentAuthentication = (cancelHandler, completionHandler, errorHandler, delegate, safari)
 
     safari.delegate = delegate
