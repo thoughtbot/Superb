@@ -1,7 +1,7 @@
 import Superb
 import UIKit
 
-final class GitHubProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
   @IBOutlet var userContainer: UIView!
   @IBOutlet var userImageView: UIImageView!
@@ -10,7 +10,7 @@ final class GitHubProfileViewController: UIViewController {
 
   private var viewHasAppeared = false
 
-  var api: GitHubAPIClient?
+  var api: APIClient?
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)

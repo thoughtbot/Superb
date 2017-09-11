@@ -1,15 +1,10 @@
+import Argo
 import Superb
 
-struct GitHubAPIClient: APIClient {
-  static let basicAuthClient = GitHubAPIClient(
+struct TwitterAPIClient: APIClient {
+  static let oauthClient = TwitterAPIClient(
     requestAuthorizer: RequestAuthorizer(
-      authenticationProvider: GitHubBasicAuthProvider.shared
-    )
-  )
-
-  static let oauthClient = GitHubAPIClient(
-    requestAuthorizer: RequestAuthorizer(
-      authenticationProvider: GitHubOAuthProvider.shared
+      authenticationProvider: TwitterOAuthProvider.shared
     )
   )
 
@@ -20,12 +15,12 @@ struct GitHubAPIClient: APIClient {
   }
 
   func getProfile(_ completionHandler: @escaping (Result<Profile, AnyError>) -> Void) {
-    let request = URLRequest(url: URL(string: "https://api.github.com/user")!)
+    let request = URLRequest(url: URL(string: "https://api.twitter.com/1.1/account/verify_credentials.json")!)
 
     authorizer.performAuthorized(request) { result in
       let profile = result
         .mapError(AnyError.init)
-        .tryMap(Profile.parse)
+        .tryMap { try Profile.parse(data: $0, response: $1, decode: Profile.decodeTwitterProfile) }
 
       completionHandler(profile)
     }

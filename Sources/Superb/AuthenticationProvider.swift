@@ -8,7 +8,7 @@ public protocol _AuthenticationProvider {
   associatedtype Token
 
   func authenticate(over viewController: UIViewController, completionHandler: @escaping (AuthenticationResult<Token>) -> Void)
-  func authorize(_ request: inout URLRequest, with token: Token)
+  func authorize(_ request: inout URLRequest, with token: Token) throws
 }
 
 public protocol AuthenticationProvider: _AuthenticationProvider, CallbackHandler {
