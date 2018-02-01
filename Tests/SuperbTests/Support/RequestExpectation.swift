@@ -46,24 +46,44 @@ final class RequestExpectation: NSObject {
   }
 
   func verify(timeout: TimeInterval = 1, file: StaticString = #file, line: UInt = #line) {
-    test.keyValueObservingExpectation(for: self, keyPath: #keyPath(responseCount), expectedValue: stubs.count)
+    let expectation = XCTKVOExpectation(
+      keyPath: #keyPath(responseCount),
+      object: self,
+      expectedValue: 5,
+      options: .initial
+    )
 
-    test.waitForExpectations(timeout: timeout) { error in
-      var missing = self.stubsQueue.sync { self.stubs }
-      for (stub, _) in self.expectedResponses.values {
-        missing.remove(stub)
-      }
+    let result = XCTWaiter().wait(for: [expectation], timeout: timeout)
 
-      if error?._code == XCTestErrorCode.timeoutWhileWaiting.rawValue {
-        for (_, file, line) in missing.stubs.values {
-          XCTFail("timed out before receiving expected request", file: file, line: line)
-        }
-      }
-
-      for request in self.unexpectedRequests {
-        XCTFail("received unexpected request: \(string(describing: request))", file: file, line: line)
-      }
+    switch result {
+    case .timedOut:
+      failMissingRequestsIfNecessary(file, line)
+      failUnexpectedRequestsIfNecessary(file, line)
+    case .completed:
+      failUnexpectedRequestsIfNecessary(file, line)
+    case .incorrectOrder, .interrupted, .invertedFulfillment:
+      XCTFail("unexpected expectation result \(result)", file: file, line: line)
     }
+  }
+
+  private func failMissingRequestsIfNecessary(_ file: StaticString, _ line: UInt) {
+    for (_, file, line) in missingResponses.stubs.values {
+      XCTFail("timed out before receiving expected request", file: file, line: line)
+    }
+  }
+
+  private func failUnexpectedRequestsIfNecessary(_ file: StaticString, _ line: UInt) {
+    for request in self.unexpectedRequests {
+      XCTFail("received unexpected request: \(string(describing: request))", file: file, line: line)
+    }
+  }
+
+  private var missingResponses: Stubs {
+    var missing = stubsQueue.sync { self.stubs }
+    for (stub, _) in self.expectedResponses.values {
+      missing.remove(stub)
+    }
+    return missing
   }
 
   private func tearDown() {
@@ -79,7 +99,7 @@ final class RequestExpectation: NSObject {
     self.unexpectedStub = nil
   }
 
-  @objc private var responseCount: Int {
+  dynamic private var responseCount: Int {
     return responsesQueue.sync {
       return responses.responseCount
     }
