@@ -1,5 +1,5 @@
 github "AliSoftware/OHHTTPStubs" ~> 6.0
-github "Quick/Quick" ~> 1.0
+github "Quick/Quick" "master"
 github "Quick/Nimble" ~> 7.0
 github "thoughtbot/Argo" ~> 4.0
 github "thoughtbot/Curry" ~> 3.0

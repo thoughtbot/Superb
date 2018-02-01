@@ -15,7 +15,7 @@ final class RequestAuthorizerSpec: QuickSpec {
     }
 
     var requests: RequestExpectation!
-    beforeEach { requests = self.requestExpectation() }
+    beforeEach { requests = QuickSpec.current.requestExpectation() }
     afterEach { requests = nil }
 
     it("authorizes a request with the current token") {

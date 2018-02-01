@@ -1,6 +1,6 @@
 github "AliSoftware/OHHTTPStubs" "6.0.0"
 github "Quick/Nimble" "v7.0.3"
-github "Quick/Quick" "v1.1.0"
+github "Quick/Quick" "2a84abaedb07e1fb102b10fd17b5e3c52325ba46"
 github "antitypical/Result" "3.2.1"
 github "thoughtbot/Argo" "v4.1.2"
 github "thoughtbot/Curry" "v3.0.0"
