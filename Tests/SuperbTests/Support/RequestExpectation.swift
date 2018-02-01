@@ -8,9 +8,7 @@ extension XCTestCase {
 }
 
 final class RequestExpectation: NSObject {
-  private let responsesQueue = DispatchQueue(label: "responses queue")
   private var responses = Responses()
-  private let stubsQueue = DispatchQueue(label: "stubs queue")
   private var stubs = Stubs()
   private let test: XCTestCase
   private var unexpectedStub: OHHTTPStubsDescriptor?
@@ -19,11 +17,11 @@ final class RequestExpectation: NSObject {
     self.test = test
     super.init()
     self.unexpectedStub = stub(condition: { _ in true }) { [unowned self] request in
-      self.willChangeValue(forKey: #keyPath(responseCount))
-      self.responsesQueue.sync {
+      DispatchQueue.main.async {
+        self.willChangeValue(forKey: #keyPath(responseCount))
         self.responses.recordUnexpected(request)
+        self.didChangeValue(forKey: #keyPath(responseCount))
       }
-      self.didChangeValue(forKey: #keyPath(responseCount))
       return OHHTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
     }
   }
@@ -35,21 +33,21 @@ final class RequestExpectation: NSObject {
   func expect(where predicate: @escaping OHHTTPStubsTestBlock, file: StaticString = #file, line: UInt = #line, andReturn response: @escaping OHHTTPStubsResponseBlock = { _ in OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil) }) {
     var expectation: OHHTTPStubsDescriptor!
     expectation = stub(condition: predicate) { [unowned self] request in
-      self.willChangeValue(forKey: #keyPath(responseCount))
-      self.responsesQueue.sync {
+      DispatchQueue.main.async {
+        self.willChangeValue(forKey: #keyPath(responseCount))
         self.responses.recordComplete(expectation, request)
+        self.didChangeValue(forKey: #keyPath(responseCount))
       }
-      self.didChangeValue(forKey: #keyPath(responseCount))
       return response(request)
     }
-    stubsQueue.sync { stubs.add(expectation, file, line) }
+    stubs.add(expectation, file, line)
   }
 
   func verify(timeout: TimeInterval = 1, file: StaticString = #file, line: UInt = #line) {
     test.keyValueObservingExpectation(for: self, keyPath: #keyPath(responseCount), expectedValue: stubs.count)
 
     test.waitForExpectations(timeout: timeout) { error in
-      var missing = self.stubsQueue.sync { self.stubs }
+      var missing = self.stubs
       for (stub, _) in self.expectedResponses.values {
         missing.remove(stub)
       }
@@ -80,21 +78,15 @@ final class RequestExpectation: NSObject {
   }
 
   @objc private var responseCount: Int {
-    return responsesQueue.sync {
-      return responses.responseCount
-    }
+    return responses.responseCount
   }
 
   private var expectedResponses: [ObjectIdentifier: (OHHTTPStubsDescriptor, URLRequest)] {
-    return responsesQueue.sync {
-      responses.expected
-    }
+    return responses.expected
   }
 
   private var unexpectedRequests: [URLRequest] {
-    return responsesQueue.sync {
-      responses.unexpected
-    }
+    return responses.unexpected
   }
 }
 

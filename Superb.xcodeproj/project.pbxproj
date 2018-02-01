@@ -21,6 +21,8 @@
 		4A0ED29F1F54C8BD00B655D8 /* Dictionary+QueryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ED29E1F54C8BD00B655D8 /* Dictionary+QueryItems.swift */; };
 		4A3776821DF9C6BA005480A1 /* GitHubOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3776811DF9C6BA005480A1 /* GitHubOAuthProvider.swift */; };
 		4A4481F91F671FE000C3A2DF /* Twitter+Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4481F71F671FD500C3A2DF /* Twitter+Providers.swift */; };
+		4A4481FB1F6722EB00C3A2DF /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4481FA1F6722EB00C3A2DF /* URLSession.swift */; };
+		4A4482001F672EAF00C3A2DF /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4481FE1F672EAA00C3A2DF /* OperationQueue.swift */; };
 		4A4B0A261F5069960038627D /* TwitterOAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4B0A241F5069920038627D /* TwitterOAuthProvider.swift */; };
 		4A4FA2C21F4B8A170033E59E /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */; };
 		4A6A821E1E3BAB3900A7D899 /* Superb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6A82171E3BAB3900A7D899 /* Superb.framework */; };
@@ -42,6 +44,7 @@
 		4A9061931DF9BB4A0004D532 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9061921DF9BB4A0004D532 /* Assets.xcassets */; };
 		4A9061B01DF9C08C0004D532 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9061AF1DF9C08C0004D532 /* ProfileViewController.swift */; };
 		4A90F2BD1F4F127700C2F23C /* PendingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */; };
+		4A956F941F68820F00383726 /* ConcurrencySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A956F921F6881EF00383726 /* ConcurrencySpec.swift */; };
 		4A97A7D51E26D0FF00FC51EC /* RequestAuthorizerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */; };
 		4A97A7D71E26D61F00FC51EC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; };
 		4A97A7D81E26D62700FC51EC /* OHHTTPStubs.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -136,6 +139,8 @@
 		4A3776831DF9C8D8005480A1 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		4A4460C11ECA453A0034FC59 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		4A4481F71F671FD500C3A2DF /* Twitter+Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Twitter+Providers.swift"; sourceTree = "<group>"; };
+		4A4481FA1F6722EB00C3A2DF /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		4A4481FE1F672EAA00C3A2DF /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		4A4B0A241F5069920038627D /* TwitterOAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOAuthProvider.swift; sourceTree = "<group>"; };
 		4A4FA2C11F4B8A170033E59E /* Deprecations+Removals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deprecations+Removals.swift"; sourceTree = "<group>"; };
 		4A6A82171E3BAB3900A7D899 /* Superb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Superb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +159,7 @@
 		4A9061AF1DF9C08C0004D532 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4A90A4FF1E09F31F0077BC68 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingRequest.swift; sourceTree = "<group>"; };
+		4A956F921F6881EF00383726 /* ConcurrencySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrencySpec.swift; sourceTree = "<group>"; };
 		4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAuthorizerSpec.swift; sourceTree = "<group>"; };
 		4A97A7D61E26D61F00FC51EC /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		4A97A7DA1E26EA8B00FC51EC /* RequestExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestExpectation.swift; sourceTree = "<group>"; };
@@ -234,6 +240,7 @@
 				4A9FE9121E2AFCCE0029C645 /* KeychainEncoding.swift */,
 				4A9FE90D1E2AF0BD0029C645 /* KeychainTokenStorage.swift */,
 				4AC65E6C1ECA3ADF009D43A0 /* NilCoalescing.swift */,
+				4A4481FE1F672EAA00C3A2DF /* OperationQueue.swift */,
 				4A90F2BC1F4F127700C2F23C /* PendingRequest.swift */,
 				4AE2AAE51E412C3400547D10 /* ProviderRegistration.swift */,
 				4A9F69421DFA046B001BB7B2 /* RequestAuthorizer.swift */,
@@ -279,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				4A97A7D91E26EA7100FC51EC /* Support */,
+				4A956F921F6881EF00383726 /* ConcurrencySpec.swift */,
 				4A9FE90B1E2AF0AB0029C645 /* KeychainTokenStorageSpec.swift */,
 				4A97A7D31E26D0CC00FC51EC /* RequestAuthorizerSpec.swift */,
 				4A9061A21DF9BB4A0004D532 /* Info.plist */,
@@ -342,6 +350,7 @@
 				4AABC5B41ECA57A500C41F2F /* URL.swift */,
 				4A0ED2941F54BC8900B655D8 /* URLQueryItem.swift */,
 				4A0ED28E1F54B47900B655D8 /* URLRequest+TwitterSignature.swift */,
+				4A4481FA1F6722EB00C3A2DF /* URLSession.swift */,
 				4AA26C771E3FEDAC00767E66 /* LaunchScreen.storyboard */,
 				4AA26C741E3FEDA000767E66 /* Main.storyboard */,
 				4A9061921DF9BB4A0004D532 /* Assets.xcassets */,
@@ -570,6 +579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A4482001F672EAF00C3A2DF /* OperationQueue.swift in Sources */,
 				4A6A82251E3BABB500A7D899 /* AnyAuthenticationProvider.swift in Sources */,
 				4A4FA2C21F4B8A170033E59E /* Deprecations+Removals.swift in Sources */,
 				4A6A822C1E3BABB500A7D899 /* KeychainTokenStorage.swift in Sources */,
@@ -601,6 +611,7 @@
 				4A0ED2991F54BFC600B655D8 /* String+Crypto.swift in Sources */,
 				4AA26C7F1E3FEED200767E66 /* Secrets.swift in Sources */,
 				4A0ED28F1F54B47900B655D8 /* URLRequest+TwitterSignature.swift in Sources */,
+				4A4481FB1F6722EB00C3A2DF /* URLSession.swift in Sources */,
 				4A9061B01DF9C08C0004D532 /* ProfileViewController.swift in Sources */,
 				4A90618C1DF9BB4A0004D532 /* AppDelegate.swift in Sources */,
 				4A0ED29F1F54C8BD00B655D8 /* Dictionary+QueryItems.swift in Sources */,
@@ -625,6 +636,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A956F941F68820F00383726 /* ConcurrencySpec.swift in Sources */,
 				4A9FE9111E2AF0DA0029C645 /* KeychainTokenStorageSpec.swift in Sources */,
 				4A97A7DF1E281EA200FC51EC /* ConditionLock.swift in Sources */,
 				4A97A7DB1E26EA8B00FC51EC /* RequestExpectation.swift in Sources */,

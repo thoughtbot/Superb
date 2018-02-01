@@ -4,7 +4,8 @@ import Superb
 struct TwitterAPIClient: APIClient {
   static let oauthClient = TwitterAPIClient(
     requestAuthorizer: RequestAuthorizer(
-      authenticationProvider: TwitterOAuthProvider.shared
+      authenticationProvider: TwitterOAuthProvider.shared,
+      urlSession: .api
     )
   )
 

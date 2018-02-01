@@ -76,20 +76,21 @@ final class RequestAuthorizerSpec: QuickSpec {
       let authorizer = RequestAuthorizer(authenticationProvider: testProvider, tokenStorage: SimpleTokenStorage())
 
       var statusCodes: [Int] = []
-      let queue = DispatchQueue(label: "response queue")
       let group = DispatchGroup()
 
       let limit = 50
-      (0..<limit).forEach { _ in group.enter() }
+      let examples = (0..<limit).map { "/example\($0 + 1)" }
+      examples.forEach { example in
+        requests.expect(where: isPath(example) && hasHeaderNamed("Authorization", value: "shared-token"))
+        group.enter()
+      }
 
       DispatchQueue.concurrentPerform(iterations: limit) { i in
-        let example = "/example\(i + 1)"
-
-        requests.expect(where: isPath(example) && hasHeaderNamed("Authorization", value: "shared-token"))
+        let example = examples[i]
 
         authorizer.performAuthorized(testRequest(path: example)) { result in
           if let httpResponse = result.value?.1 as? HTTPURLResponse {
-            queue.sync { statusCodes.append(httpResponse.statusCode) }
+            statusCodes.append(httpResponse.statusCode)
           }
         }
 
@@ -114,25 +115,21 @@ final class RequestAuthorizerSpec: QuickSpec {
       let group = DispatchGroup()
 
       let examples = (1...5000).map { "/example\($0)" }
-      examples.forEach { _ in group.enter() }
 
       DispatchQueue.concurrentPerform(iterations: examples.count) { i in
         let example = examples[i]
         let request = testRequest(path: example)
 
         authorizer.performAuthorized(request) { result in
-          DispatchQueue.main.async {
-            completedRequests.insert(example)
-            if let error = result.error {
-              errors.append(error)
-            }
+          completedRequests.insert(example)
+          if let error = result.error {
+            errors.append(error)
           }
         }
-
-        group.leave()
       }
 
-      group.wait()
+      let blk = DispatchWorkItem(flags: .detached) { print("doit") }
+      blk.wait()
 
       testProvider.complete(with: .cancelled)
 
@@ -148,10 +145,10 @@ final class RequestAuthorizerSpec: QuickSpec {
         return true
       }
 
+      requests.verify()
       expect(completedRequests).toEventually(equal(Set(examples)))
       expect(errors.count).to(equal(examples.count))
       expect(allCancelled).to(beTrue())
-      requests.verify()
     }
 
     describe("token storage") {
@@ -166,9 +163,8 @@ final class RequestAuthorizerSpec: QuickSpec {
         authorizer.performAuthorized(request) { _ in }
         testProvider.complete(with: .authenticated("new-token"))
 
-        expect(testTokenStorage.fetchToken()).toEventually(equal("new-token"))
-
         requests.verify()
+        expect(testTokenStorage.fetchToken()).to(equal("new-token"))
       }
     }
 

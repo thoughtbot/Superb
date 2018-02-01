@@ -14,7 +14,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   private var pendingRequests: [PendingRequest] = []
 
   private let callbackQueue: DispatchQueue
-  private let messageQueue: DispatchQueue
+  private let messageQueue: OperationQueue
 
   public init<Provider: AuthenticationProvider, Storage: TokenStorage>(
     authenticationProvider: Provider,
@@ -27,8 +27,10 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     self.authenticationState = AuthenticationState(tokenStorage: tokenStorage)
     self.authenticationProvider = AnyAuthenticationProvider(authenticationProvider)
     self.callbackQueue = callbackQueue
-    self.messageQueue = DispatchQueue(label: "com.thoughtbot.superb.\(type(of: self))")
+    self.messageQueue = urlSession.delegateQueue
     self.urlSession = urlSession
+
+    precondition(messageQueue.maxConcurrentOperationCount == 1, "The provided URLSession's delegateQueue must have a maxConcurrentOperationCount of 1.")
   }
 
   /// Performs `request` based on the current authentication state.
@@ -51,7 +53,9 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   ///       response from performing `request`, or the error returned
   ///       from authentication.
   public func performAuthorized(_ request: URLRequest, completionHandler: @escaping (Result<(Data, URLResponse), SuperbError>) -> Void) {
-    performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
+    messageQueue.addOperation {
+      self.performAuthorized(request, reauthenticate: true, completionHandler: completionHandler)
+    }
   }
 
   /// Safely clears the token from the underlying token storage.
@@ -85,15 +89,15 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     fetchAuthenticationState(handlingErrorsWith: completionHandler) { state, startedAuthenticating in
       switch state {
       case .authenticated(let token):
-        self.perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
+        perform(request, with: token, reauthenticate: reauthenticate, completionHandler: completionHandler)
 
       case .unauthenticated:
         startedAuthenticating = true
-        self.enqueuePendingRequest(request, completionHandler: completionHandler)
-        self.authenticate(errorHandler: completionHandler)
+        enqueuePendingRequest(request, completionHandler: completionHandler)
+        authenticate(errorHandler: completionHandler)
 
       case .authenticating:
-        self.enqueuePendingRequest(request, completionHandler: completionHandler)
+        enqueuePendingRequest(request, completionHandler: completionHandler)
       }
     }
   }
@@ -144,7 +148,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
         }
 
       self.handlingAuthenticationErrors(with: completionHandler) {
-        try self.clearToken()
+        try self.authenticationState.clearToken()
         self.performAuthorized(request, reauthenticate: false, completionHandler: completionHandler)
       }
     }
@@ -202,20 +206,6 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
   /// Invokes the auth provider to authenticate, updating `authenticationState`
   /// before performing `request` with the new token.
   ///
-  /// - note: This method must be called in the `body` block of
-  ///   `fetchAuthenticationState()`, after checking that the state
-  ///   is `.unauthenticated` and setting `startedAuthenticating` to `true`.
-  ///
-  /// - note: When authentication completes, the result is broadcast to
-  ///   pending requests via the `authenticationComplete` channel. This
-  ///   broadcast occurs while holding the `authenticationState` lock,
-  ///   to ensure that no new pending requests are enqueued before the
-  ///   the authentication state is updated. For this to remain true,
-  ///   new subscribers must only be added while holding the
-  ///   `authenticationState` lock. Once the lock is released, new
-  ///   requests will then see the state as either a `.authenticated`
-  ///   or `.unauthenticated`, and react accordingly.
-  ///
   /// - parameters:
   ///     - request: A `URLRequest` to perform after authenticating successfully.
   ///     - errorHandler: If authorization fails, this function will be invoked
@@ -230,33 +220,35 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
       }
 
       self.authenticationProvider.authenticate(over: topViewController) { result in
-        self.updateAuthenticationState(handlingErrorsWith: errorHandler) {
-          defer { self.notifyPendingRequests(with: result) }
-
-          switch result {
-          case let .authenticated(token):
-            return .authenticated(token)
-          case .cancelled, .failed:
-            return .unauthenticated
-          }
+        self.messageQueue.addOperation {
+          self.completeAuthentication(with: result, errorHandler: errorHandler)
         }
       }
     }
   }
 
-  private func fetchAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: @escaping (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
-    messageQueue.async {
-      self.handlingAuthenticationErrors(with: errorHandler) {
-        try self.authenticationState.fetch(body)
+  private func completeAuthentication<T>(with result: AuthenticationResult<Token>, errorHandler: @escaping (Result<T, SuperbError>) -> Void) {
+    updateAuthenticationState(handlingErrorsWith: errorHandler) {
+      defer { notifyPendingRequests(with: result) }
+
+      switch result {
+      case let .authenticated(token):
+        return .authenticated(token)
+      case .cancelled, .failed:
+        return .unauthenticated
       }
     }
   }
 
-  private func updateAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: @escaping () -> NewAuthenticationState<Token>) {
-    messageQueue.async {
-      self.handlingAuthenticationErrors(with: errorHandler) {
-        try self.authenticationState.update(body)
-      }
+  private func fetchAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: (CurrentAuthenticationState<Token>, inout Bool) -> Void) {
+    handlingAuthenticationErrors(with: errorHandler) {
+      try authenticationState.fetch(body)
+    }
+  }
+
+  private func updateAuthenticationState<T>(handlingErrorsWith errorHandler: @escaping (Result<T, SuperbError>) -> Void, body: () -> NewAuthenticationState<Token>) {
+    handlingAuthenticationErrors(with: errorHandler) {
+      try authenticationState.update(body)
     }
   }
 

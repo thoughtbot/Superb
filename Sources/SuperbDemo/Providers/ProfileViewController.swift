@@ -48,13 +48,16 @@ final class ProfileViewController: UIViewController {
     userNameLabel.text = profile.name
 
     if let avatar = profile.avatar {
-      DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-        guard let data = try? Data(contentsOf: avatar) else { return }
+      URLSession.api.dataTask(with: avatar) { [weak self] data, _, _ in
+        guard let data = data else { return }
         let image = UIImage(data: data)
         DispatchQueue.main.async {
-          self?.userImageView?.image = image
+          guard let `self` = self else { return }
+          UIView.animate(withDuration: 0.3) {
+            self.userImageView?.image = image
+          }
         }
-      }
+      }.resume()
     }
 
     UIView.animate(withDuration: 0.3) {
