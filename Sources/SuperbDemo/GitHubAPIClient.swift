@@ -33,7 +33,7 @@ struct GitHubAPIClient {
   }
 }
 
-extension Decodable {
+extension Argo.Decodable {
   static func parse(data: Data, response _: URLResponse) throws -> DecodedType {
     let object = try JSONSerialization.jsonObject(with: data)
     let json = JSON(object)

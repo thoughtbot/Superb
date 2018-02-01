@@ -8,7 +8,7 @@ struct Profile {
   var avatar: URL?
 }
 
-extension Profile: Decodable {
+extension Profile: Argo.Decodable {
   static func decode(_ json: JSON) -> Decoded<Profile> {
     return curry(Profile.init)
       <^> json <| "login"
