@@ -20,7 +20,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
     authenticationProvider: Provider,
     tokenStorage: Storage,
     queue callbackQueue: DispatchQueue = .main,
-    applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate,
+    applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = UIApplication.shared.delegate,
     urlSession: URLSession = .shared
   ) where Provider.Token == Token, Storage.Token == Token {
     self.applicationDelegate = applicationDelegate
@@ -120,7 +120,7 @@ public final class RequestAuthorizer<Token>: RequestAuthorizerProtocol {
       if let error = error {
         result = .failure(.requestFailed(request.url, error))
       } else if let data = data, let response = response {
-        result = .success(data, response)
+        result = .success((data, response))
       } else {
         fatalError("expected response data from the server, got \(response ??? "nil"), \(data ??? "nil")")
       }
@@ -281,16 +281,12 @@ extension RequestAuthorizer where Token: KeychainDecodable & KeychainEncodable {
   public convenience init<Provider: AuthenticationProvider>(
     authenticationProvider: Provider,
     queue: DispatchQueue = .main,
-    applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = defaultApplicationDelegate,
+    applicationDelegate: @autoclosure @escaping () -> UIApplicationDelegate? = UIApplication.shared.delegate,
     urlSession: URLSession = .shared
   ) where Provider.Token == Token {
     let keychainTokenStorage = KeychainTokenStorage<Token>(service: Provider.keychainServiceName, label: Provider.identifier)
     self.init(authenticationProvider: authenticationProvider, tokenStorage: keychainTokenStorage, queue: queue, applicationDelegate: applicationDelegate, urlSession: urlSession)
   }
-}
-
-private var defaultApplicationDelegate: UIApplicationDelegate? {
-  return UIApplication.shared.delegate
 }
 
 private extension Sequence {

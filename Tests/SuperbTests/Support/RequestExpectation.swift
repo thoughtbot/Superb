@@ -99,7 +99,7 @@ final class RequestExpectation: NSObject {
     self.unexpectedStub = nil
   }
 
-  dynamic private var responseCount: Int {
+  @objc dynamic private var responseCount: Int {
     return responsesQueue.sync {
       return responses.responseCount
     }
