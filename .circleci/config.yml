@@ -10,6 +10,10 @@ jobs:
           name: Pre-Start Simulator
           command: |
             xcrun instruments -w "iPhone 7 (10.2) [" || true
+
+      - restore_cache:
+          key: carthage-{{ checksum "Cartfile.resolved" }}
+
       - run:
           name: Copy Secrets
           command: |
@@ -22,6 +26,11 @@ jobs:
           name: Run Tests
           command: |
             bin/test
+
+      - save_cache:
+          key: carthage-{{ checksum "Cartfile.resolved" }}
+          paths:
+            - Carthage
 
   lint-podspec:
     macos:
