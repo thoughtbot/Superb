@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build-and-test:
+    macos:
+      xcode: "8.3.3"
+
+    steps:
+      - checkout
+      - run:
+          name: Pre-Start Simulator
+          command: |
+            xcrun instruments -w "iPhone 7 (10.2) [" || true
+      - run:
+          name: Copy Secrets
+          command: |
+            bin/copy-secrets
+      - run:
+          name: Bootstrap Dependencies
+          command: |
+            bin/bootstrap-if-needed
+      - run:
+          name: Run Tests
+          command: |
+            bin/test
+
+  lint-podspec:
+    macos:
+      xcode: "8.3.3"
+
+    steps:
+      - checkout
+      - run:
+          name: Fetch CocoaPods Specs
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh \
+              | bash -s cf
+      - run:
+          name: Lint Podspec
+          command: |
+            pod lib lint
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build-and-test
+      - lint-podspec
