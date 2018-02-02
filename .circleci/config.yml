@@ -4,12 +4,16 @@ jobs:
     macos:
       xcode: "8.3.3"
 
+    environment:
+      - XCODE_SIMULATOR_NAME: "iPhone 7"
+      - XCODE_SIMULATOR_OS: "10.2"
+
     steps:
       - checkout
       - run:
           name: Pre-Start Simulator
           command: |
-            xcrun instruments -w "iPhone 7 (10.2) [" || true
+            xcrun instruments -w "${XCODE_SIMULATOR_NAME} (${XCODE_SIMULATOR_OS}) [" || true
 
       - restore_cache:
           key: carthage-{{ checksum "Cartfile.resolved" }}

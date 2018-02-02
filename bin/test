@@ -3,8 +3,14 @@
 set -e
 set -o pipefail
 
+simulator_name=",name=${XCODE_SIMULATOR_NAME:-iPhone 7}"
+
+if [ -n "${XCODE_SIMULATOR_OS}" ]; then
+  simulator_os=",OS=${XCODE_SIMULATOR_OS}"
+fi
+
 env NSUnbufferedIO=YES \
   xcodebuild test \
     -scheme Superb \
-    -destination 'platform=iOS Simulator,name=iPhone 7' \
+    -destination "platform=iOS Simulator${simulator_name}${simulator_os}" \
     | xcpretty -c
