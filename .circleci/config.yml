@@ -2,11 +2,11 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "8.3.3"
+      xcode: "9.2.0"
 
     environment:
-      - XCODE_SIMULATOR_NAME: "iPhone 7"
-      - XCODE_SIMULATOR_OS: "10.2"
+      - XCODE_SIMULATOR_NAME: "iPhone 8"
+      - XCODE_SIMULATOR_OS: "11.2"
 
     steps:
       - checkout
@@ -38,7 +38,7 @@ jobs:
 
   lint-podspec:
     macos:
-      xcode: "8.3.3"
+      xcode: "9.2.0"
 
     steps:
       - checkout
